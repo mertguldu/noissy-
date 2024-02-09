@@ -8,10 +8,33 @@
 import SwiftUI
 
 struct libraryView: View {
+    let numberOfContent = 5
+    private let threeColumnGrid = [
+            GridItem(.flexible(minimum: 40), spacing: 0),
+            GridItem(.flexible(minimum: 40), spacing: 0),
+            GridItem(.flexible(minimum: 40), spacing: 0),
+        ]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            LazyVGrid(columns: threeColumnGrid, spacing: 0) {
+                ForEach(0..<numberOfContent, id: \.self) {i in
+                    Rectangle()
+                        .stroke(Color.black) //remove the stroke later
+                        .fill(.gray)
+                        .frame(height: UIScreen.main.bounds.width/3)
+                        .id(i)
+                        .onTapGesture {
+                            print(i)
+                        }
+                }
+            }
+            Spacer()
+        }
     }
 }
+
+
 
 #Preview {
     libraryView()

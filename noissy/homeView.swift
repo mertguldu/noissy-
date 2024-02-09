@@ -6,8 +6,13 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct homeView: View {
+    
+    @State private var selectedImage: PhotosPickerItem? = nil
+    @State var selectedImageData: Data? = nil
+    
     var body: some View {
         VStack{
             Text("Click to Upload Your REEL")
@@ -17,11 +22,13 @@ struct homeView: View {
                 .padding(.top)
             
             Spacer()
+            PhotosPicker(selection: $selectedImage) {
+                Circle()
+                    .frame(width: 200)
+                    .foregroundStyle(Color(red: 0.5, green: 0, blue: 0.5))
+            }
+            .padding(.top,-50)
             
-            Circle()
-                .frame(width: 200)
-                .foregroundStyle(Color(red: 0.5, green: 0, blue: 0.5))
-                .padding(.top,-50)
             
             Spacer()
             Spacer()

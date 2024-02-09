@@ -1,18 +1,18 @@
 //
-//  ContentView.swift
+//  noissy.swift
 //  noissy
 //
 //  Created by Mert Guldu on 1/25/24.
 //
 
 import SwiftUI
-import PhotosUI
 
 struct noissy: View {
     @State var pageNumber: Int = 1
     @State private var scrollPosition: CGPoint = .zero
     @State var libraryTextSize: CGFloat = 0
     @State var itemOpacity: CGFloat = 0.5
+    
     var body: some View {
         ScrollViewReader { scrollView in
                 ZStack{
@@ -63,13 +63,14 @@ struct noissy: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing:0){
-                        mainView()
+                        homeView()
                             .frame(width: UIScreen.main.bounds.width)
                             .id("home")
                             
                         libraryView()
                             .frame(width: UIScreen.main.bounds.width)
                             .id("library")
+                            .environment(\.layoutDirection, .leftToRight)
                             
                     }
                     .background(GeometryReader { geometry in
@@ -98,7 +99,7 @@ struct noissy: View {
                         UIScrollView.appearance().bounces = false
                     }
                     .coordinateSpace(name: "scroll")
-                    .padding(.top, 50)
+                    .padding(.top, 70)
                 
             }.background(
                 RadialGradient(gradient:
@@ -117,19 +118,6 @@ struct noissy: View {
 }
 
 
-
-
-struct libraryView: View {
-    var body: some View {
-        Color.red
-    }
-}
-struct ScrollOffsetPreferenceKey: PreferenceKey {
-    static var defaultValue: CGPoint = .zero
-
-    static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
-    }
-}
 
 #Preview {
     noissy()
