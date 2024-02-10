@@ -61,7 +61,6 @@
 		C7853D1C2B62F88400130915 = {
 			isa = PBXGroup;
 			children = (
-				C75EBA9A2B77F4FD00659D07 /* singleFeedView.swift */,
 				C7853D272B62F88400130915 /* noissy */,
 				C7853D262B62F88400130915 /* Products */,
 			);
@@ -83,6 +82,7 @@
 				C75EBA8B2B76DFA000659D07 /* homeView.swift */,
 				C75EBA8D2B76E61900659D07 /* libraryView.swift */,
 				C75EBA982B778C6600659D07 /* feedView.swift */,
+				C75EBA9A2B77F4FD00659D07 /* singleFeedView.swift */,
 				C75EBA8F2B76E63B00659D07 /* PreferenceKeys.swift */,
 				C75EBA972B7703BB00659D07 /* Custom Navigation Bar */,
 				C7853D2C2B62F88600130915 /* Assets.xcassets */,
