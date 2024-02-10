@@ -24,8 +24,6 @@ struct CustomNavigationLink<Label:View, Destination:View>: View {
                 destination
             }
             .toolbar(.hidden)
-            
-                
         } label: {
             label
         }
@@ -46,6 +44,8 @@ extension UINavigationController {
         } label: {
             Text("label")
         }
+        
     }
+    
 
 }

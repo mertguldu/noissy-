@@ -37,31 +37,7 @@ struct libraryView: View {
     }
 }
 
-struct feedView: View {
-    @State var imageText: String
-    var body: some View {
-        VStack {
-            Text(imageText)
-            ZStack {
-                Rectangle()
-                    .fill(.gray)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                VStack{
-                    Spacer()
-                    Text("Caption for the image/video")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .padding()
-                }
-            }
-            
-            Spacer()
-            
-            Circle()
-                .frame(width: 100)
-        }
-    }
-}
+
 
 #Preview {
     libraryView()

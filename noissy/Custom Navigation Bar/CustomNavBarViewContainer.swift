@@ -29,6 +29,6 @@ struct CustomNavBarViewContainer<Content:View>: View {
 
 #Preview {
     CustomNavBarViewContainer(title: "NavBar"){
-        Color.green
+        Text("asd")
     }
 }
