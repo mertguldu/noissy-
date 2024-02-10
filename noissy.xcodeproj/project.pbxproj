@@ -10,6 +10,9 @@
 		C75EBA8C2B76DFA000659D07 /* homeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA8B2B76DFA000659D07 /* homeView.swift */; };
 		C75EBA8E2B76E61900659D07 /* libraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA8D2B76E61900659D07 /* libraryView.swift */; };
 		C75EBA902B76E63B00659D07 /* PreferenceKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA8F2B76E63B00659D07 /* PreferenceKeys.swift */; };
+		C75EBA922B77036600659D07 /* CustomNavBarViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA912B77036600659D07 /* CustomNavBarViewContainer.swift */; };
+		C75EBA942B77038500659D07 /* CustomNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA932B77038500659D07 /* CustomNavigationLink.swift */; };
+		C75EBA962B77039E00659D07 /* LinkedNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA952B77039E00659D07 /* LinkedNavBar.swift */; };
 		C7853D292B62F88400130915 /* noissyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7853D282B62F88400130915 /* noissyApp.swift */; };
 		C7853D2B2B62F88400130915 /* noissy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7853D2A2B62F88400130915 /* noissy.swift */; };
 		C7853D2D2B62F88600130915 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7853D2C2B62F88600130915 /* Assets.xcassets */; };
@@ -20,6 +23,9 @@
 		C75EBA8B2B76DFA000659D07 /* homeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeView.swift; sourceTree = "<group>"; };
 		C75EBA8D2B76E61900659D07 /* libraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = libraryView.swift; sourceTree = "<group>"; };
 		C75EBA8F2B76E63B00659D07 /* PreferenceKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKeys.swift; sourceTree = "<group>"; };
+		C75EBA912B77036600659D07 /* CustomNavBarViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarViewContainer.swift; sourceTree = "<group>"; };
+		C75EBA932B77038500659D07 /* CustomNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationLink.swift; sourceTree = "<group>"; };
+		C75EBA952B77039E00659D07 /* LinkedNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedNavBar.swift; sourceTree = "<group>"; };
 		C7853D252B62F88400130915 /* noissy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noissy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7853D282B62F88400130915 /* noissyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noissyApp.swift; sourceTree = "<group>"; };
 		C7853D2A2B62F88400130915 /* noissy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noissy.swift; sourceTree = "<group>"; };
@@ -38,6 +44,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C75EBA972B7703BB00659D07 /* Custom Navigation Bar */ = {
+			isa = PBXGroup;
+			children = (
+				C75EBA912B77036600659D07 /* CustomNavBarViewContainer.swift */,
+				C75EBA932B77038500659D07 /* CustomNavigationLink.swift */,
+				C75EBA952B77039E00659D07 /* LinkedNavBar.swift */,
+			);
+			path = "Custom Navigation Bar";
+			sourceTree = "<group>";
+		};
 		C7853D1C2B62F88400130915 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +78,7 @@
 				C75EBA8B2B76DFA000659D07 /* homeView.swift */,
 				C75EBA8D2B76E61900659D07 /* libraryView.swift */,
 				C75EBA8F2B76E63B00659D07 /* PreferenceKeys.swift */,
+				C75EBA972B7703BB00659D07 /* Custom Navigation Bar */,
 				C7853D2C2B62F88600130915 /* Assets.xcassets */,
 				C7853D2E2B62F88600130915 /* Preview Content */,
 			);
@@ -147,9 +164,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7853D2B2B62F88400130915 /* noissy.swift in Sources */,
+				C75EBA922B77036600659D07 /* CustomNavBarViewContainer.swift in Sources */,
 				C75EBA8C2B76DFA000659D07 /* homeView.swift in Sources */,
+				C75EBA942B77038500659D07 /* CustomNavigationLink.swift in Sources */,
 				C7853D292B62F88400130915 /* noissyApp.swift in Sources */,
 				C75EBA8E2B76E61900659D07 /* libraryView.swift in Sources */,
+				C75EBA962B77039E00659D07 /* LinkedNavBar.swift in Sources */,
 				C75EBA902B76E63B00659D07 /* PreferenceKeys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct noissy: View {
     @State var pageNumber: Int = 1
@@ -14,7 +15,8 @@ struct noissy: View {
     @State var itemOpacity: CGFloat = 0.5
     
     var body: some View {
-        ScrollViewReader { scrollView in
+        NavigationView{
+            ScrollViewReader { scrollView in
                 ZStack{
                     VStack{
                         HStack(spacing: 20){
@@ -39,7 +41,7 @@ struct noissy: View {
                                     }
                                 })
                         }
-                            Spacer()
+                        Spacer()
                     }
                     
                     VStack{
@@ -59,59 +61,59 @@ struct noissy: View {
                         .padding(.horizontal)
                         Spacer()
                     }
-        
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing:0){
-                        homeView()
-                            .frame(width: UIScreen.main.bounds.width)
-                            .id("home")
-                            
-                        libraryView()
-                            .frame(width: UIScreen.main.bounds.width)
-                            .id("library")
-                            .environment(\.layoutDirection, .leftToRight)
-                            
-                    }
-                    .background(GeometryReader { geometry in
-                                        Color.clear
-                                            .preference(key: ScrollOffsetPreferenceKey.self, value: geometry.frame(in: .named("scroll")).origin)
-                                    })
-                                    .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
-                                        self.scrollPosition = value
-                                        libraryTextSize = (2 - (abs(scrollPosition.x) / UIScreen.main.bounds.width)) * 15
-                                        itemOpacity = 0.6 + (1 - (abs(scrollPosition.x) / UIScreen.main.bounds.width))
-                                        withAnimation(.easeOut) {
-                                            if scrollPosition.x >  -UIScreen.main.bounds.width / 2{
-                                                pageNumber = 0
-                                            } else {
-                                                pageNumber = 1
-                                            }
-                                        }
-                                        
-                                                
-                                    }
                     
-                }.scrollTargetBehavior(.paging)
-                    .environment(\.layoutDirection, .rightToLeft)
-                    .frame(width: .infinity, height: .infinity)
-                    .onAppear {
-                        UIScrollView.appearance().bounces = false
-                    }
-                    .coordinateSpace(name: "scroll")
-                    .padding(.top, 70)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack(spacing:0){
+                            homeView()
+                                .frame(width: UIScreen.main.bounds.width)
+                                .id("home")
+                            
+                            libraryView()
+                                .frame(width: UIScreen.main.bounds.width)
+                                .id("library")
+                                .environment(\.layoutDirection, .leftToRight)
+                            
+                        }
+                        .background(GeometryReader { geometry in
+                            Color.clear
+                                .preference(key: ScrollOffsetPreferenceKey.self, value: geometry.frame(in: .named("scroll")).origin)
+                        })
+                        .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+                            self.scrollPosition = value
+                            libraryTextSize = (2 - (abs(scrollPosition.x) / UIScreen.main.bounds.width)) * 15
+                            itemOpacity = 0.6 + (1 - (abs(scrollPosition.x) / UIScreen.main.bounds.width))
+                            withAnimation(.easeOut) {
+                                if scrollPosition.x >  -UIScreen.main.bounds.width / 2{
+                                    pageNumber = 0
+                                } else {
+                                    pageNumber = 1
+                                }
+                            }
+                            
+                            
+                        }
+                        
+                    }.scrollTargetBehavior(.paging)
+                        .environment(\.layoutDirection, .rightToLeft)
+                        .onAppear {
+                            UIScrollView.appearance().bounces = false
+                        }
+                        .coordinateSpace(name: "scroll")
+                        .padding(.top, 65)
+                    
+                }.background(
+                    RadialGradient(gradient:
+                                    Gradient(colors: [Color(red: 0.6, green: 0.0, blue: 0.5), Color(red: 0.2, green: 0.02, blue: 0.15)]),
+                                   center: .bottom,
+                                   startRadius: 0,
+                                   endRadius: 650)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                )
                 
-            }.background(
-                RadialGradient(gradient:
-                                Gradient(colors: [Color(red: 0.6, green: 0.0, blue: 0.5), Color(red: 0.2, green: 0.02, blue: 0.15)]),
-                               center: .bottom,
-                               startRadius: 0,
-                               endRadius: 650)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .edgesIgnoringSafeArea(.all)
-            )
-            
-            
+                
+            }
         }
     }
     

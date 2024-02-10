@@ -19,14 +19,17 @@ struct libraryView: View {
         VStack {
             LazyVGrid(columns: threeColumnGrid, spacing: 0) {
                 ForEach(0..<numberOfContent, id: \.self) {i in
-                    Rectangle()
-                        .stroke(Color.black) //remove the stroke later
-                        .fill(.gray)
-                        .frame(height: UIScreen.main.bounds.width/3)
-                        .id(i)
-                        .onTapGesture {
-                            print(i)
-                        }
+                    
+                    CustomNavigationLink(title: "Feed \(i)") {
+                        feedView(imageText: "image \(i)")
+                    } label: {
+                        Rectangle()
+                            .stroke(Color.black) //remove the stroke later
+                            .fill(.gray)
+                            .frame(height: UIScreen.main.bounds.width/3)
+                            .id(i)
+                    }
+
                 }
             }
             Spacer()
@@ -34,7 +37,31 @@ struct libraryView: View {
     }
 }
 
-
+struct feedView: View {
+    @State var imageText: String
+    var body: some View {
+        VStack {
+            Text(imageText)
+            ZStack {
+                Rectangle()
+                    .fill(.gray)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack{
+                    Spacer()
+                    Text("Caption for the image/video")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .padding()
+                }
+            }
+            
+            Spacer()
+            
+            Circle()
+                .frame(width: 100)
+        }
+    }
+}
 
 #Preview {
     libraryView()
