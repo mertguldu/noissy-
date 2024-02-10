@@ -11,7 +11,7 @@ import SwiftUI
 struct noissyApp: App {
     var body: some Scene {
         WindowGroup {
-            noissy()
+            noissy(imageIsSelected: false)
         }
     }
 }

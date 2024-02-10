@@ -19,10 +19,13 @@ struct CustomNavBarViewContainer<Content:View>: View {
     }
     
     var body: some View {
-            VStack(spacing:0) {
-                LinkedNavBar(title: title)
+            ZStack {
                 content
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack(spacing:0) {
+                    LinkedNavBar(title: title)
+                    Spacer()
+                }
             }
     }
 }
@@ -30,5 +33,7 @@ struct CustomNavBarViewContainer<Content:View>: View {
 #Preview {
     CustomNavBarViewContainer(title: "NavBar"){
         Text("asd")
+            .foregroundStyle(.black)
     }
+    
 }

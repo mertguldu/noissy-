@@ -36,16 +36,12 @@ struct LinkedNavBar: View {
         }.padding(.horizontal)
             .padding(.bottom, 5)
             .frame(maxWidth: .infinity)
-            .background(
-                RadialGradient(gradient:
-                                Gradient(colors: [Color(red: 0.2, green: 0.02, blue: 0.15), Color(red: 0.6, green: 0.0, blue: 0.5)]),
-                               center: .bottom,
-                               startRadius: 0,
-                               endRadius: 650))
+            .background(.clear)
     }
 }
 
 #Preview {
     LinkedNavBar(title: "Text")
+        .background(.green)
     
 }

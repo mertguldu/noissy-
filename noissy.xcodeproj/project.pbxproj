@@ -14,6 +14,7 @@
 		C75EBA942B77038500659D07 /* CustomNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA932B77038500659D07 /* CustomNavigationLink.swift */; };
 		C75EBA962B77039E00659D07 /* LinkedNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA952B77039E00659D07 /* LinkedNavBar.swift */; };
 		C75EBA992B778C6600659D07 /* feedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA982B778C6600659D07 /* feedView.swift */; };
+		C75EBA9B2B77F4FD00659D07 /* singleFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA9A2B77F4FD00659D07 /* singleFeedView.swift */; };
 		C7853D292B62F88400130915 /* noissyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7853D282B62F88400130915 /* noissyApp.swift */; };
 		C7853D2B2B62F88400130915 /* noissy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7853D2A2B62F88400130915 /* noissy.swift */; };
 		C7853D2D2B62F88600130915 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7853D2C2B62F88600130915 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 		C75EBA932B77038500659D07 /* CustomNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationLink.swift; sourceTree = "<group>"; };
 		C75EBA952B77039E00659D07 /* LinkedNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedNavBar.swift; sourceTree = "<group>"; };
 		C75EBA982B778C6600659D07 /* feedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = feedView.swift; sourceTree = "<group>"; };
+		C75EBA9A2B77F4FD00659D07 /* singleFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = singleFeedView.swift; sourceTree = "<group>"; };
 		C7853D252B62F88400130915 /* noissy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noissy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7853D282B62F88400130915 /* noissyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noissyApp.swift; sourceTree = "<group>"; };
 		C7853D2A2B62F88400130915 /* noissy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noissy.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 		C7853D1C2B62F88400130915 = {
 			isa = PBXGroup;
 			children = (
+				C75EBA9A2B77F4FD00659D07 /* singleFeedView.swift */,
 				C7853D272B62F88400130915 /* noissy */,
 				C7853D262B62F88400130915 /* Products */,
 			);
@@ -172,6 +175,7 @@
 				C75EBA8C2B76DFA000659D07 /* homeView.swift in Sources */,
 				C75EBA942B77038500659D07 /* CustomNavigationLink.swift in Sources */,
 				C7853D292B62F88400130915 /* noissyApp.swift in Sources */,
+				C75EBA9B2B77F4FD00659D07 /* singleFeedView.swift in Sources */,
 				C75EBA8E2B76E61900659D07 /* libraryView.swift in Sources */,
 				C75EBA962B77039E00659D07 /* LinkedNavBar.swift in Sources */,
 				C75EBA902B76E63B00659D07 /* PreferenceKeys.swift in Sources */,
@@ -316,6 +320,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -349,6 +354,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

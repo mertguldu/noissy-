@@ -9,47 +9,29 @@ import SwiftUI
 
 struct feedView: View {
     @State var imageText: String
-    let example = Image(systemName: "square.and.arrow.up")
-
+    @State var scrollTo: Int
+    @State var imageIsSelected = false
     
     var body: some View {
-        VStack {
-            ZStack {
-                
-                Rectangle()
-                    .fill(.gray)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                
-                
-                VStack{
-                    HStack{
-                        Spacer()
-                        ShareLink(item: example, preview: SharePreview("Share your REEL", image: example)) {
-                            Image(systemName: "square.and.arrow.up")
-                                .foregroundStyle(Color.white)
-                                .padding()
-                        }
-                    }
-                    Spacer()
-                    HStack{
-                        Text("Generated Caption for the content")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                            .padding()
-                        Spacer()
-                    }
+        ScrollViewReader{ scrollView in
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing:0){
+                    ForEach(0..<10, id: \.self){ i in
+                        singleFeedView(imageIsSelected: $imageIsSelected)
+                            .id(i)
+                    }.onAppear(perform: {
+                        scrollView.scrollTo(scrollTo)
+                    })
                 }
-            }
-            
-            Spacer()
-            
-            
+            }.scrollTargetBehavior(.paging)
+                .edgesIgnoringSafeArea(.all)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color(red: 0.1, green: 0.0, blue: 0.1))
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(red: 0.1, green: 0.0, blue: 0.1))
+        
     }
 }
 
 #Preview {
-    feedView(imageText: "")
+    feedView(imageText: "", scrollTo: 0)
 }

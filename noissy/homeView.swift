@@ -8,37 +8,74 @@
 import SwiftUI
 import PhotosUI
 
-struct homeView: View {
+@MainActor
+final class PhotoPickerViewModel: ObservableObject {
+    @Published private(set) var selectedImage: UIImage? = nil
+    @Published var imageSelection: PhotosPickerItem? = nil {
+        didSet {
+            setImage(from: imageSelection)
+            
+        }
+    }
     
-    @State private var selectedImage: PhotosPickerItem? = nil
-    @State var selectedImageData: Data? = nil
+    
+    private func setImage(from selection: PhotosPickerItem?) {
+        guard let selection else { return }
+        Task {
+            if let data = try? await selection.loadTransferable(type: Data.self) {
+                if let uiImage = UIImage(data: data) {
+                    selectedImage = uiImage // store the selected image
+                    imageSelection = nil // reset the selection 
+                    return
+                }
+            }
+        }
+    }
+    
+}
+
+
+struct homeView: View {
+    @StateObject private var viewModel = PhotoPickerViewModel()
+    @Binding var imageSelected: Bool
     
     var body: some View {
-        VStack{
-            Text("Click to Upload Your REEL")
-                .foregroundStyle(.white)
-                .font(.headline)
-                .fontWeight(.bold)
-                .padding(.top)
-            
+        HStack{
             Spacer()
-            PhotosPicker(selection: $selectedImage) {
-                Circle()
-                    .frame(width: 200)
-                    .foregroundStyle(Color(red: 0.5, green: 0, blue: 0.5))
+            VStack{
+                Text("Click to Upload Your REEL")
+                    .foregroundStyle(.white)
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .padding(.top)
+                
+                Spacer()
+                PhotosPicker(selection: $viewModel.imageSelection, matching:.any(of: [.images, .videos])) {
+                    Circle()
+                        .frame(width: 200)
+                        .foregroundStyle(Color(red: 0.5, green: 0, blue: 0.5))
+                }
+                .padding(.top,-50)
+                .photosPickerAccessoryVisibility(.hidden, edges: .bottom)
+                .onChange(of: viewModel.selectedImage) { oldValue, newValue in
+                    print("change")
+                    withAnimation(.easeIn) {
+                        imageSelected = true
+                    }
+                }
+                Spacer()
+                Spacer()
+                
             }
-            .padding(.top,-50)
-            
-            
             Spacer()
-            Spacer()
-
         }
     }
 }
 
 #Preview {
-    homeView()
-        .frame(width: 400)
-        .background(.black)
+    @State var imageIsSelected = false
+    let view = homeView(imageSelected: $imageIsSelected)
+    
+    return view.background(.black)
+    
 }

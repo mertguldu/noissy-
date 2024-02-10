@@ -43,6 +43,7 @@ extension UINavigationController {
             Text("destination")
         } label: {
             Text("label")
+                .foregroundStyle(.red)
         }
         
     }

@@ -20,8 +20,9 @@ struct libraryView: View {
             LazyVGrid(columns: threeColumnGrid, spacing: 0) {
                 ForEach(0..<numberOfContent, id: \.self) {i in
                     
-                    CustomNavigationLink(title: "Feed \(i)") {
-                        feedView(imageText: "image \(i)")
+                    CustomNavigationLink(title: "") {
+                        feedView(imageText: "image \(i)", scrollTo: i)
+                            
                     } label: {
                         Rectangle()
                             .stroke(Color.black) //remove the stroke later
@@ -29,7 +30,6 @@ struct libraryView: View {
                             .frame(height: UIScreen.main.bounds.width/3)
                             .id(i)
                     }
-
                 }
             }
             Spacer()
