@@ -10,13 +10,15 @@ import SwiftUI
 struct singleFeedView: View {
     let example = Image(systemName: "square.and.arrow.up")
     @Binding var imageIsSelected: Bool
+    @State var image: UIImage
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .fill(.gray)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .frame(height: UIScreen.main.bounds.height)
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFit()
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            
             
             VStack(spacing:0){
                 HStack{
@@ -24,8 +26,14 @@ struct singleFeedView: View {
                     .foregroundStyle(Color.white)
                     .opacity(imageIsSelected ? 1.0 : 0.0)
                     .onTapGesture(perform: {
+                        if let image = selectedImage {
+                            selectedImageLibrary.append(image)
+                            selectedImage = nil
+                        }
+                        print(selectedImageLibrary.count)
                         withAnimation(.easeOut) {
                             imageIsSelected.toggle()
+                            
                         }
                     })
                     
@@ -45,6 +53,7 @@ struct singleFeedView: View {
                     Text("Generated Caption for the content")
                         .font(.title3)
                         .fontWeight(.semibold)
+                        .foregroundStyle(.white)
                         .padding()
                     Spacer()
                 }
@@ -52,12 +61,10 @@ struct singleFeedView: View {
             .padding()
         }
         .ignoresSafeArea()
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        .background(Color(red: 0.2, green: 0.0, blue: 0.2))
         
     }
 }
 
-#Preview {
-    @State var imageIsSelected = false
 
-    return singleFeedView(imageIsSelected: $imageIsSelected)
-}

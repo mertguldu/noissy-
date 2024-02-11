@@ -8,6 +8,10 @@
 import SwiftUI
 import PhotosUI
 
+
+public var selectedImage = UIImage(systemName: "square.and.arrow.up")
+public var selectedImageLibrary: [UIImage] = []
+
 @MainActor
 final class PhotoPickerViewModel: ObservableObject {
     @Published private(set) var selectedImage: UIImage? = nil
@@ -34,10 +38,10 @@ final class PhotoPickerViewModel: ObservableObject {
     
 }
 
-
 struct homeView: View {
-    @StateObject private var viewModel = PhotoPickerViewModel()
+    @StateObject var viewModel = PhotoPickerViewModel()
     @Binding var imageSelected: Bool
+    
     
     var body: some View {
         HStack{
@@ -59,10 +63,13 @@ struct homeView: View {
                 .photosPickerAccessoryVisibility(.hidden, edges: .bottom)
                 .onChange(of: viewModel.selectedImage) { oldValue, newValue in
                     print("change")
+                    selectedImage = viewModel.selectedImage
+                    
                     withAnimation(.easeIn) {
                         imageSelected = true
                     }
                 }
+                
                 Spacer()
                 Spacer()
                 

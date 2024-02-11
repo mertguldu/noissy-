@@ -11,13 +11,14 @@ struct feedView: View {
     @State var imageText: String
     @State var scrollTo: Int
     @State var imageIsSelected = false
+    let numberOfContent = selectedImageLibrary.count
     
     var body: some View {
         ScrollViewReader{ scrollView in
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing:0){
-                    ForEach(0..<10, id: \.self){ i in
-                        singleFeedView(imageIsSelected: $imageIsSelected)
+                    ForEach(0..<numberOfContent, id: \.self){ i in
+                        singleFeedView(imageIsSelected: $imageIsSelected, image: selectedImageLibrary[i])
                             .id(i)
                     }.onAppear(perform: {
                         scrollView.scrollTo(scrollTo)

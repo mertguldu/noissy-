@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct libraryView: View {
-    let numberOfContent = 5
+    let numberOfContent = selectedImageLibrary.count
     private let threeColumnGrid = [
             GridItem(.flexible(minimum: 40), spacing: 0),
             GridItem(.flexible(minimum: 40), spacing: 0),
@@ -24,10 +24,11 @@ struct libraryView: View {
                         feedView(imageText: "image \(i)", scrollTo: i)
                             
                     } label: {
-                        Rectangle()
-                            .stroke(Color.black) //remove the stroke later
-                            .fill(.gray)
-                            .frame(height: UIScreen.main.bounds.width/3)
+                        Image(uiImage: selectedImageLibrary[i])
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: UIScreen.main.bounds.width/3, height: UIScreen.main.bounds.width/3)
+                            .background(.black)
                             .id(i)
                     }
                 }

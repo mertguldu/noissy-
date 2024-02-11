@@ -112,9 +112,10 @@ struct noissy: View {
                     )
                 }
             }
-            
-            singleFeedView(imageIsSelected: $imageIsSelected)
-                .opacity(imageIsSelected ? 1.0 : 0.0)
+            if let image = selectedImage {
+                singleFeedView(imageIsSelected: $imageIsSelected, image: image)
+                    .opacity(imageIsSelected ? 1.0 : 0.0)
+            }
         }
         .edgesIgnoringSafeArea(.all)
     }
