@@ -39,8 +39,8 @@ struct singleFeedView: View {
                     
                     Spacer()
                     
-                    ShareLink(item: example, preview: SharePreview("Share your REEL", image: example)) {
-                        Image(systemName: "square.and.arrow.up")
+                    ShareLink(item: example, preview: SharePreview("Share your video.", image: example)) {
+                        Label("Share", systemImage: "square.and.arrow.up")
                             .foregroundStyle(Color.white)
                             
                     }
@@ -49,14 +49,6 @@ struct singleFeedView: View {
                 .padding(.top, 35)
                 
                 Spacer()
-                HStack{
-                    Text("Generated Caption for the content")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.white)
-                        .padding()
-                    Spacer()
-                }
             }
             .padding()
         }

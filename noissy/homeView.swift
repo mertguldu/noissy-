@@ -47,7 +47,7 @@ struct homeView: View {
         HStack{
             Spacer()
             VStack{
-                Text("Click to Upload Your REEL")
+                Text("Click to upload your video")
                     .foregroundStyle(.white)
                     .font(.headline)
                     .fontWeight(.bold)
@@ -58,6 +58,7 @@ struct homeView: View {
                     Circle()
                         .frame(width: 200)
                         .foregroundStyle(Color(red: 0.5, green: 0, blue: 0.5))
+                        .overlay(Image("logo-crop").resizable().frame(width: 125, height: 125))
                 }
                 .padding(.top,-50)
                 .photosPickerAccessoryVisibility(.hidden, edges: .bottom)

@@ -17,23 +17,30 @@ struct libraryView: View {
     
     var body: some View {
         VStack {
-            LazyVGrid(columns: threeColumnGrid, spacing: 0) {
-                ForEach(0..<numberOfContent, id: \.self) {i in
-                    
-                    CustomNavigationLink(title: "") {
-                        feedView(imageText: "image \(i)", scrollTo: i)
-                            
-                    } label: {
-                        Image(uiImage: selectedImageLibrary[i])
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: UIScreen.main.bounds.width/3, height: UIScreen.main.bounds.width/3)
-                            .background(.black)
-                            .id(i)
+            if numberOfContent == 0 {
+                Spacer()
+                Text("Your library is currently empty.")
+                    .foregroundStyle(.white)
+                Spacer()
+            } else {
+                LazyVGrid(columns: threeColumnGrid, spacing: 0) {
+                    ForEach(0..<numberOfContent, id: \.self) {i in
+                        
+                        CustomNavigationLink(title: "") {
+                            feedView(imageText: "image \(i)", scrollTo: i)
+                                
+                        } label: {
+                            Image(uiImage: selectedImageLibrary[i])
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIScreen.main.bounds.width/3, height: UIScreen.main.bounds.width/3)
+                                .background(.black)
+                                .id(i)
+                        }
                     }
                 }
+                Spacer()
             }
-            Spacer()
         }
     }
 }

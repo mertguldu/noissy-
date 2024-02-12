@@ -18,48 +18,47 @@ struct noissy: View {
         ZStack {
             NavigationView{
                 ScrollViewReader { scrollView in
-                    ZStack{
-                        VStack(spacing:0){
-                            HStack(spacing: 20){
-                                Circle()
-                                    .foregroundStyle(.white)
-                                    .frame(width: 6)
-                                    .opacity(pageNumber == 0 ? 1.0: 0.5)
-                                    .onTapGesture(perform: {
-                                        withAnimation(.easeIn) {
-                                            scrollView.scrollTo("library")
-                                            pageNumber = 0
-                                        }
-                                    })
-                                Circle()
-                                    .foregroundStyle(.white)
-                                    .frame(width: 6)
-                                    .opacity(pageNumber == 1 ? 1.0: 0.5)
-                                    .onTapGesture(perform: {
-                                        withAnimation(.easeIn) {
-                                            scrollView.scrollTo("home")
-                                            pageNumber = 1
-                                        }
-                                    })
+                    ZStack {
+                        VStack {
+                            HStack(){
+                                Group {
+                                    Text("Library")
+                                        .font(.system(size: libraryTextSize))
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.white)
+                                        .opacity(itemOpacity)
+                                        .onTapGesture(perform: {
+                                            withAnimation(.easeInOut) {
+                                                scrollView.scrollTo("library")
+                                            }
+                                        })}
+                                .padding(.horizontal, -100)
+                                Group {
+                                    HStack(spacing: 20){
+                                        Circle()
+                                            .foregroundStyle(.white)
+                                            .frame(width: 8)
+                                            .opacity(pageNumber == 0 ? 1.0: 0.5)
+                                            .onTapGesture(perform: {
+                                                withAnimation(.easeIn) {
+                                                    scrollView.scrollTo("library")
+                                                    pageNumber = 0
+                                                }
+                                            })
+                                        Circle()
+                                            .foregroundStyle(.white)
+                                            .frame(width: 8)
+                                            .opacity(pageNumber == 1 ? 1.0: 0.5)
+                                            .onTapGesture(perform: {
+                                                withAnimation(.easeIn) {
+                                                    scrollView.scrollTo("home")
+                                                    pageNumber = 1
+                                                }
+                                            })
+                                    }
+                                    .padding(.horizontal, 40)
+                                }
                             }
-                            Spacer()
-                        }
-                        
-                        VStack(spacing:0){
-                            HStack(spacing: 20){
-                                Text("Library")
-                                    .font(.system(size: libraryTextSize))
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(.white)
-                                    .opacity(itemOpacity)
-                                    .onTapGesture(perform: {
-                                        withAnimation(.easeInOut) {
-                                            scrollView.scrollTo("library")
-                                        }
-                                    })
-                                Spacer()
-                            }
-                            .padding(.horizontal)
                             Spacer()
                         }
                         
