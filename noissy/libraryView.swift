@@ -1,15 +1,14 @@
 //
 //  libraryView.swift
-//  noissy
-//
-//  Created by Mert Guldu on 2/10/24.
-//
+
+//check feedView page explanation to see the UI of this page.
 
 import SwiftUI
 
 struct libraryView: View {
-    let numberOfContent = selectedImageLibrary.count
-    private let threeColumnGrid = [
+    @ObservedObject var feedViewModel: FeedViewModel
+    
+    private let threeColumnGrid = [ //Number of columns and their features. Used in LazyVGrid.
             GridItem(.flexible(minimum: 40), spacing: 0),
             GridItem(.flexible(minimum: 40), spacing: 0),
             GridItem(.flexible(minimum: 40), spacing: 0),
@@ -17,36 +16,30 @@ struct libraryView: View {
     
     var body: some View {
         VStack {
-            if numberOfContent == 0 {
-                Spacer()
-                Text("Your library is currently empty.")
-                    .foregroundStyle(.white)
-                Spacer()
-            } else {
-                LazyVGrid(columns: threeColumnGrid, spacing: 0) {
-                    ForEach(0..<numberOfContent, id: \.self) {i in
+            LazyVGrid(columns: threeColumnGrid, spacing: 0) {
+                ForEach(feedViewModel.ContentLibrary.indices, id: \.self) { index in //place every feed inside the library view with the determined features.
+                    CustomNavigationLink(title: "") { //check CustomNavigationLink file for info
+                        feedView(scrollTo: index, feedViewModel: feedViewModel) // navigate to the matching feed when it is cliceked
+                    } label: {
                         
-                        CustomNavigationLink(title: "") {
-                            feedView(imageText: "image \(i)", scrollTo: i)
-                                
-                        } label: {
-                            Image(uiImage: selectedImageLibrary[i])
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: UIScreen.main.bounds.width/3, height: UIScreen.main.bounds.width/3)
-                                .background(.black)
-                                .id(i)
-                        }
+                        Image(uiImage: feedViewModel.ContentLibrary[index].content) //place every feed
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.width/3, height: UIScreen.main.bounds.width/3)
                     }
                 }
-                Spacer()
             }
+            Spacer()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 
 
 #Preview {
-    libraryView()
+    libraryView(feedViewModel: FeedViewModel())
 }
+
+
+
+

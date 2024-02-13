@@ -1,38 +1,36 @@
 //
 //  feedView.swift
-//  noissy
-//
-//  Created by Mert Guldu on 2/10/24.
-//
+
+
+//Since no image is saved at t=0, this page will be empty. To see the page add dummy feed by changing
+//singleFeedView(feed: feedViewModel.ContentLibrary[index]). Or run the app, save an image and check the
+//feedView by goinf to the library and selecting a feed.
 
 import SwiftUI
 
 struct feedView: View {
-    @State var imageText: String
     @State var scrollTo: Int
-    @State var imageIsSelected = false
-    let numberOfContent = selectedImageLibrary.count
+    @ObservedObject var feedViewModel: FeedViewModel
     
     var body: some View {
         ScrollViewReader{ scrollView in
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing:0){
-                    ForEach(0..<numberOfContent, id: \.self){ i in
-                        singleFeedView(imageIsSelected: $imageIsSelected, image: selectedImageLibrary[i])
-                            .id(i)
+                    ForEach(feedViewModel.ContentLibrary.indices, id: \.self){ index in
+                        singleFeedView(feed: feedViewModel.ContentLibrary[index]) //place every feed vertically
+                            .id(index) //id each feed to differentiate
                     }.onAppear(perform: {
-                        scrollView.scrollTo(scrollTo)
+                        scrollView.scrollTo(scrollTo) //scroll to the selected feed
                     })
                 }
-            }.scrollTargetBehavior(.paging)
-                .edgesIgnoringSafeArea(.all)
+            }.scrollTargetBehavior(.paging) //make the scrolling discrete, not continuos - like paging
+                .edgesIgnoringSafeArea(.all) //fill the entire screen
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color(red: 0.1, green: 0.0, blue: 0.1))
         }
-        
     }
 }
 
 #Preview {
-    feedView(imageText: "", scrollTo: 0)
+    feedView(scrollTo: 0, feedViewModel: FeedViewModel())
 }

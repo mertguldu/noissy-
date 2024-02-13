@@ -1,17 +1,15 @@
 //
 //  noissyApp.swift
-//  noissy
-//
-//  Created by Mert Guldu on 1/25/24.
-//
+
 
 import SwiftUI
 
 @main
 struct noissyApp: App {
+    @StateObject var model = FeedViewModel()
     var body: some Scene {
         WindowGroup {
-            noissy(imageIsSelected: false)
+            noissy()
         }
     }
 }
