@@ -6,39 +6,21 @@ import SwiftUI
 
 struct LinkedNavBar: View {
     @Environment(\.presentationMode) var presentationMode
-    let title: String
 
     var body: some View {
         HStack(alignment: .center) {
-            Button(action: {
+            backButton {
                 presentationMode.wrappedValue.dismiss()
-            }, label: {
-                    Image(systemName: "chevron.left")
-                    .foregroundStyle(Color.white)
-                })
+            }
             Spacer()
-                Text(title)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundStyle(Color.white)
-            Spacer()
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }, label: {
-                    Image(systemName: "chevron.left")
-                    .foregroundStyle(Color.white)
-                })
-            .hidden()
-            
-        }.padding(.horizontal)
-            .padding(.bottom, 5)
+        }.padding()
             .frame(maxWidth: .infinity)
             .background(.clear)
     }
 }
 
 #Preview {
-    LinkedNavBar(title: "Text")
+    LinkedNavBar()
         .background(.green)
     
 }

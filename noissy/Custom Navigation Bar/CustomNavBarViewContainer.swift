@@ -20,7 +20,7 @@ struct CustomNavBarViewContainer<Content:View>: View {
                 content
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 VStack(spacing:0) {
-                    LinkedNavBar(title: title)
+                    LinkedNavBar()
                     Spacer()
                 }
             }
