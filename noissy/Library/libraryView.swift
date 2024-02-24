@@ -7,15 +7,18 @@ struct libraryView: View {
     var feedViewModel: FeedViewModel = FeedViewModel()
     
     var body: some View {
-        VStack {
-            LazyVGrid(columns: threeColumnGrid, spacing: 0) {
-                ForEach(feedViewModel.ContentLibrary.indices, id: \.self) { index in
-                    libraryFeedPreview(index: index, feedViewModel: feedViewModel)
+        ScrollView {
+            VStack {
+                LazyVGrid(columns: threeColumnGrid, spacing: 0) {
+                    ForEach(feedViewModel.ContentLibrary.indices, id: \.self) { index in
+                        libraryFeedPreview(index: index, feedViewModel: feedViewModel)
+                    }
                 }
+                Spacer()
             }
-            Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea()
     }
     
     

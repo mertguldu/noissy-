@@ -7,14 +7,16 @@ import PhotosUI
 
 class FeedViewModel: ObservableObject {
     @Published private var Model = feedModel<UIImage>(contentLibrary: [])
+    
     @Published var contentIsSelected: Bool = false
     @Published var selectedContent: UIImage? = nil
-    
-    var imageSelection: PhotosPickerItem? = nil {
+    @Published var isTaskCompleted: Bool = false
+    @Published var imageSelection: PhotosPickerItem? = nil {
         didSet {
             setImage(from: imageSelection)
-            withAnimation(.easeIn) {
+            withAnimation(.easeIn(duration: 2)) {
                 contentIsSelected = true
+                isTaskCompleted = true
             }
         }
     }
@@ -26,6 +28,7 @@ class FeedViewModel: ObservableObject {
             if let data = try? await selection.loadTransferable(type: Data.self) {
                 if let uiImage = UIImage(data: data) {
                     selectedContent = uiImage
+        
                     let feed = Feed(content: uiImage)
                     add(feed: feed)
                 }

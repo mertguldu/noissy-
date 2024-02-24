@@ -14,6 +14,7 @@
 		C71F79752B89783D00288621 /* noissyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F79742B89783D00288621 /* noissyHeader.swift */; };
 		C71F79772B89798700288621 /* containerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F79762B89798700288621 /* containerView.swift */; };
 		C71F79792B897B3600288621 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F79782B897B3600288621 /* Colors.swift */; };
+		C71F79822B8A380900288621 /* logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F79812B8A380900288621 /* logo.swift */; };
 		C7331EF92B87A36800ECE039 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7331EF82B87A36800ECE039 /* Feed.swift */; };
 		C7331EFB2B89040700ECE039 /* backButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7331EFA2B89040700ECE039 /* backButton.swift */; };
 		C7331EFD2B89043900ECE039 /* shareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7331EFC2B89043900ECE039 /* shareButton.swift */; };
@@ -41,6 +42,7 @@
 		C71F79742B89783D00288621 /* noissyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noissyHeader.swift; sourceTree = "<group>"; };
 		C71F79762B89798700288621 /* containerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = containerView.swift; sourceTree = "<group>"; };
 		C71F79782B897B3600288621 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		C71F79812B8A380900288621 /* logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logo.swift; sourceTree = "<group>"; };
 		C7331EF82B87A36800ECE039 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		C7331EFA2B89040700ECE039 /* backButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backButton.swift; sourceTree = "<group>"; };
 		C7331EFC2B89043900ECE039 /* shareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shareButton.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				C7DC01AE2B7A61DE00F96B92 /* Feed VMM */,
 				C7331EFE2B89047800ECE039 /* Buttons */,
 				C75EBA972B7703BB00659D07 /* Custom Navigation Bar */,
+				C71F79812B8A380900288621 /* logo.swift */,
 				C71F79782B897B3600288621 /* Colors.swift */,
 				C7853D2C2B62F88600130915 /* Assets.xcassets */,
 				C7853D2E2B62F88600130915 /* Preview Content */,
@@ -259,6 +262,7 @@
 				C7331EFB2B89040700ECE039 /* backButton.swift in Sources */,
 				C71F79772B89798700288621 /* containerView.swift in Sources */,
 				C7853D2B2B62F88400130915 /* noissy.swift in Sources */,
+				C71F79822B8A380900288621 /* logo.swift in Sources */,
 				C7331EFD2B89043900ECE039 /* shareButton.swift in Sources */,
 				C75EBA922B77036600659D07 /* CustomNavBarViewContainer.swift in Sources */,
 				C71F796B2B89652800288621 /* openMedia.swift in Sources */,

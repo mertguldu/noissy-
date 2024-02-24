@@ -21,7 +21,7 @@ struct singleFeedView: View {
                     .navigationBarItems(leading: backButton(action: {
                         withAnimation(.easeOut) {
                             feedViewModel.contentIsSelected = false
-                            feedViewModel.selectedContent = nil
+                            feedViewModel.isTaskCompleted = false
                         }
                     }))
             }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct containerView: View {
-    var feedViewModel: FeedViewModel = FeedViewModel()
+    @ObservedObject var feedViewModel: FeedViewModel = FeedViewModel()
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
