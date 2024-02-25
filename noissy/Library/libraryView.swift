@@ -5,13 +5,14 @@ import SwiftUI
 
 struct libraryView: View {
     var feedViewModel: FeedViewModel
+    @ObservedObject var CoreDataVM: CoreDataViewModel = CoreDataViewModel()
     
     var body: some View {
         ScrollView {
             VStack {
                 LazyVGrid(columns: threeColumnGrid, spacing: 0) {
-                    ForEach(feedViewModel.ContentLibrary.indices, id: \.self) { index in
-                        libraryFeedPreview(index: index, feedViewModel: feedViewModel)
+                    ForEach(CoreDataVM.savedContents.indices, id: \.self) { index in
+                        libraryFeedPreview(index: index, feedViewModel: feedViewModel, CoreDataVM: CoreDataVM)
                     }
                 }
                 Spacer()

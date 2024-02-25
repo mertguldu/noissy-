@@ -6,14 +6,18 @@ import SwiftUI
 struct feedView: View {
     @State var scrollTo: Int? = nil
     var feedViewModel: FeedViewModel
+    var CoreVM: CoreDataViewModel = CoreDataViewModel()
     
     var body: some View {
         ScrollViewReader{ scrollView in
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing:0) {
-                    ForEach(feedViewModel.ContentLibrary.indices, id: \.self){ index in
-                        singleFeedView(feed: feedViewModel.ContentLibrary[index], feedViewModel: feedViewModel)
-                            .id(index)
+                    ForEach(CoreVM.savedContents.indices, id: \.self){ index in
+                        if let contentData = CoreVM.savedContents[index].content {
+                            let content = UIImage(data: contentData)
+                            singleFeedView(feed: Feed(content: content!), feedViewModel: feedViewModel)
+                                .id(index)
+                        }
                     }.onAppear(perform: {
                         if let position = scrollTo {
                             scrollView.scrollTo(position)

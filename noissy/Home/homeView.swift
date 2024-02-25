@@ -6,7 +6,8 @@ import SwiftUI
 
 struct homeView: View {
     @ObservedObject var feedViewModel: FeedViewModel
-
+    @ObservedObject var CoreDataVM: CoreDataViewModel = CoreDataViewModel()
+    
     var body: some View {
         HStack(alignment:.center){
             VStack(spacing:0){
@@ -20,9 +21,9 @@ struct homeView: View {
                
                 openMedia(feedViewModel: feedViewModel)
                     .navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
-                        if let uiImage = feedViewModel.selectedContent {
-                            let feed = Feed(content: uiImage)
-                            singleFeedView(feed: feed, feedViewModel: feedViewModel)
+                        if let lastUpdatedEntity = CoreDataVM.savedContents.last {
+                            let lastFeed = Feed(content: UIImage(data: lastUpdatedEntity.content!)!)
+                            singleFeedView(feed: lastFeed, feedViewModel: feedViewModel)
                                 .toolbar(.hidden)
                         }
                     }

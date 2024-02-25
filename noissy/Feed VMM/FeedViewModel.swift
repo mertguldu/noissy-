@@ -8,30 +8,27 @@ import PhotosUI
 @MainActor
 class FeedViewModel: ObservableObject {
     @Published private var Model = feedModel<UIImage>(contentLibrary: [])
+    @Published private var CoreModel = CoreDataViewModel()
     
     @Published var contentIsSelected: Bool = false
     @Published var selectedContent: UIImage? = nil
     @Published var isTaskCompleted: Bool = false
+    
     @Published var imageSelection: PhotosPickerItem? = nil {
         didSet {
             setImage(from: imageSelection)
-            withAnimation(.easeIn(duration: 2)) {
-                contentIsSelected = true
-                isTaskCompleted = true
-            }
+            contentIsSelected = true
+            isTaskCompleted = true
         }
     }
     
     private func setImage(from selection: PhotosPickerItem?) {
         guard let selection else { return }
-        
         Task{
             if let data = try? await selection.loadTransferable(type: Data.self) {
                 if let uiImage = UIImage(data: data) {
                     selectedContent = uiImage
-        
-                    let feed = Feed(content: uiImage)
-                    add(feed: feed)
+                    CoreModel.addContent(contentData: data)
                 }
             }
         }

@@ -11,7 +11,7 @@ import PhotosUI
 struct openMedia: View {
     //For opening the photo library
     @ObservedObject var feedViewModel: FeedViewModel
-
+    
     var body: some View {
         PhotosPicker(selection: $feedViewModel.imageSelection, matching:.any(of: [.images, .videos])) {
             logo()
