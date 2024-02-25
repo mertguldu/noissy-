@@ -6,7 +6,7 @@ import SwiftUI
 
 struct singleFeedView: View {
     var feed: Feed<UIImage>? = nil
-    var feedViewModel: FeedViewModel = FeedViewModel()
+    var feedViewModel: FeedViewModel
     
     var body: some View {
         if let currentFeed = feed {
@@ -42,5 +42,5 @@ struct singleFeedView: View {
     //return singleFeedView(feed: example_Feed, feedViewModel: FeedViewModel())
     // Uncomment the above lines to see an example
     
-    singleFeedView()
+    singleFeedView(feedViewModel: FeedViewModel())
 }

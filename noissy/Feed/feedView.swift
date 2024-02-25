@@ -5,7 +5,7 @@ import SwiftUI
 
 struct feedView: View {
     @State var scrollTo: Int? = nil
-    var feedViewModel: FeedViewModel = FeedViewModel()
+    var feedViewModel: FeedViewModel
     
     var body: some View {
         ScrollViewReader{ scrollView in
@@ -29,5 +29,5 @@ struct feedView: View {
 }
 
 #Preview {
-    feedView()
+    feedView(feedViewModel: FeedViewModel())
 }

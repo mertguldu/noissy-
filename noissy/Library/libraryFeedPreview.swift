@@ -9,7 +9,7 @@ import SwiftUI
 
 struct libraryFeedPreview: View {
     var index: Int?
-    var feedViewModel: FeedViewModel = FeedViewModel()
+    var feedViewModel: FeedViewModel
 
     var body: some View {
         CustomNavigationLink(title: "") {
@@ -25,5 +25,5 @@ struct libraryFeedPreview: View {
 }
 
 #Preview {
-    libraryFeedPreview()
+    libraryFeedPreview(feedViewModel: FeedViewModel())
 }

@@ -4,7 +4,7 @@
 import SwiftUI
 
 struct libraryView: View {
-    var feedViewModel: FeedViewModel = FeedViewModel()
+    var feedViewModel: FeedViewModel
     
     var body: some View {
         ScrollView {
@@ -34,7 +34,7 @@ struct libraryView: View {
 
 
 #Preview {
-    libraryView()
+    libraryView(feedViewModel: FeedViewModel())
 }
 
 

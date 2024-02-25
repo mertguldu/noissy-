@@ -5,6 +5,7 @@
 import SwiftUI
 import PhotosUI
 
+@MainActor
 class FeedViewModel: ObservableObject {
     @Published private var Model = feedModel<UIImage>(contentLibrary: [])
     
