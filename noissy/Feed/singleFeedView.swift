@@ -22,7 +22,7 @@ struct singleFeedView: View {
                         withAnimation(.easeOut) {
                             feedViewModel.contentIsSelected = false
                             feedViewModel.isTaskCompleted = false
-                            feedViewModel.scrollToLibrary = 1
+                            feedViewModel.scrollToLibrary = "library"
                         }
                     }))
             }
@@ -39,9 +39,5 @@ struct singleFeedView: View {
 
 
 #Preview {
-    //let example_Feed = Feed(content: UIImage(systemName: "chevron.left")!)
-    //return singleFeedView(feed: example_Feed, feedViewModel: FeedViewModel())
-    // Uncomment the above lines to see an example
-    
     singleFeedView(feedViewModel: FeedViewModel())
 }

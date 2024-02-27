@@ -11,7 +11,7 @@ class FeedViewModel: ObservableObject {
     @Published var contentIsSelected: Bool = false
     @Published var selectedContent: UIImage? = nil
     @Published var isTaskCompleted: Bool = false
-    @Published var scrollToLibrary: Int = 0
+    @Published var scrollToLibrary: String = "home"
     
     @Published var imageSelection: PhotosPickerItem? = nil {
         didSet {

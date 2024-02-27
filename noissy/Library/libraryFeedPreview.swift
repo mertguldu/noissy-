@@ -16,16 +16,17 @@ struct libraryFeedPreview: View {
             feedView(scrollTo: index, feedViewModel: feedViewModel)
         } label: {
             if let i = index {
-                if let uiimage = UIImage(data: feedViewModel.ContentLibrary[i].content!) {
-                    Image(uiImage: uiimage)
-                        .resizable()
-                        .frame(width: UIScreen.main.bounds.width/3, height: UIScreen.main.bounds.width/3)
+                if let contentData = feedViewModel.ContentLibrary[i].content {
+                    if let uiimage = UIImage(data: contentData) {
+                        previewContent(uiImage: uiimage)
+                    }
                 }
             }
         }
     }
 }
 
+
 #Preview {
-    libraryFeedPreview(feedViewModel: FeedViewModel())
+    libraryFeedPreview(index: 0, feedViewModel: FeedViewModel())
 }

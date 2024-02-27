@@ -16,11 +16,11 @@ struct containerView: View {
                 LazyHStack(spacing:0){
                     homeView(feedViewModel: feedViewModel)
                         .frame(width: UIScreen.main.bounds.width)
-                        .id(0)
+                        .id("home")
                     
                     libraryView(feedViewModel: feedViewModel)
                         .frame(width: UIScreen.main.bounds.width)
-                        .id(1)
+                        .id("library")
                         .environment(\.layoutDirection, .leftToRight)
                 }
             }

@@ -10,11 +10,7 @@ struct homeView: View {
     var body: some View {
         HStack(alignment:.center){
             VStack(spacing:0){
-                Text("Click to upload your video")
-                    .foregroundStyle(.white)
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .padding(.top)
+                HeaderLabel()
                 Spacer()
                 openMedia(feedViewModel: feedViewModel)
                     .navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
@@ -30,6 +26,7 @@ struct homeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
+
 
 
 #Preview {

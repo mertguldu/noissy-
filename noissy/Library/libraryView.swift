@@ -7,9 +7,9 @@ struct libraryView: View {
     @ObservedObject var feedViewModel: FeedViewModel
     
     var body: some View {
-        ScrollView {
-            VStack {
-                LazyVGrid(columns: threeColumnGrid, spacing: 0) {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 0) {
+                LazyVGrid(columns: threeColumnGrid, spacing: 20) {
                     ForEach(feedViewModel.ContentLibrary.indices, id: \.self) { index in
                         libraryFeedPreview(index: index, feedViewModel: feedViewModel)
                     }
@@ -23,7 +23,6 @@ struct libraryView: View {
     
     
     private let threeColumnGrid = [ //Number of columns and their features.
-            GridItem(.flexible(minimum: 40), spacing: 0),
             GridItem(.flexible(minimum: 40), spacing: 0),
             GridItem(.flexible(minimum: 40), spacing: 0),
         ]
