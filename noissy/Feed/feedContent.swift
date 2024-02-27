@@ -17,7 +17,6 @@ struct feedContent: View {
                 .scaledToFit()
                 .frame(maxWidth: .infinity)
                 .background(.clear)
-                
         } else {
             Text("No content is available. Choose a content")
                 .font(.title)

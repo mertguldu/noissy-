@@ -5,8 +5,7 @@ import SwiftUI
 
 struct noissy: View {
     @ObservedObject var feedViewModel: FeedViewModel
-    @ObservedObject var CoreDataVM: CoreDataViewModel
-
+    
     var body: some View {
         NavigationStack {
                 ZStack {
@@ -22,7 +21,8 @@ struct noissy: View {
     }
 }
 
+
 #Preview {
-    noissy(feedViewModel: FeedViewModel(), CoreDataVM: CoreDataViewModel())
+    noissy(feedViewModel: FeedViewModel())
        
 }

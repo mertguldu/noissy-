@@ -33,7 +33,6 @@
 		C7853D2D2B62F88600130915 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7853D2C2B62F88600130915 /* Assets.xcassets */; };
 		C7853D302B62F88600130915 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7853D2F2B62F88600130915 /* Preview Assets.xcassets */; };
 		C7DC01AB2B7A254600F96B92 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DC01AA2B7A254600F96B92 /* FeedViewModel.swift */; };
-		C7DC01AD2B7A267900F96B92 /* feedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DC01AC2B7A267900F96B92 /* feedModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,7 +63,6 @@
 		C7853D2C2B62F88600130915 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7853D2F2B62F88600130915 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C7DC01AA2B7A254600F96B92 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
-		C7DC01AC2B7A267900F96B92 /* feedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = feedModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +111,6 @@
 				C71F79702B8977B000288621 /* CircleIndicator.swift */,
 				C71F79722B89781800288621 /* PageIndicator.swift */,
 				C71F79742B89783D00288621 /* noissyHeader.swift */,
-				C71F79762B89798700288621 /* containerView.swift */,
 			);
 			path = Parts;
 			sourceTree = "<group>";
@@ -158,13 +155,12 @@
 			children = (
 				C7853D282B62F88400130915 /* noissyApp.swift */,
 				C7853D2A2B62F88400130915 /* noissy.swift */,
-				C73F70572B8BCE390063978E /* CoreDataViewModel.swift */,
-				C73F70542B8BCE120063978E /* CoreDataModel.xcdatamodeld */,
-				C71F797A2B897D6F00288621 /* Parts */,
+				C71F79762B89798700288621 /* containerView.swift */,
 				C71F796C2B89655800288621 /* Home */,
 				C71F796D2B89667D00288621 /* Library */,
 				C71F79692B89616A00288621 /* Feed */,
-				C7DC01AE2B7A61DE00F96B92 /* Feed VMM */,
+				C7DC01AE2B7A61DE00F96B92 /* VMM */,
+				C71F797A2B897D6F00288621 /* Parts */,
 				C7331EFE2B89047800ECE039 /* Buttons */,
 				C75EBA972B7703BB00659D07 /* Custom Navigation Bar */,
 				C71F79812B8A380900288621 /* logo.swift */,
@@ -183,13 +179,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		C7DC01AE2B7A61DE00F96B92 /* Feed VMM */ = {
+		C7DC01AE2B7A61DE00F96B92 /* VMM */ = {
 			isa = PBXGroup;
 			children = (
 				C7DC01AA2B7A254600F96B92 /* FeedViewModel.swift */,
-				C7DC01AC2B7A267900F96B92 /* feedModel.swift */,
+				C73F70572B8BCE390063978E /* CoreDataViewModel.swift */,
+				C73F70542B8BCE120063978E /* CoreDataModel.xcdatamodeld */,
 			);
-			path = "Feed VMM";
+			path = VMM;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,7 +279,6 @@
 				C75EBA942B77038500659D07 /* CustomNavigationLink.swift in Sources */,
 				C7853D292B62F88400130915 /* noissyApp.swift in Sources */,
 				C7DC01AB2B7A254600F96B92 /* FeedViewModel.swift in Sources */,
-				C7DC01AD2B7A267900F96B92 /* feedModel.swift in Sources */,
 				C7331F002B89049500ECE039 /* feedContent.swift in Sources */,
 				C75EBA9B2B77F4FD00659D07 /* singleFeedView.swift in Sources */,
 				C75EBA8E2B76E61900659D07 /* libraryView.swift in Sources */,

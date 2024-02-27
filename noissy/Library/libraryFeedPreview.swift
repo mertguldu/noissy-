@@ -9,15 +9,14 @@ import SwiftUI
 
 struct libraryFeedPreview: View {
     var index: Int?
-    var feedViewModel: FeedViewModel
-    var CoreDataVM: CoreDataViewModel = CoreDataViewModel()
+    @ObservedObject var feedViewModel: FeedViewModel
     
     var body: some View {
         CustomNavigationLink(title: "") {
-            feedView(scrollTo: index, feedViewModel: feedViewModel, CoreVM: CoreDataVM)
+            feedView(scrollTo: index, feedViewModel: feedViewModel)
         } label: {
             if let i = index {
-                if let uiimage = UIImage(data: CoreDataVM.savedContents[i].content!) {
+                if let uiimage = UIImage(data: feedViewModel.ContentLibrary[i].content!) {
                     Image(uiImage: uiimage)
                         .resizable()
                         .frame(width: UIScreen.main.bounds.width/3, height: UIScreen.main.bounds.width/3)

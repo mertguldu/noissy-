@@ -22,6 +22,7 @@ struct singleFeedView: View {
                         withAnimation(.easeOut) {
                             feedViewModel.contentIsSelected = false
                             feedViewModel.isTaskCompleted = false
+                            feedViewModel.scrollToLibrary = 1
                         }
                     }))
             }

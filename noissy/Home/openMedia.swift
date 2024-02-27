@@ -16,6 +16,17 @@ struct openMedia: View {
         PhotosPicker(selection: $feedViewModel.imageSelection, matching:.any(of: [.images, .videos])) {
             logo()
         }
+        .onChange(of: feedViewModel.imageSelection) {newItem in
+            Task {
+                if let data = try? await
+                    newItem?.loadTransferable(type: Data.self) {
+                    let selectedImageData = data
+                    feedViewModel.selectedContent = UIImage(data: selectedImageData)
+                    feedViewModel.add(feedData: data)
+                }
+            }
+            
+        }
         .padding(.top, -200)
         .photosPickerAccessoryVisibility(.hidden, edges: .bottom)
     }
