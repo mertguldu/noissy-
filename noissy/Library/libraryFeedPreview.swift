@@ -18,7 +18,7 @@ struct libraryFeedPreview: View {
             if let i = index {
                 if let contentData = feedViewModel.ContentLibrary[i].content {
                     if let uiimage = UIImage(data: contentData) {
-                        previewContent(uiImage: uiimage)
+                        PreviewView(uiImage: uiimage)
                     }
                 }
             }

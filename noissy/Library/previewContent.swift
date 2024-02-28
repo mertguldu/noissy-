@@ -20,6 +20,7 @@ struct previewContent: View {
         
         Image(uiImage: uiImage)
             .resizable()
+            .aspectRatio(contentMode: .fill)
             .frame(width: width , height: height)
             .mask {
                 RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
