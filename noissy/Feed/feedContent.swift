@@ -6,22 +6,21 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct feedContent: View {
-    var content: UIImage? = nil
+    var contentData: NSData? = nil
     
     var body: some View {
-        if let selectedContent = content {
-            Image(uiImage: selectedContent)
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: .infinity)
-                .background(.clear)
+        if let data = contentData {
+            let cacheURL = dataToURL(data: data)
+            VideoPlayer(player: AVPlayer(url: cacheURL))
         } else {
-            Text("No content is available. Choose a content")
-                .font(.title)
-                .fontWeight(.bold)
+            Rectangle()
+                .frame(width: 200, height: 200)
+            
         }
+        
     }
 }
 

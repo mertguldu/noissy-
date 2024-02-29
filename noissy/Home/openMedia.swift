@@ -5,33 +5,49 @@
 //  Created by Mert Guldu on 2/24/24.
 //
 
-import SwiftUI
+import AVKit
 import PhotosUI
+import SwiftUI
 
 struct openMedia: View {
-    //For opening the photo library
     @ObservedObject var feedViewModel: FeedViewModel
+    @State private var selectedItem: PhotosPickerItem?
+    @State private var isNavigate = false
+    @State var data : NSData? = nil
     
     var body: some View {
-        PhotosPicker(selection: $feedViewModel.imageSelection, matching:.any(of: [.images, .videos])) {
-            logo()
-        }
-        .onChange(of: feedViewModel.imageSelection) {newItem in
-            Task {
-                if let data = try? await
-                    newItem?.loadTransferable(type: Data.self) {
-                    let selectedImageData = data
-                    feedViewModel.selectedContent = UIImage(data: selectedImageData)
-                    feedViewModel.add(feedData: data)
+        VStack {
+            NavigationStack {
+                PhotosPicker(selection: $selectedItem, matching: .videos){
+                    logo()
                 }
+                    .onChange(of: selectedItem) { _ in
+                        Task {
+                            do {
+                                if let movie = try await selectedItem?.loadTransferable(type: Movie.self) {
+                                    isNavigate = true
+                                    
+                                    data = NSData(contentsOf: movie.url)!
+                                    feedViewModel.selectedContent = data
+                                    feedViewModel.isTaskCompleted = true
+                                    feedViewModel.add(contentData: data! as Data)
+                                }
+                            } catch let error {
+                                print(error)
+                            }
+                        }
+                    }
+                    .padding(.top, -200)
+                    .photosPickerAccessoryVisibility(.hidden, edges: .bottom)
+                    //.navigationDestination(isPresented: $isNavigate) {
+                      //  singleFeedView(feedViewModel: feedViewModel, contentData: data)
+                    //}
             }
-            
         }
-        .padding(.top, -200)
-        .photosPickerAccessoryVisibility(.hidden, edges: .bottom)
     }
 }
 
 #Preview {
     openMedia(feedViewModel: FeedViewModel())
 }
+

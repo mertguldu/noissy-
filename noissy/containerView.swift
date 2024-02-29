@@ -28,9 +28,16 @@ struct containerView: View {
             .environment(\.layoutDirection, .rightToLeft)
             .onAppear {
                 withAnimation(.easeInOut(duration: 2).delay(2)) {
-                    scrollView.scrollTo(feedViewModel.scrollToLibrary)
+                    //scrollView.scrollTo(feedViewModel.scrollToLibrary)
                 }
                 UIScrollView.appearance().bounces = false
+            }
+            .navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
+                if let content = feedViewModel.selectedContent{
+                
+                    singleFeedView(feedViewModel: feedViewModel, contentData: content)
+                        //.toolbar(.hidden)
+                }
             }
         }
     }

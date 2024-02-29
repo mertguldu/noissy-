@@ -12,16 +12,32 @@ struct libraryFeedPreview: View {
     @ObservedObject var feedViewModel: FeedViewModel
     
     var body: some View {
+        /*
         CustomNavigationLink(title: "") {
             feedView(scrollTo: index, feedViewModel: feedViewModel)
         } label: {
             if let i = index {
                 if let contentData = feedViewModel.ContentLibrary[i].content {
                     if let uiimage = UIImage(data: contentData) {
-                        PreviewView(uiImage: uiimage)
+                        //PreviewView(uiImage: uiimage)
                     }
                 }
             }
+        } */
+        CustomNavigationLink(title: "") {
+            //feedView(scrollTo: index, feedViewModel: feedViewModel)
+            if let i = index {
+                if feedViewModel.ContentLibrary.isEmpty == false {
+                    singleFeedView(feedViewModel: feedViewModel, contentData: feedViewModel.ContentLibrary[i].contenData as NSData?)
+                }
+            }
+        } label: {
+            if let i = index {
+                if let contentData = feedViewModel.ContentLibrary[i].contenData {
+                    PreviewView(videoData: contentData as NSData)
+                }
+            }
+                
         }
     }
 }

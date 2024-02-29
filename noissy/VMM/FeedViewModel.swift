@@ -9,7 +9,7 @@ class FeedViewModel: ObservableObject {
     @Published private var CoreModel = CoreDataViewModel()
     
     @Published var contentIsSelected: Bool = false
-    @Published var selectedContent: UIImage? = nil
+    @Published var selectedContent: NSData? = nil
     @Published var isTaskCompleted: Bool = false
     @Published var scrollToLibrary: String = "home"
     
@@ -24,8 +24,8 @@ class FeedViewModel: ObservableObject {
         return CoreModel.savedContents
     }
     
-    func add(feedData: Data) { // add feed
-        return CoreModel.addContent(contentData: feedData)
+    func add(contentData: Data) { // add feed
+        return CoreModel.addContent(contenData: contentData)
     }
 
     func reset() {

@@ -12,10 +12,8 @@ struct feedView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing:0) {
                     ForEach(feedViewModel.ContentLibrary.indices, id: \.self){ index in
-                        if let contentData = feedViewModel.ContentLibrary[index].content  {
-                            let content = UIImage(data: contentData)
-                            singleFeedView(feed: Feed(content: content!), feedViewModel: feedViewModel)
-                                .id(index)
+                        if let contentData = feedViewModel.ContentLibrary[index].contenData {
+                            singleFeedView(feedViewModel: feedViewModel)
                         }
                     }.onAppear(perform: {
                         if let position = scrollTo {

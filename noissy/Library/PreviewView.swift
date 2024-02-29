@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct PreviewView: View {
-    let uiImage: UIImage
+    //let uiImage: UIImage
+    var videoData: NSData?
+    
     var body: some View {
         ZStack {
-            previewContent(uiImage: uiImage)
+            previewContent(videoContentData: videoData)
             VideoPlayButton()
         }
     }
 }
 
 #Preview {
-    PreviewView(uiImage: UIImage(systemName: "pencil")!)
+    PreviewView()
 }

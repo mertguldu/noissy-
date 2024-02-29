@@ -13,13 +13,7 @@ struct homeView: View {
                 HeaderLabel()
                 Spacer()
                 openMedia(feedViewModel: feedViewModel)
-                    .navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
-                        if let content = feedViewModel.selectedContent{
-                            let feed = Feed(content: content)
-                            singleFeedView(feed: feed, feedViewModel: feedViewModel)
-                                .toolbar(.hidden)
-                        }
-                    }
+                    
                 Spacer()
             }
         }

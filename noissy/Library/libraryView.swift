@@ -12,6 +12,7 @@ struct libraryView: View {
                 LazyVGrid(columns: threeColumnGrid, spacing: 20) {
                     ForEach(feedViewModel.ContentLibrary.indices, id: \.self) { index in
                         libraryFeedPreview(index: index, feedViewModel: feedViewModel)
+                        
                     }
                 }
                 Spacer()

@@ -39,9 +39,9 @@ class CoreDataViewModel: ObservableObject {
         }
     }
     
-    func addContent(contentData: Data) {
+    func addContent(contenData: Data) {
         let newContent = FeedEntity(context: context)
-        newContent.content = contentData
+        newContent.contenData = contenData
         saveData()
     }
     
