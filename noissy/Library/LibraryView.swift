@@ -20,20 +20,13 @@ struct LibraryView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
-        .onAppear {
-            print(feedViewModel.ContentLibrary.count)
-        }
-        
     }
-    
     
     private let threeColumnGrid = [ //Number of columns and their features.
             GridItem(.flexible(minimum: 40), spacing: 0),
             GridItem(.flexible(minimum: 40), spacing: 0),
         ]
 }
-
-
 
 #Preview {
     LibraryView(feedViewModel: FeedViewModel())

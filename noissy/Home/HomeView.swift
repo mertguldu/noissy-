@@ -20,8 +20,6 @@ struct HomeView: View {
     }
 }
 
-
-
 #Preview {
     HomeView(feedViewModel: FeedViewModel())
         .background(.black)
