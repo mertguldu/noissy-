@@ -11,7 +11,8 @@ struct LibraryView: View {
             VStack(spacing: 0) {
                 LazyVGrid(columns: threeColumnGrid, spacing: 20) {
                     ForEach(feedViewModel.ContentLibrary.indices, id: \.self) { index in
-                        libraryFeedPreview(index: index, feedViewModel: feedViewModel)
+                        let contentData = feedViewModel.ContentLibrary[index].contenData
+                        libraryFeedPreview(feedViewModel: feedViewModel, contentData: contentData as NSData?)
                     }
                 }
                 Spacer()
@@ -19,6 +20,9 @@ struct LibraryView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
+        .onAppear {
+            print(feedViewModel.ContentLibrary.count)
+        }
         
     }
     

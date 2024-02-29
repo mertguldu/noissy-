@@ -20,9 +20,6 @@ struct PreviewContent: View {
         let width = UIScreen.main.bounds.width/heightAspect * scaleUp
         let height = UIScreen.main.bounds.width/widthAspect * scaleUp
         
-        //Image(uiImage: uiImage)
-          //  .resizable()
-           // .aspectRatio(contentMode: .fill)
         if let data = videoContentData {
             let url = dataToURL(data: data)
             VideoPlayer(player: AVPlayer(url: url))
@@ -31,6 +28,15 @@ struct PreviewContent: View {
                     RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
                         .frame(width:width, height: height)
                 }
+        } else {
+            ZStack {
+                RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
+                    .foregroundStyle(.gray)
+                    .frame(width:width, height: height)
+                Text("Preview")
+                    .font(.title)
+                    .fontWeight(.bold)
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ struct FeedView: View {
                 VStack(spacing:0) {
                     ForEach(feedViewModel.ContentLibrary.indices, id: \.self){ index in
                         if let contentData = feedViewModel.ContentLibrary[index].contenData {
-                            SingleFeedView(feedViewModel: feedViewModel)
+                            SingleFeedView(feedViewModel: feedViewModel, contentData: contentData as NSData)
                         }
                     }.onAppear(perform: {
                         if let position = scrollTo {

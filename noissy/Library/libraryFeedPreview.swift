@@ -8,27 +8,18 @@
 import SwiftUI
 
 struct libraryFeedPreview: View {
-    var index: Int?
     @ObservedObject var feedViewModel: FeedViewModel
-    
+    var contentData: NSData?
+
     var body: some View {
-        CustomNavigationLink(title: "") {
-            if let i = index {
-                if feedViewModel.ContentLibrary.isEmpty == false {
-                    SingleFeedView(feedViewModel: feedViewModel, contentData: feedViewModel.ContentLibrary[i].contenData as NSData?)
-                }
-            }
+        NavigationLink {
+            SingleFeedView(feedViewModel: feedViewModel, contentData: contentData)
         } label: {
-            if let i = index {
-                if let contentData = feedViewModel.ContentLibrary[i].contenData {
-                    PreviewView(videoData: contentData as NSData)
-                }
-            }
+            PreviewView(videoData: contentData)
         }
     }
 }
 
-
 #Preview {
-    libraryFeedPreview(index: 0, feedViewModel: FeedViewModel())
+    libraryFeedPreview(feedViewModel: FeedViewModel(), contentData: nil)
 }

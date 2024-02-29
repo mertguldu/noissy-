@@ -1,5 +1,5 @@
 //
-//  FeedContent.swift
+//  feedContent.swift
 //  noissy
 //
 //  Created by Mert Guldu on 2/23/24.
@@ -16,8 +16,16 @@ struct FeedContent: View {
             let cacheURL = dataToURL(data: data)
             VideoPlayer(player: AVPlayer(url: cacheURL))
         } else {
-            Rectangle()
-                .frame(width: 200, height: 200)
+            ZStack {
+                Rectangle()
+                    .frame(width: 200, height: 200)
+                    .foregroundStyle(.gray)
+                Text("Video Content")
+                    .font(.title)
+                    .fontWeight(.bold)
+            }
+            
+                
             
         }
         

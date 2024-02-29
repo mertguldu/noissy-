@@ -45,12 +45,6 @@ struct CombinedView: View {
                     
                 }
                 .coordinateSpace(name: "scroll")
-                .navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
-                    if let content = feedViewModel.selectedContent{
-                        SingleFeedView(feedViewModel: feedViewModel, contentData: content)
-                        //.toolbar(.hidden)
-                    }
-                }
             }
         }
     }
