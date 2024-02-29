@@ -31,18 +31,10 @@ struct FeedContent: View {
                     .font(.title)
                     .fontWeight(.bold)
             }
-            
-                
-            
         }
-        
     }
 }
 
 #Preview {
-    //let exampleContent = UIImage(systemName: "pencil")
-    //return feedContent(content: exampleContent)
-    //uncomment the above lines to see the UI of this page
-    
-    FeedContent()
+   FeedContent()
 }
