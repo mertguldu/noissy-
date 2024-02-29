@@ -14,7 +14,14 @@ struct FeedContent: View {
     var body: some View {
         if let data = contentData {
             let cacheURL = dataToURL(data: data)
-            VideoPlayer(player: AVPlayer(url: cacheURL))
+            let player: AVPlayer = AVPlayer(url: cacheURL)
+            CustomVideoPlayer(player: player)
+                .onAppear {
+                    player.play()
+                }
+                .onDisappear {
+                    player.pause()
+                }
         } else {
             ZStack {
                 Rectangle()

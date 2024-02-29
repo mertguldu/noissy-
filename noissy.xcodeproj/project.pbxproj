@@ -35,6 +35,7 @@
 		C7A038E82B900365002CD141 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A038E72B900365002CD141 /* Movie.swift */; };
 		C7A038EA2B900394002CD141 /* dataToURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A038E92B900394002CD141 /* dataToURL.swift */; };
 		C7A038EC2B90A3FF002CD141 /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A038EB2B90A3FF002CD141 /* PreferenceKey.swift */; };
+		C7A038F02B910F5F002CD141 /* CustomVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A038EF2B910F5F002CD141 /* CustomVideoPlayer.swift */; };
 		C7DC01AB2B7A254600F96B92 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DC01AA2B7A254600F96B92 /* FeedViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		C7A038E72B900365002CD141 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		C7A038E92B900394002CD141 /* dataToURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataToURL.swift; sourceTree = "<group>"; };
 		C7A038EB2B90A3FF002CD141 /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
+		C7A038EF2B910F5F002CD141 /* CustomVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoPlayer.swift; sourceTree = "<group>"; };
 		C7DC01AA2B7A254600F96B92 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,6 +158,7 @@
 				C7853D282B62F88400130915 /* noissyApp.swift */,
 				C7853D2A2B62F88400130915 /* noissy.swift */,
 				C71F79762B89798700288621 /* CombinedView.swift */,
+				C7A038EF2B910F5F002CD141 /* CustomVideoPlayer.swift */,
 				C71F796C2B89655800288621 /* Home */,
 				C71F796D2B89667D00288621 /* Library */,
 				C71F79692B89616A00288621 /* Feed */,
@@ -297,6 +300,7 @@
 				C7A038E82B900365002CD141 /* Movie.swift in Sources */,
 				C73F70582B8BCE390063978E /* CoreDataViewModel.swift in Sources */,
 				C71F79792B897B3600288621 /* Colors.swift in Sources */,
+				C7A038F02B910F5F002CD141 /* CustomVideoPlayer.swift in Sources */,
 				C7853D292B62F88400130915 /* noissyApp.swift in Sources */,
 				C7DC01AB2B7A254600F96B92 /* FeedViewModel.swift in Sources */,
 				C7A038EA2B900394002CD141 /* dataToURL.swift in Sources */,

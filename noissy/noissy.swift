@@ -25,6 +25,7 @@ struct noissy: View {
             }
             .tint(.white)
             .edgesIgnoringSafeArea(.all)
+            .statusBarHidden(feedViewModel.hideStatusBar)
             .onAppear {
                 UIScrollView.appearance().bounces = false
             }

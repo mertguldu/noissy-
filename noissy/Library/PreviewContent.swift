@@ -22,7 +22,7 @@ struct PreviewContent: View {
         
         if let data = videoContentData {
             let url = dataToURL(data: data)
-            VideoPlayer(player: AVPlayer(url: url))
+            CustomVideoPlayer(player: AVPlayer(url: url))
                 .frame(width: width , height: height)
                 .mask {
                     RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
