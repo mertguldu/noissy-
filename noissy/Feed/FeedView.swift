@@ -1,9 +1,9 @@
 //
-//  feedView.swift
+//  FeedView.swift
 
 import SwiftUI
 
-struct feedView: View {
+struct FeedView: View {
     @State var scrollTo: Int? = nil
     var feedViewModel: FeedViewModel
     
@@ -13,7 +13,7 @@ struct feedView: View {
                 VStack(spacing:0) {
                     ForEach(feedViewModel.ContentLibrary.indices, id: \.self){ index in
                         if let contentData = feedViewModel.ContentLibrary[index].contenData {
-                            singleFeedView(feedViewModel: feedViewModel)
+                            SingleFeedView(feedViewModel: feedViewModel)
                         }
                     }.onAppear(perform: {
                         if let position = scrollTo {
@@ -30,5 +30,5 @@ struct feedView: View {
 }
 
 #Preview {
-    feedView(feedViewModel: FeedViewModel())
+    FeedView(feedViewModel: FeedViewModel())
 }

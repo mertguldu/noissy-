@@ -11,7 +11,8 @@ class FeedViewModel: ObservableObject {
     @Published var contentIsSelected: Bool = false
     @Published var selectedContent: NSData? = nil
     @Published var isTaskCompleted: Bool = false
-    @Published var scrollToLibrary: String = "home"
+    @Published var onPage: String = "home"
+    @Published var scrollPosition: CGPoint = .zero
     
     @Published var imageSelection: PhotosPickerItem? = nil {
         didSet {
@@ -28,8 +29,4 @@ class FeedViewModel: ObservableObject {
         return CoreModel.addContent(contenData: contentData)
     }
 
-    func reset() {
-        print("reseting")
-        return CoreModel.reset()
-    }
 }

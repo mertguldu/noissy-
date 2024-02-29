@@ -1,10 +1,10 @@
 //
-//  backButton.swift
+//  BackButton.swift
 
 
 import SwiftUI
 
-struct backButton: View {
+struct BackButton: View {
     var action: (() -> Void)? = nil
     var body: some View {
         Button(action: {
@@ -22,6 +22,6 @@ struct backButton: View {
 }
 
 #Preview {
-    backButton()
+    BackButton()
         .background(.black)
 }

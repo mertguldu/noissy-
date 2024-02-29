@@ -1,9 +1,9 @@
 //
-//  libraryView.swift
+//  LibraryView.swift
 
 import SwiftUI
 
-struct libraryView: View {
+struct LibraryView: View {
     @ObservedObject var feedViewModel: FeedViewModel
     
     var body: some View {
@@ -12,7 +12,6 @@ struct libraryView: View {
                 LazyVGrid(columns: threeColumnGrid, spacing: 20) {
                     ForEach(feedViewModel.ContentLibrary.indices, id: \.self) { index in
                         libraryFeedPreview(index: index, feedViewModel: feedViewModel)
-                        
                     }
                 }
                 Spacer()
@@ -20,6 +19,7 @@ struct libraryView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
+        
     }
     
     
@@ -32,7 +32,7 @@ struct libraryView: View {
 
 
 #Preview {
-    libraryView(feedViewModel: FeedViewModel())
+    LibraryView(feedViewModel: FeedViewModel())
 }
 
 

@@ -9,8 +9,8 @@ struct noissy: View {
     var body: some View {
         NavigationStack {
                 ZStack {
-                    noissyHeader()
-                    containerView(feedViewModel: feedViewModel)
+                    noissyHeader(feedViewModel: feedViewModel)
+                    CombinedView(feedViewModel: feedViewModel)
                         .padding(.top, 70)
                 }
                 .edgesIgnoringSafeArea(.bottom)
@@ -18,6 +18,9 @@ struct noissy: View {
                 .background(mainColor)
             }
             .edgesIgnoringSafeArea(.all)
+            .onAppear {
+                UIScrollView.appearance().bounces = false
+            }
     }
 }
 

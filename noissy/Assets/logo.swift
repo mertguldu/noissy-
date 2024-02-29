@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct logo: View {
+struct Logo: View {
     var body: some View {
         Circle()
             .frame(width: 200)
@@ -18,5 +18,5 @@ struct logo: View {
 
 
 #Preview {
-    logo()
+    Logo()
 }

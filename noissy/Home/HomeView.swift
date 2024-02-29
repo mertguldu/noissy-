@@ -1,10 +1,10 @@
 //
-//  homeView.swift
+//  HomeView.swift
 
 
 import SwiftUI
 
-struct homeView: View {
+struct HomeView: View {
     @ObservedObject var feedViewModel: FeedViewModel
     
     var body: some View {
@@ -12,8 +12,7 @@ struct homeView: View {
             VStack(spacing:0){
                 HeaderLabel()
                 Spacer()
-                openMedia(feedViewModel: feedViewModel)
-                    
+                OpenMedia(feedViewModel: feedViewModel)
                 Spacer()
             }
         }
@@ -24,7 +23,7 @@ struct homeView: View {
 
 
 #Preview {
-    homeView(feedViewModel: FeedViewModel())
+    HomeView(feedViewModel: FeedViewModel())
         .background(.black)
         
 }

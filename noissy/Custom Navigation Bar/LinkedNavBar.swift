@@ -9,7 +9,7 @@ struct LinkedNavBar: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            backButton {
+            BackButton {
                 presentationMode.wrappedValue.dismiss()
             }
             Spacer()

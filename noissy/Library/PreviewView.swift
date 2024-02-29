@@ -13,7 +13,7 @@ struct PreviewView: View {
     
     var body: some View {
         ZStack {
-            previewContent(videoContentData: videoData)
+            PreviewContent(videoContentData: videoData)
             VideoPlayButton()
         }
     }

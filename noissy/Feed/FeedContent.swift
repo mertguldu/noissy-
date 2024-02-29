@@ -1,5 +1,5 @@
 //
-//  feedContent.swift
+//  FeedContent.swift
 //  noissy
 //
 //  Created by Mert Guldu on 2/23/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import AVKit
 
-struct feedContent: View {
+struct FeedContent: View {
     var contentData: NSData? = nil
     
     var body: some View {
@@ -29,5 +29,5 @@ struct feedContent: View {
     //return feedContent(content: exampleContent)
     //uncomment the above lines to see the UI of this page
     
-    feedContent()
+    FeedContent()
 }
