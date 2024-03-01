@@ -9,7 +9,7 @@ struct LibraryView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 0) {
-                LazyVGrid(columns: threeColumnGrid, spacing: 20) {
+                LazyVGrid(columns: threeColumnGrid, spacing: 25) {
                     ForEach(feedViewModel.ContentLibrary.indices, id: \.self) { index in
                         let contentData = feedViewModel.ContentLibrary[index].contenData
                         libraryFeedPreview(feedViewModel: feedViewModel, contentData: contentData as NSData?)
