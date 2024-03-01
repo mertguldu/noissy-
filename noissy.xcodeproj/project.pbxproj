@@ -37,6 +37,7 @@
 		C7A038EC2B90A3FF002CD141 /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A038EB2B90A3FF002CD141 /* PreferenceKey.swift */; };
 		C7A038F02B910F5F002CD141 /* CustomVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A038EF2B910F5F002CD141 /* CustomVideoPlayer.swift */; };
 		C7A0390C2B9206FD002CD141 /* mergeVideoAndAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A0390B2B9206FD002CD141 /* mergeVideoAndAudio.swift */; };
+		C7A0390E2B921104002CD141 /* generateImageFromVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A0390D2B921104002CD141 /* generateImageFromVideo.swift */; };
 		C7DC01AB2B7A254600F96B92 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DC01AA2B7A254600F96B92 /* FeedViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		C7A038EB2B90A3FF002CD141 /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
 		C7A038EF2B910F5F002CD141 /* CustomVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoPlayer.swift; sourceTree = "<group>"; };
 		C7A0390B2B9206FD002CD141 /* mergeVideoAndAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mergeVideoAndAudio.swift; sourceTree = "<group>"; };
+		C7A0390D2B921104002CD141 /* generateImageFromVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = generateImageFromVideo.swift; sourceTree = "<group>"; };
 		C7DC01AA2B7A254600F96B92 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				C7A038E92B900394002CD141 /* dataToURL.swift */,
+				C7A0390D2B921104002CD141 /* generateImageFromVideo.swift */,
 				C7A0390B2B9206FD002CD141 /* mergeVideoAndAudio.swift */,
 			);
 			path = Functions;
@@ -294,6 +297,7 @@
 				C7A0390C2B9206FD002CD141 /* mergeVideoAndAudio.swift in Sources */,
 				C7A038B42B8DE812002CD141 /* HeaderLabel.swift in Sources */,
 				C7331EFD2B89043900ECE039 /* ShareButton.swift in Sources */,
+				C7A0390E2B921104002CD141 /* generateImageFromVideo.swift in Sources */,
 				C7A038EC2B90A3FF002CD141 /* PreferenceKey.swift in Sources */,
 				C71F796B2B89652800288621 /* OpenMedia.swift in Sources */,
 				C71F79732B89781800288621 /* PageIndicator.swift in Sources */,

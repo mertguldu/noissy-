@@ -26,8 +26,8 @@ class FeedViewModel: ObservableObject {
         return CoreModel.savedContents
     }
     
-    func add(contentData: Data) { // add feed
-        return CoreModel.addContent(contenData: contentData)
+    func add(imageData:Data, contentData: Data) { // add feed
+        return CoreModel.addContent(imageData: imageData, contenData: contentData)
     }
 
 }

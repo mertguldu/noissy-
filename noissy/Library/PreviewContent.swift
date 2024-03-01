@@ -9,8 +9,7 @@ import SwiftUI
 import AVKit
 
 struct PreviewContent: View {
-    //var uiImage: UIImage
-    var videoContentData: NSData?
+    var imageData: NSData?
     
     let scaleUp: CGFloat = 7.0
     let widthAspect: CGFloat = 9.0
@@ -20,14 +19,15 @@ struct PreviewContent: View {
         let width = UIScreen.main.bounds.width/heightAspect * scaleUp
         let height = UIScreen.main.bounds.width/widthAspect * scaleUp
         
-        if let data = videoContentData {
-            let url = dataToURL(data: data)
-            CustomVideoPlayer(player: AVPlayer(url: url))
-                .frame(width: width , height: height)
-                .mask {
-                    RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
-                        .frame(width:width, height: height)
-                }
+        if let data = imageData {
+            if let uiimage = UIImage(data: data as Data) {
+                Image(uiImage: uiimage)
+                    .frame(width: width , height: height)
+                    .mask {
+                        RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
+                            .frame(width:width, height: height)
+                    }
+            }
         } else {
             ZStack {
                 RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))

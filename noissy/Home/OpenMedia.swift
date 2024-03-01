@@ -24,9 +24,14 @@ struct OpenMedia: View {
                             do {
                                 if let movie = try await selectedItem?.loadTransferable(type: Movie.self) {
                                     let data = NSData(contentsOf: movie.url)!
+                                    let cgimage = await generateImageFromVideo(videoUrl: movie.url)
+                                    let imageData = UIImage(cgImage: cgimage).pngData()
+                                    
                                     feedViewModel.selectedContent = data
                                     feedViewModel.isTaskCompleted = true
-                                    feedViewModel.add(contentData: data as Data)
+                                    if let imgData = imageData {
+                                        feedViewModel.add(imageData: imgData, contentData: data as Data)
+                                    } else {print("Unable to save image data")}
                                 }
                             } catch let error {
                                 print(error)

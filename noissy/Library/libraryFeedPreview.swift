@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct libraryFeedPreview: View {
-    @ObservedObject var feedViewModel: FeedViewModel
+    var imageData: NSData?
     var contentData: NSData?
+
+    @ObservedObject var feedViewModel: FeedViewModel
 
     var body: some View {
         NavigationLink {
             SingleFeedView(feedViewModel: feedViewModel, contentData: contentData)
         } label: {
-            PreviewView(videoData: contentData)
+            PreviewView(imageData: imageData)
         }
     }
 }
 
 #Preview {
-    libraryFeedPreview(feedViewModel: FeedViewModel(), contentData: nil)
+    libraryFeedPreview(feedViewModel: FeedViewModel())
 }
