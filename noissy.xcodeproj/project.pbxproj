@@ -22,7 +22,6 @@
 		C73F70582B8BCE390063978E /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73F70572B8BCE390063978E /* CoreDataViewModel.swift */; };
 		C75EBA8C2B76DFA000659D07 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA8B2B76DFA000659D07 /* HomeView.swift */; };
 		C75EBA8E2B76E61900659D07 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA8D2B76E61900659D07 /* LibraryView.swift */; };
-		C75EBA992B778C6600659D07 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA982B778C6600659D07 /* FeedView.swift */; };
 		C75EBA9B2B77F4FD00659D07 /* SingleFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA9A2B77F4FD00659D07 /* SingleFeedView.swift */; };
 		C7853D292B62F88400130915 /* noissyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7853D282B62F88400130915 /* noissyApp.swift */; };
 		C7853D2B2B62F88400130915 /* noissy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7853D2A2B62F88400130915 /* noissy.swift */; };
@@ -57,7 +56,6 @@
 		C73F70572B8BCE390063978E /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
 		C75EBA8B2B76DFA000659D07 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C75EBA8D2B76E61900659D07 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
-		C75EBA982B778C6600659D07 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		C75EBA9A2B77F4FD00659D07 /* SingleFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleFeedView.swift; sourceTree = "<group>"; };
 		C7853D252B62F88400130915 /* noissy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = noissy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7853D282B62F88400130915 /* noissyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noissyApp.swift; sourceTree = "<group>"; };
@@ -91,7 +89,6 @@
 		C71F79692B89616A00288621 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				C75EBA982B778C6600659D07 /* FeedView.swift */,
 				C75EBA9A2B77F4FD00659D07 /* SingleFeedView.swift */,
 				C7331EFF2B89049500ECE039 /* FeedContent.swift */,
 				C7A038E72B900365002CD141 /* Movie.swift */,
@@ -287,7 +284,6 @@
 			files = (
 				C7A038B62B8DEFF9002CD141 /* PreviewContent.swift in Sources */,
 				C7A038E02B8F867E002CD141 /* VideoPlayButton.swift in Sources */,
-				C75EBA992B778C6600659D07 /* FeedView.swift in Sources */,
 				C71F79712B8977B000288621 /* CircleIndicator.swift in Sources */,
 				C7331EFB2B89040700ECE039 /* BackButton.swift in Sources */,
 				C71F79772B89798700288621 /* CombinedView.swift in Sources */,
@@ -373,7 +369,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -430,7 +426,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -456,7 +452,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -490,7 +486,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

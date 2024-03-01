@@ -27,9 +27,7 @@ struct noissy: View {
             .edgesIgnoringSafeArea(.all)
             .statusBarHidden(feedViewModel.hideStatusBar)
             .preferredColorScheme(.dark) //for setting the theme of the app, including the status bar color
-            .onAppear {
-                UIScrollView.appearance().bounces = false
-            }
+            
     }
 }
 

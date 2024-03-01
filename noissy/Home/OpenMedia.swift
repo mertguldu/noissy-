@@ -39,7 +39,7 @@ struct OpenMedia: View {
                         }
                     }
                     .padding(.top, -200)
-                    .photosPickerAccessoryVisibility(.hidden, edges: .bottom)
+                    //.photosPickerAccessoryVisibility(.hidden, edges: .bottom)
             }
         }
     }
