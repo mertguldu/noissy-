@@ -19,7 +19,7 @@ struct noissy: View {
             
                 .navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
                     if let content = feedViewModel.selectedContent{
-                        SingleFeedView(feedViewModel: feedViewModel, contentData: content)
+                        SingleFeedView(contentData: content, feedViewModel: feedViewModel)
                     }
                 }
             }

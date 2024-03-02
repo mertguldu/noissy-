@@ -9,11 +9,17 @@ import SwiftUI
 import AVKit
 
 struct VideoMenu: View {
+    var feedID: Int?
+    var feedViewModel: FeedViewModel
+    
     var body: some View {
         HStack {
             Spacer()
             VStack(spacing:20) {
                 ShareButton()
+                if let id = feedID {
+                    DeleteButton(feedID: id, feedViewModel: feedViewModel)
+                }
                 MoreActionButton()
             }
             .padding()
@@ -23,6 +29,8 @@ struct VideoMenu: View {
 
 struct FeedContent: View {
     var contentData: NSData? = nil
+    var feedID: Int?
+    var feedViewModel: FeedViewModel
     
     @State private var player: AVPlayer?
     
@@ -42,7 +50,7 @@ struct FeedContent: View {
                         .overlay(alignment: .bottom) {
                             VStack() {
                                 Spacer()
-                                VideoMenu()
+                                VideoMenu(feedID: feedID, feedViewModel: feedViewModel)
                                 VideoSeekerView()
                             }
                         }
@@ -153,5 +161,5 @@ struct FeedContent: View {
 }
 
 #Preview {
-    FeedContent()
+    FeedContent(feedViewModel: FeedViewModel())
 }

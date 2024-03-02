@@ -10,12 +10,13 @@ import SwiftUI
 struct libraryFeedPreview: View {
     var imageData: NSData?
     var contentData: NSData?
-
+    var feedID: Int?
+    
     @ObservedObject var feedViewModel: FeedViewModel
 
     var body: some View {
         NavigationLink {
-            SingleFeedView(feedViewModel: feedViewModel, contentData: contentData)
+            SingleFeedView(contentData: contentData, feedID: feedID, feedViewModel: feedViewModel)
         } label: {
             PreviewView(imageData: imageData)
         }
