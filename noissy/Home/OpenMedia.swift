@@ -1,9 +1,7 @@
 //
 //  OpenMedia.swift
 //  noissy
-//
-//  Created by Mert Guldu on 2/24/24.
-//
+
 
 import AVKit
 import PhotosUI

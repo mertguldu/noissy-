@@ -1,31 +1,10 @@
 //
 //  feedContent.swift
 //  noissy
-//
-//  Created by Mert Guldu on 2/23/24.
-//
+
 
 import SwiftUI
 import AVKit
-
-struct VideoMenu: View {
-    var feedID: Int?
-    var feedViewModel: FeedViewModel
-    
-    var body: some View {
-        HStack {
-            Spacer()
-            VStack(spacing:20) {
-                ShareButton()
-                if let id = feedID {
-                    DeleteButton(feedID: id, feedViewModel: feedViewModel)
-                }
-                MoreActionButton()
-            }
-            .padding()
-        }
-    }
-}
 
 struct FeedContent: View {
     var contentData: NSData? = nil
@@ -116,7 +95,6 @@ struct FeedContent: View {
             RoundedRectangle(cornerSize: CGSize(width: 50, height: 50))
                 .fill(.white)
                 .frame(width: max(width * progress, 0))
-                
         }
         .frame(height: 3)
         .overlay (alignment: .leading) {

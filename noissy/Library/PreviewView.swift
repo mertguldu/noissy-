@@ -1,9 +1,7 @@
 //
 //  PreviewView.swift
 //  noissy
-//
-//  Created by Mert Guldu on 2/28/24.
-//
+
 
 import SwiftUI
 
