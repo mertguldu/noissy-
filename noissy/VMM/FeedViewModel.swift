@@ -11,8 +11,6 @@ class FeedViewModel: ObservableObject {
     @Published var contentIsSelected: Bool = false
     @Published var selectedContent: NSData? = nil
     @Published var isTaskCompleted: Bool = false
-    @Published var onPage: String = "home"
-    //@Published var scrollPosition: CGPoint = .zero
     @Published var hideStatusBar: Bool = false
     @Published var selectedTab: Int = 1 //homePage
     

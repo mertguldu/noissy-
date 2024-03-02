@@ -33,7 +33,6 @@
 		C7A038E22B8F873C002CD141 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A038E12B8F873C002CD141 /* PreviewView.swift */; };
 		C7A038E82B900365002CD141 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A038E72B900365002CD141 /* Movie.swift */; };
 		C7A038EA2B900394002CD141 /* dataToURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A038E92B900394002CD141 /* dataToURL.swift */; };
-		C7A038EC2B90A3FF002CD141 /* PreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A038EB2B90A3FF002CD141 /* PreferenceKey.swift */; };
 		C7A038F02B910F5F002CD141 /* CustomVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A038EF2B910F5F002CD141 /* CustomVideoPlayer.swift */; };
 		C7A0390C2B9206FD002CD141 /* mergeVideoAndAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A0390B2B9206FD002CD141 /* mergeVideoAndAudio.swift */; };
 		C7A0390E2B921104002CD141 /* generateImageFromVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A0390D2B921104002CD141 /* generateImageFromVideo.swift */; };
@@ -68,7 +67,6 @@
 		C7A038E12B8F873C002CD141 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		C7A038E72B900365002CD141 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		C7A038E92B900394002CD141 /* dataToURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataToURL.swift; sourceTree = "<group>"; };
-		C7A038EB2B90A3FF002CD141 /* PreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKey.swift; sourceTree = "<group>"; };
 		C7A038EF2B910F5F002CD141 /* CustomVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoPlayer.swift; sourceTree = "<group>"; };
 		C7A0390B2B9206FD002CD141 /* mergeVideoAndAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mergeVideoAndAudio.swift; sourceTree = "<group>"; };
 		C7A0390D2B921104002CD141 /* generateImageFromVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = generateImageFromVideo.swift; sourceTree = "<group>"; };
@@ -168,7 +166,6 @@
 				C7331EFE2B89047800ECE039 /* Buttons */,
 				C7A038ED2B90C77A002CD141 /* Functions */,
 				C7A038EE2B90C79D002CD141 /* Assets */,
-				C7A038EB2B90A3FF002CD141 /* PreferenceKey.swift */,
 				C7853D2C2B62F88600130915 /* Assets.xcassets */,
 				C7853D2E2B62F88600130915 /* Preview Content */,
 			);
@@ -294,7 +291,6 @@
 				C7A038B42B8DE812002CD141 /* HeaderLabel.swift in Sources */,
 				C7331EFD2B89043900ECE039 /* ShareButton.swift in Sources */,
 				C7A0390E2B921104002CD141 /* generateImageFromVideo.swift in Sources */,
-				C7A038EC2B90A3FF002CD141 /* PreferenceKey.swift in Sources */,
 				C71F796B2B89652800288621 /* OpenMedia.swift in Sources */,
 				C71F79732B89781800288621 /* PageIndicator.swift in Sources */,
 				C75EBA8C2B76DFA000659D07 /* HomeView.swift in Sources */,

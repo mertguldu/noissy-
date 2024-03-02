@@ -10,7 +10,7 @@ struct HomeView: View {
     var body: some View {
         HStack(alignment:.center){
             VStack(spacing:0){
-                HeaderLabel()
+                HeaderLabel(feedViewModel: feedViewModel)
                 Spacer()
                 OpenMedia(feedViewModel: feedViewModel)
                 Spacer()
