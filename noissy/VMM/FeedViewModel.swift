@@ -29,4 +29,7 @@ class FeedViewModel: ObservableObject {
         return CoreModel.addContent(imageData: imageData, contenData: contentData)
     }
 
+    func delete(feed: FeedEntity) {
+        return CoreModel.deleteContent(feed: feed)
+    }
 }

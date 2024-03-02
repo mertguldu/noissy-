@@ -13,18 +13,8 @@ struct SingleFeedView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        ZStack {
             FeedContent(contentData: contentData)
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    ShareButton()
-                        .padding()
-                }
-                .padding()
-            }
-        }
+        
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(red: 0.2, green: 0.0, blue: 0.2))
             .ignoresSafeArea()

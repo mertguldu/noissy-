@@ -47,6 +47,11 @@ class CoreDataViewModel: ObservableObject {
         saveData()
     }
     
+    func deleteContent(feed: FeedEntity) {
+        context.delete(feed)
+        saveData()
+    }
+    
     func reset() {
         for content in savedContents {
             context.delete(content)
