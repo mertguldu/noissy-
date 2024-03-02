@@ -14,12 +14,14 @@ struct noissyHeader: View {
             ZStack {
                 HStack {
                     Button {
-                        feedViewModel.onPage = "library"
+                        withAnimation {
+                            feedViewModel.selectedTab = 2
+                        }
                         print("Library is clicked")
                     } label: {
                         Text("Library")
                             .fontWeight(.bold)
-                            .foregroundStyle(feedViewModel.scrollPosition.x >=  -screenWidth/2 ? Color.white : Color.gray)
+                            .foregroundStyle(feedViewModel.selectedTab == 2 ? Color.white : Color.gray)
                     }
                     Spacer()
                 }

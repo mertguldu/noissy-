@@ -14,15 +14,19 @@ struct PageIndicator: View {
 
     var body: some View {
         HStack(alignment:.center, spacing: 20){
-            CircleIndicator(color: feedViewModel.scrollPosition.x >=  -screenWidth/2 ? Color.white : Color.gray)
+            CircleIndicator(color: feedViewModel.selectedTab == 2 ? Color.white : Color.gray)
                 .onTapGesture {
-                    feedViewModel.onPage = "library"
+                    withAnimation {
+                        feedViewModel.selectedTab = 2
+                    }
                     print("circle 1 is clicked")
                 }
             
-            CircleIndicator(color: feedViewModel.scrollPosition.x <=  -screenWidth/2 ? Color.white : Color.gray)
+            CircleIndicator(color: feedViewModel.selectedTab == 1 ? Color.white : Color.gray)
                 .onTapGesture {
-                    feedViewModel.onPage = "home"
+                    withAnimation {
+                        feedViewModel.selectedTab = 1
+                    }
                     print("circle 2 is clicked")
                 }
         }

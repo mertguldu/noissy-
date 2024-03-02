@@ -9,10 +9,9 @@ import SwiftUI
 
 struct CombinedView: View {
     @ObservedObject var feedViewModel: FeedViewModel = FeedViewModel()
-    @State var selectedTab = 1
+    
     var body: some View {
-        
-        TabView(selection: $selectedTab){
+        TabView(selection: $feedViewModel.selectedTab){
             LibraryView(feedViewModel: feedViewModel)
                 .frame(width: UIScreen.main.bounds.width)
                 .id("home")
@@ -26,6 +25,8 @@ struct CombinedView: View {
         .onAppear(perform: {
                 UIScrollView.appearance().bounces = false
             })
+        
+        
     }
 }
 

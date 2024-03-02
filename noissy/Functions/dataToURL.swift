@@ -12,8 +12,8 @@ func dataToURL(data: NSData) -> URL {
     
     do {
         try data.write(to: cacheURL, options: .atomicWrite)
-    } catch let err {
-        print("Failed with error:")
+    } catch let error {
+        print(error)
     }
     
     return cacheURL
