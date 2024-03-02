@@ -8,6 +8,19 @@
 import SwiftUI
 import AVKit
 
+struct VideoMenu: View {
+    var body: some View {
+        HStack {
+            Spacer()
+            VStack(spacing:20) {
+                ShareButton()
+                MoreActionButton()
+            }
+            .padding()
+        }
+    }
+}
+
 struct FeedContent: View {
     var contentData: NSData? = nil
     
@@ -29,17 +42,9 @@ struct FeedContent: View {
                         .overlay(alignment: .bottom) {
                             VStack() {
                                 Spacer()
-                                HStack {
-                                    Spacer()
-                                    VStack(spacing:20) {
-                                        ShareButton()
-                                        MoreButton()
-                                    }
-                                    .padding()
-                                }
+                                VideoMenu()
                                 VideoSeekerView()
                             }
-                            
                         }
                 }
             }
@@ -59,7 +64,7 @@ struct FeedContent: View {
                 player!.play()
                 
                 if let player = player {
-                    player.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 600), queue: .main) { time in
+                    player.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 5), queue: .main) { time in
                         if let currentPlayerTime = player.currentItem {
                             let totalDuration = currentPlayerTime.duration.seconds
                             let currentDuration = player.currentTime().seconds
@@ -90,6 +95,7 @@ struct FeedContent: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
+    
     
     @ViewBuilder
     func VideoSeekerView() -> some View {

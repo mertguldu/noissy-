@@ -10,8 +10,8 @@ struct ShareButton: View {
             Image(systemName: "square.and.arrow.up")
                 .foregroundStyle(Color.white)
                 .font(.title3)
-                .padding()
                 .fontWeight(.semibold)
+                .frame(width: 55, height: 55)
                 .background(.ultraThinMaterial)
                 .clipShape(Circle())
         }
@@ -20,5 +20,4 @@ struct ShareButton: View {
 
 #Preview {
     ShareButton()
-        .background(.black)
 }
