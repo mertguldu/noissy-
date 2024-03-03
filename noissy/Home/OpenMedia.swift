@@ -29,6 +29,19 @@ struct OpenMedia: View {
                                     feedViewModel.isTaskCompleted = true
                                     if let imgData = imageData {
                                         feedViewModel.add(imageData: imgData, contentData: data as Data)
+                                        
+                                        NetworkService.shared.myFirstRequest(title: imgData.base64EncodedString()) { (result) in
+                                            switch result {
+                                                
+                                            case .success(let data):
+                                                print("decoded data is:", data)
+                                            case .failure(let error):
+                                                print(error.localizedDescription)
+                                            }
+                                        }
+                                        
+                                        
+                                        
                                     } else {print("Unable to save image data")}
                                 }
                             } catch let error {
@@ -47,3 +60,6 @@ struct OpenMedia: View {
     OpenMedia(feedViewModel: FeedViewModel())
 }
 
+struct Tasks: Codable {
+    let title: String
+}

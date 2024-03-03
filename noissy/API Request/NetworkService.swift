@@ -9,8 +9,14 @@ struct NetworkService {
     static let shared = NetworkService()
     private init() {}
     
-    func myFirstRequest(completion: @escaping (Result<String, Error>) -> Void) {
-        request(route: .temp, method: .get, completion: completion)
+    func myFirstRequest(title: String, completion: @escaping (Result<Tasks, Error>) -> Void) {
+        let params = ["title": title]
+        request(route: .temp, method: .post, parameters: params, completion: completion)
+    }
+    
+    func sendVideoData(videoData: Data, completion: @escaping (Result<Data, Error>) -> Void) {
+        let params = ["imageData": videoData]
+        request(route: .temp, method: .post, parameters: params, completion: completion)
     }
     
     private func request<T: Decodable>(route: Route, method: Method, parameters: [String: Any]? = nil, completion: @escaping (Result<T, Error>) -> Void) {
@@ -58,7 +64,8 @@ struct NetworkService {
             if let decodedMusicData = response.musicData {
                 completion(.success(decodedMusicData))
             } else {
-                completion(.failure(AppError.unkownError))
+                //completion(.failure(AppError.unkownError))
+                print("no music data is available")
             }
             
         case .failure(let error):
