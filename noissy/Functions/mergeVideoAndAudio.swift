@@ -17,10 +17,10 @@ import AssetsLibrary
 ///   - audioUrl: URL to audio file
 ///   - shouldFlipHorizontally: pass True if video was recorded using frontal camera otherwise pass False
 ///   - completion: completion of saving: error or url with final video
-func mergeVideoAndAudio(videoUrl: URL,
-                        audioUrl: URL,
+func mergeVideoAndAudio(videoData: String,
+                        audioData: String,
                         shouldFlipHorizontally: Bool = false,
-                        completion: @escaping (_ error: Error?, _ url: URL?) -> Void) async {
+                        completion: @escaping (_ mergedData:Data?, _ error:Error?) -> Void) async {
 
     let mixComposition = AVMutableComposition()
     var mutableCompositionVideoTrack = [AVMutableCompositionTrack]()
@@ -28,9 +28,37 @@ func mergeVideoAndAudio(videoUrl: URL,
     var mutableCompositionAudioOfVideoTrack = [AVMutableCompositionTrack]()
 
     //start merge
-
-    let aVideoAsset = AVAsset(url: videoUrl)
-    let aAudioAsset = AVAsset(url: audioUrl)
+    // Decode base64 audio data
+    guard let videoDataDecoded = Data(base64Encoded: videoData) else {
+        completion(nil, NSError(domain: "YourAppDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode base64 video data"]))
+        return
+    }
+    // Save decoded audio data to a temporary file
+    let tempVideoURL = FileManager.default.temporaryDirectory.appendingPathComponent("tempVideo.mp4")
+    do {
+        try videoDataDecoded.write(to: tempVideoURL)
+    } catch {
+        completion(nil, NSError(domain: "YourAppDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to write base64 video data"]))
+        return
+    }
+        
+    // Decode base64 audio data
+    guard let audioDataDecoded = Data(base64Encoded: audioData) else {
+        completion(nil, NSError(domain: "YourAppDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode base64 audio data"]))
+        return
+    }
+    // Save decoded audio data to a temporary file
+    let tempAudioURL = FileManager.default.temporaryDirectory.appendingPathComponent("tempAudio.mp3")
+    do {
+        try audioDataDecoded.write(to: tempAudioURL)
+    } catch {
+        completion(nil, NSError(domain: "YourAppDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to write base64 audio data"]))
+        return
+    }
+    
+    let aVideoAsset = AVAsset(url: tempVideoURL)
+    let aAudioAsset = AVAsset(url: tempAudioURL)
+    
 
     let compositionAddVideo = mixComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)!
 
@@ -41,27 +69,6 @@ func mergeVideoAndAudio(videoUrl: URL,
     let aVideoAssetTrack: AVAssetTrack? = try? await aVideoAsset.loadTracks(withMediaType: AVMediaType.video)[0]
     let aAudioOfVideoAssetTrack: AVAssetTrack? = try? await aVideoAsset.loadTracks(withMediaType: AVMediaType.audio).first
     let aAudioAssetTrack: AVAssetTrack? = try? await aAudioAsset.loadTracks(withMediaType: AVMediaType.audio)[0]
-
-    if let videoAssetTrack = aVideoAssetTrack {
-        // Default must have tranformation
-        do {
-            compositionAddVideo.preferredTransform = try await videoAssetTrack.load(.preferredTransform)
-        } catch let error {
-            print(error)
-        }
-        
-        if shouldFlipHorizontally {
-            // Flip video horizontally
-            var frontalTransform: CGAffineTransform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-            do {
-                frontalTransform = try await frontalTransform.translatedBy(x: -videoAssetTrack.load(.naturalSize).width, y: 0.0)
-                frontalTransform = try await frontalTransform.translatedBy(x: 0.0, y: -videoAssetTrack.load(.naturalSize).width)
-            } catch let error {
-                print(error)
-            }
-            compositionAddVideo.preferredTransform = frontalTransform
-        }
-    }
 
     mutableCompositionVideoTrack.append(compositionAddVideo)
     mutableCompositionAudioTrack.append(compositionAddAudio)
@@ -83,7 +90,7 @@ func mergeVideoAndAudio(videoUrl: URL,
                                                                                         at: CMTime.zero)
                 
             } else {
-                print("audioAssetTrack is nil")
+                print("there is no audio in the audio file")
             }
             
             // adding audio (of the video if exists) asset to the final composition
@@ -94,7 +101,7 @@ func mergeVideoAndAudio(videoUrl: URL,
                                                                                                 at: CMTime.zero)
                 
             } else {
-                print("aAudioOfVideoAssetTrack is nil")
+                print("Video does not have an audio")
             }
         } catch {
             print(error.localizedDescription)
@@ -114,6 +121,19 @@ func mergeVideoAndAudio(videoUrl: URL,
     assetExport.outputURL = savePathUrl
     assetExport.shouldOptimizeForNetworkUse = true
 
+    
+    let outputURL = assetExport.outputURL
     await assetExport.export()
+    
+    if let url = outputURL {
+        do {
+            let mergedData = try Data(contentsOf: url)
+            completion(mergedData, nil)
+            print("merging completed")
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
 }
 

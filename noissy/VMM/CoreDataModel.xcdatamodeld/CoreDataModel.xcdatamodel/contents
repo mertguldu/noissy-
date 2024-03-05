@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23D60" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="FeedEntity" representedClassName="FeedEntity" syncable="YES" codeGenerationType="class">
         <attribute name="contenData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="musicData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="previewImageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
     </entity>
 </model>

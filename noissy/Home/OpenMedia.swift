@@ -25,23 +25,21 @@ struct OpenMedia: View {
                                     let cgimage = await generateImageFromVideo(videoUrl: movie.url)
                                     let imageData = UIImage(cgImage: cgimage).pngData()
                                     
-                                    feedViewModel.selectedContent = data
-                                    feedViewModel.isTaskCompleted = true
+                                    feedViewModel.selectedContent = data.base64EncodedString()
+                                    
                                     if let imgData = imageData {
-                                        feedViewModel.add(imageData: imgData, contentData: data as Data)
                                         
-                                        NetworkService.shared.myFirstRequest(title: imgData.base64EncodedString()) { (result) in
+                                        NetworkService.shared.sendVideoData(videoData: data.base64EncodedString()) {(result) in
                                             switch result {
-                                                
-                                            case .success(let data):
-                                                print("decoded data is:", data)
+                                            case .success(let musicData):
+                                                print("backend result is successfull")
+                                                feedViewModel.musicDataString = musicData
+                                                feedViewModel.add(imageData: imgData, contentData: data as Data, musicData: Data(base64Encoded: musicData)!)
+                                                feedViewModel.isTaskCompleted = true
                                             case .failure(let error):
                                                 print(error.localizedDescription)
                                             }
                                         }
-                                        
-                                        
-                                        
                                     } else {print("Unable to save image data")}
                                 }
                             } catch let error {
@@ -58,8 +56,4 @@ struct OpenMedia: View {
 
 #Preview {
     OpenMedia(feedViewModel: FeedViewModel())
-}
-
-struct Tasks: Codable {
-    let title: String
 }

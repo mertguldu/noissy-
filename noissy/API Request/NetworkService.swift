@@ -8,14 +8,9 @@ struct NetworkService {
     
     static let shared = NetworkService()
     private init() {}
-    
-    func myFirstRequest(title: String, completion: @escaping (Result<Tasks, Error>) -> Void) {
-        let params = ["title": title]
-        request(route: .temp, method: .post, parameters: params, completion: completion)
-    }
-    
-    func sendVideoData(videoData: Data, completion: @escaping (Result<Data, Error>) -> Void) {
-        let params = ["imageData": videoData]
+
+    func sendVideoData(videoData: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let params = ["VideoData": videoData]
         request(route: .temp, method: .post, parameters: params, completion: completion)
     }
     
@@ -28,7 +23,6 @@ struct NetworkService {
             if let data = data {
                 result = .success(data)
                 let respondString = String(data: data, encoding: .utf8) ?? "Could not convert data to string"
-                print("response is:", respondString)
             } else if let error = error {
                 result = .failure(error)
                 print(error.localizedDescription)
@@ -61,7 +55,7 @@ struct NetworkService {
                 return
             }
             
-            if let decodedMusicData = response.musicData {
+            if let decodedMusicData = response.message {
                 completion(.success(decodedMusicData))
             } else {
                 //completion(.failure(AppError.unkownError))
@@ -70,6 +64,7 @@ struct NetworkService {
             
         case .failure(let error):
             completion(.failure(error))
+            
         }
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 
 struct APIResponse<T: Decodable>: Decodable {
-    let musicData: T?
+    let message: T?
     let error: String?
 }
 
