@@ -18,8 +18,8 @@ struct noissy: View {
                 .background(mainColor)
             
                 .navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
-                    if let content = feedViewModel.selectedContent{
-                        SingleFeedView(contentData: content, feedViewModel: feedViewModel)
+                    if let content = feedViewModel.selectedMovie {
+                        SingleFeedView(feedViewModel: feedViewModel)
                     }
                 }
             }

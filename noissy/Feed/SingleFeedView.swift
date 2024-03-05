@@ -6,7 +6,7 @@ import SwiftUI
 import AVKit
 
 struct SingleFeedView: View {
-    var contentData: String? = nil
+    var contentData: Data?
     var feedID: Int?
     var feedViewModel: FeedViewModel
     @State var mergedData: Data?
@@ -22,16 +22,25 @@ struct SingleFeedView: View {
             .ignoresSafeArea()
             .onAppear {
                 feedViewModel.hideStatusBar = true
-                if let musicDataStr = feedViewModel.musicDataString {
-                    Task {
-                        await mergeVideoAndAudio(videoData: feedViewModel.selectedContent!, audioData: feedViewModel.musicDataString!) { (data, error) in
-                            mergedData = data
-                            print(error)
+                if feedViewModel.newMerge {
+                    if let musicDataStr = feedViewModel.musicDataString {
+                        Task {
+                            await mergeVideoAndAudio(videoData: feedViewModel.selectedMovie!, audioData: feedViewModel.musicDataString!) { (data, error) in
+                                if let data = data {
+                                    mergedData = data
+                                    feedViewModel.add(imageData: feedViewModel.imagePreviewData!, contentData: data)
+                                }
+                                if let error = error {
+                                    print(error)
+                                }
+                            }
                         }
+                        feedViewModel.newMerge = false
+                    } else {
+                        print("no music data")
                     }
-            
                 } else {
-                    print("no music data")
+                    mergedData = contentData
                 }
             }
             .onDisappear {

@@ -25,22 +25,21 @@ struct OpenMedia: View {
                                     let cgimage = await generateImageFromVideo(videoUrl: movie.url)
                                     let imageData = UIImage(cgImage: cgimage).pngData()
                                     
-                                    feedViewModel.selectedContent = data.base64EncodedString()
+                                    feedViewModel.imagePreviewData = imageData
+                                    feedViewModel.selectedMovie = data.base64EncodedString()
+                                    feedViewModel.newMerge = true
                                     
-                                    if let imgData = imageData {
-                                        
-                                        NetworkService.shared.sendVideoData(videoData: data.base64EncodedString()) {(result) in
-                                            switch result {
-                                            case .success(let musicData):
-                                                print("backend result is successfull")
-                                                feedViewModel.musicDataString = musicData
-                                                feedViewModel.add(imageData: imgData, contentData: data as Data, musicData: Data(base64Encoded: musicData)!)
-                                                feedViewModel.isTaskCompleted = true
-                                            case .failure(let error):
-                                                print(error.localizedDescription)
-                                            }
+                                    NetworkService.shared.sendVideoData(videoData: data.base64EncodedString()) {(result) in
+                                        switch result {
+                                        case .success(let musicData):
+                                            print("backend result is successfull")
+                                            feedViewModel.musicDataString = musicData
+                                            
+                                            feedViewModel.isTaskCompleted = true
+                                        case .failure(let error):
+                                            print(error.localizedDescription)
                                         }
-                                    } else {print("Unable to save image data")}
+                                    }
                                 }
                             } catch let error {
                                 print(error)

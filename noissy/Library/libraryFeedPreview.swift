@@ -7,7 +7,7 @@ import SwiftUI
 
 struct libraryFeedPreview: View {
     var imageData: NSData?
-    var contentData: String?
+    var contentData: Data?
     var feedID: Int?
     
     @ObservedObject var feedViewModel: FeedViewModel

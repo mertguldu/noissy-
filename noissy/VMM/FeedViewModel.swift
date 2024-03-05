@@ -9,11 +9,14 @@ class FeedViewModel: ObservableObject {
     @Published private var CoreModel = CoreDataViewModel()
     
     @Published var contentIsSelected: Bool = false
-    @Published var selectedContent: String? = nil
+    @Published var selectedMovie: String? = nil
     @Published var isTaskCompleted: Bool = false
     @Published var hideStatusBar: Bool = false
     @Published var selectedTab: Int = 1 //homePage
     @Published var musicDataString: String?
+    @Published var mergedVideo: Data?
+    @Published var imagePreviewData: Data?
+    @Published var newMerge: Bool = false
     
     @Published var imageSelection: PhotosPickerItem? = nil {
         didSet {
@@ -26,8 +29,8 @@ class FeedViewModel: ObservableObject {
         return CoreModel.savedContents
     }
     
-    func add(imageData:Data, contentData: Data, musicData: Data) { // add feed
-        return CoreModel.addContent(imageData: imageData, contenData: contentData, musicData: musicData)
+    func add(imageData:Data, contentData: Data) { // add feed
+        return CoreModel.addContent(imageData: imageData, contentData: contentData)
     }
 
     func delete(feed: FeedEntity) {
