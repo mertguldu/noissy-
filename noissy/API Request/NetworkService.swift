@@ -25,7 +25,6 @@ struct NetworkService {
                 //let respondString = String(data: data, encoding: .utf8) ?? "Could not convert data to string"
             } else if let error = error {
                 result = .failure(error)
-                print(error.localizedDescription)
             }
             
             DispatchQueue.main.async {
@@ -64,7 +63,6 @@ struct NetworkService {
             
         case .failure(let error):
             completion(.failure(error))
-            
         }
     }
     
@@ -81,6 +79,10 @@ struct NetworkService {
         let urlString = Route.baseUrl + route.description // basURL + endpoint: "https://.../temp"
         guard let url = urlString.asUrl else { return nil }
         var urlRequest = URLRequest(url: url)
+        
+        // Set timeout interval (adjust the value as needed)
+        urlRequest.timeoutInterval = 120.0 // 120 seconds
+        
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.httpMethod = method.rawValue
         

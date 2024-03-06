@@ -25,23 +25,28 @@ struct OpenMedia: View {
                                     let data = NSData(contentsOf: movie.url)!
                                     let cgimage = await generateImageFromVideo(videoUrl: movie.url)
                                     let imageData = UIImage(cgImage: cgimage).pngData()
+                                    let asset = AVURLAsset(url: movie.url)
+                                    let durationOfVideo = try await asset.load(.duration).seconds
                                     
-                                    feedViewModel.imagePreviewData = imageData
-                                    feedViewModel.selectedMovie = data.base64EncodedString()
-                                    feedViewModel.newMerge = true
-                                    feedViewModel.currentTask = true
-                                    
-                                    NetworkService.shared.sendVideoData(videoData: data.base64EncodedString()) {(result) in
-                                        switch result {
-                                        case .success(let musicData):
-                                            print("backend result is successfull")
-                                            feedViewModel.musicDataString = musicData
-                                            
-                                            feedViewModel.isTaskCompleted = true
-                                            
-                                        case .failure(let error):
-                                            print(error.localizedDescription)
+                                    if durationOfVideo <= 30.0 {
+                                        feedViewModel.imagePreviewData = imageData
+                                        feedViewModel.selectedMovie = data.base64EncodedString()
+                                        feedViewModel.currentTask = true
+                                        
+                                        NetworkService.shared.sendVideoData(videoData: data.base64EncodedString()) {(result) in
+                                            switch result {
+                                                case .success(let musicData):
+                                                    print("backend result is successfull")
+                                                    feedViewModel.musicDataString = musicData
+                                                    feedViewModel.newMerge = true
+                                                    feedViewModel.isTaskCompleted = true
+                                                case .failure(let error):
+                                                    print("here is the error:", error.localizedDescription)
+                                                    feedViewModel.currentTask = false
+                                            }
                                         }
+                                    } else {
+                                        print("video is too large")
                                     }
                                 }
                             } catch let error {
