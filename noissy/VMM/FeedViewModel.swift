@@ -18,6 +18,8 @@ class FeedViewModel: ObservableObject {
     @Published var mergedVideo: Data?
     @Published var imagePreviewData: Data?
     @Published var newMerge: Bool = false
+    @Published var isErrorOccured = false
+    @Published var errorMessage: String = ""
     
     @Published var imageSelection: PhotosPickerItem? = nil {
         didSet {

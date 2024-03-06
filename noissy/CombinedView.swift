@@ -27,6 +27,13 @@ struct CombinedView: View {
         .onAppear(perform: {
                 UIScrollView.appearance().bounces = false
             })
+        .alert(Text(feedViewModel.errorMessage), isPresented: $feedViewModel.isErrorOccured) {
+            Button(action: {
+                feedViewModel.isErrorOccured = false
+            }, label: {
+                Text("OK")
+            })
+        }
         
         
     }

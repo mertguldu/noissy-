@@ -43,10 +43,18 @@ struct OpenMedia: View {
                                                 case .failure(let error):
                                                     print("here is the error:", error.localizedDescription)
                                                     feedViewModel.currentTask = false
+                                                    feedViewModel.isErrorOccured = true
+                                                    if error.localizedDescription == "The request timed out." {
+                                                        feedViewModel.errorMessage = "The request timed out. Try Again."
+                                                    } else {
+                                                        feedViewModel.errorMessage = error.localizedDescription
+                                                    }
                                             }
                                         }
                                     } else {
                                         print("video is too large")
+                                        feedViewModel.isErrorOccured = true
+                                        feedViewModel.errorMessage = "Video can't be longer than 30 secs"
                                     }
                                 }
                             } catch let error {
