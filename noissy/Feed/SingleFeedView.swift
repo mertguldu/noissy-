@@ -26,11 +26,10 @@ struct SingleFeedView: View {
                     if let musicDataStr = feedViewModel.musicDataString {
                         feedViewModel.currentTask = false
                         Task {
-                            await mergeVideoAndAudio(videoData: feedViewModel.selectedMovie!, audioData: feedViewModel.musicDataString!) { (data, error) in
+                            await mergeVideoAndAudio(videoData: feedViewModel.selectedMovie!, audioData: musicDataStr) { (data, error) in
                                 if let data = data {
                                     mergedData = data
                                     feedViewModel.add(imageData: feedViewModel.imagePreviewData!, contentData: data)
-                                    
                                 }
                                 if let error = error {
                                     print(error)

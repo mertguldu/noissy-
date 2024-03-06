@@ -8,22 +8,23 @@ import PhotosUI
 class FeedViewModel: ObservableObject {
     @Published private var CoreModel = CoreDataViewModel()
     
-    @Published var contentIsSelected: Bool = false
-    @Published var selectedMovie: String? = nil
+    @Published var selectedTab: Int = 1 //homePage
+    @Published var hideStatusBar: Bool = false
+    
     @Published var isTaskCompleted: Bool = false
     @Published var currentTask: Bool = false
-    @Published var hideStatusBar: Bool = false
-    @Published var selectedTab: Int = 1 //homePage
+    
+    @Published var selectedMovie: String? = nil
     @Published var musicDataString: String?
     @Published var mergedVideo: Data?
     @Published var imagePreviewData: Data?
+    
     @Published var newMerge: Bool = false
     @Published var isErrorOccured = false
     @Published var errorMessage: String = ""
     
     @Published var imageSelection: PhotosPickerItem? = nil {
         didSet {
-            contentIsSelected = true
             isTaskCompleted = true
         }
     }

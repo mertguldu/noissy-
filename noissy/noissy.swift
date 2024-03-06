@@ -20,9 +20,7 @@ struct noissy: View {
                 .background(mainColor)
             
                 .navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
-                    if let content = feedViewModel.selectedMovie {
-                        SingleFeedView(feedViewModel: feedViewModel)
-                    }
+                    SingleFeedView(feedViewModel: feedViewModel)
                 }
             }
             .tint(.white)
