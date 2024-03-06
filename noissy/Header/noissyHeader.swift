@@ -21,7 +21,8 @@ struct noissyHeader: View {
                     } label: {
                         Text("Library")
                             .fontWeight(.bold)
-                            .foregroundStyle(feedViewModel.selectedTab == 2 ? Color.white : Color.gray)
+                            .foregroundStyle(.white)
+                            .opacity(feedViewModel.selectedTab == 2 ? 1 : 0.5)
                     }
                     Spacer()
                 }

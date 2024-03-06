@@ -14,7 +14,8 @@ struct PageIndicator: View {
 
     var body: some View {
         HStack(alignment:.center, spacing: 20){
-            CircleIndicator(color: feedViewModel.selectedTab == 2 ? Color.white : Color.gray)
+            CircleIndicator(color: Color.white)
+                .opacity(feedViewModel.selectedTab == 2 ? 1 : 0.5)
                 .onTapGesture {
                     withAnimation {
                         feedViewModel.selectedTab = 2
@@ -22,7 +23,8 @@ struct PageIndicator: View {
                     print("circle 1 is clicked")
                 }
             
-            CircleIndicator(color: feedViewModel.selectedTab == 1 ? Color.white : Color.gray)
+            CircleIndicator(color: Color.white)
+                .opacity(feedViewModel.selectedTab == 1 ? 1 : 0.5)
                 .onTapGesture {
                     withAnimation {
                         feedViewModel.selectedTab = 1
