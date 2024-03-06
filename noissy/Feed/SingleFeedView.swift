@@ -46,6 +46,11 @@ struct SingleFeedView: View {
             }
             .onDisappear {
                 feedViewModel.hideStatusBar = false
+                if feedViewModel.selectedTab != 2 {
+                    withAnimation(.easeIn) {
+                        feedViewModel.selectedTab = 2
+                    }
+                }
             }
     }
 }
