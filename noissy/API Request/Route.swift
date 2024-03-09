@@ -6,7 +6,7 @@
 import Foundation
 
 enum Route {
-    static let baseUrl = "http://127.0.0.1:5000"
+    static let baseUrl = "https://noissy.ai/5000"
     
     case temp //endpoint
     

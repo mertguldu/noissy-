@@ -19,7 +19,6 @@ import AssetsLibrary
 ///   - completion: completion of saving: error or url with final video
 func mergeVideoAndAudio(videoData: String,
                         audioData: String,
-                        shouldFlipHorizontally: Bool = false,
                         completion: @escaping (_ mergedData:Data?, _ error:Error?) -> Void) async {
 
     let mixComposition = AVMutableComposition()
@@ -34,7 +33,7 @@ func mergeVideoAndAudio(videoData: String,
         return
     }
     // Save decoded audio data to a temporary file
-    let tempVideoURL = FileManager.default.temporaryDirectory.appendingPathComponent("tempVideo.mp4")
+    let tempVideoURL = FileManager.default.temporaryDirectory.appendingPathComponent("tempVideo.MOV")
     do {
         try videoDataDecoded.write(to: tempVideoURL)
     } catch {
@@ -69,12 +68,19 @@ func mergeVideoAndAudio(videoData: String,
     let aVideoAssetTrack: AVAssetTrack? = try? await aVideoAsset.loadTracks(withMediaType: AVMediaType.video)[0]
     let aAudioOfVideoAssetTrack: AVAssetTrack? = try? await aVideoAsset.loadTracks(withMediaType: AVMediaType.audio).first
     let aAudioAssetTrack: AVAssetTrack? = try? await aAudioAsset.loadTracks(withMediaType: AVMediaType.audio)[0]
-
+    
     mutableCompositionVideoTrack.append(compositionAddVideo)
     mutableCompositionAudioTrack.append(compositionAddAudio)
     mutableCompositionAudioOfVideoTrack.append(compositionAddAudioOfVideo)
 
     if let videoAssetTrack = aVideoAssetTrack {
+        // Default must have tranformation
+        do {
+            compositionAddVideo.preferredTransform = try await videoAssetTrack.load(.preferredTransform)
+        } catch let error {
+            print(error)
+        }
+        
         do {
             try await mutableCompositionVideoTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
                                                                                     duration: videoAssetTrack.load(.timeRange).duration),

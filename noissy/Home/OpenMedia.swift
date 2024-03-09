@@ -24,16 +24,20 @@ struct OpenMedia: View {
                                 if let movie = try await selectedItem?.loadTransferable(type: Movie.self) {
                                     let data = NSData(contentsOf: movie.url)!
                                     let cgimage = await generateImageFromVideo(videoUrl: movie.url)
-                                    let imageData = UIImage(cgImage: cgimage).pngData()
+                                    let imageData = UIImage(cgImage: cgimage!).pngData()
                                     let asset = AVURLAsset(url: movie.url)
-                                    let durationOfVideo = try await asset.load(.duration).seconds
+                                    
+                                    let durationOfVideo = Float(try await asset.load(.duration).seconds)
+                                    let fps = await getVideoFPS(videoURL: movie.url)
+                                    let videoSizeMB = Float((data.length) / (1024 * 1024))
+                                    let sizePerFrame = videoSizeMB / ( durationOfVideo * fps)
                                     
                                     if durationOfVideo <= 30.0 {
                                         feedViewModel.imagePreviewData = imageData
                                         feedViewModel.selectedMovie = data.base64EncodedString()
                                         feedViewModel.currentTask = true
                                         
-                                        NetworkService.shared.sendVideoData(videoData: data.base64EncodedString()) {(result) in
+                                        NetworkService.shared.sendVideoData(videoData: data.base64EncodedString(), sizePerFrame: String(sizePerFrame)) {(result) in
                                             switch result {
                                                 case .success(let musicData):
                                                     print("backend result is successfull")
@@ -41,7 +45,7 @@ struct OpenMedia: View {
                                                     feedViewModel.newMerge = true
                                                     feedViewModel.isTaskCompleted = true
                                                 case .failure(let error):
-                                                    print("here is the error:", error.localizedDescription)
+                                                    print("error:", error.localizedDescription)
                                                     feedViewModel.currentTask = false
                                                     feedViewModel.isErrorOccured = true
                                                     if error.localizedDescription == "The request timed out." {
