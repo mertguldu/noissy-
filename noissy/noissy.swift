@@ -5,7 +5,7 @@ import SwiftUI
 
 struct noissy: View {
     @ObservedObject var feedViewModel: FeedViewModel
-    
+
     var body: some View {
         NavigationStack {
                 ZStack {
@@ -18,7 +18,6 @@ struct noissy: View {
                 .edgesIgnoringSafeArea(.bottom)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(mainColor)
-            
                 .navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
                     SingleFeedView(feedViewModel: feedViewModel)
                 }

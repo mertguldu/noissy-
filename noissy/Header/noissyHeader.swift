@@ -14,7 +14,7 @@ struct noissyHeader: View {
             ZStack {
                 HStack {
                     Button {
-                        withAnimation {
+                        withAnimation(.easeInOut(duration: 0.2)) {
                             feedViewModel.selectedTab = 2
                         }
                         print("Library is clicked")

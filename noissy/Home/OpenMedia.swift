@@ -29,9 +29,9 @@ struct OpenMedia: View {
                                     
                                     let durationOfVideo = Float(try await asset.load(.duration).seconds)
                                     let fps = await getVideoFPS(videoURL: movie.url)
-                                    let videoSizeMB = Float((data.length) / (1024 * 1024))
+                                    let videoSizeMB = Float(data.length) / Float(1024.0 * 1024.0)
                                     let sizePerFrame = videoSizeMB / ( durationOfVideo * fps)
-                                    
+
                                     if durationOfVideo <= 30.0 {
                                         feedViewModel.imagePreviewData = imageData
                                         feedViewModel.selectedMovie = data.base64EncodedString()

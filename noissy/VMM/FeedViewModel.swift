@@ -8,7 +8,7 @@ import PhotosUI
 class FeedViewModel: ObservableObject {
     @Published private var CoreModel = CoreDataViewModel()
     
-    @Published var selectedTab: Int = 1 //homePage
+    @Published var selectedTab: Int = 1
     @Published var hideStatusBar: Bool = false
     
     @Published var isTaskCompleted: Bool = false
