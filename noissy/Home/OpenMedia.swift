@@ -33,8 +33,8 @@ struct OpenMedia: View {
                                     let sizePerFrame = videoSizeMB / ( durationOfVideo * fps)
 
                                     if durationOfVideo <= 30.0 {
-                                        feedViewModel.imagePreviewData = imageData
-                                        feedViewModel.selectedMovie = data.base64EncodedString()
+                                        feedViewModel.imagePreviewData = imageData // one time value
+                                        feedViewModel.selectedMovie = data.base64EncodedString() // one time value
                                         feedViewModel.currentTask = true
                                         
                                         NetworkService.shared.sendVideoData(videoData: data.base64EncodedString(), sizePerFrame: String(sizePerFrame)) {(result) in

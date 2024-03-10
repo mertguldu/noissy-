@@ -29,7 +29,7 @@ struct FeedContent: View {
                         .overlay(alignment: .bottom) {
                             VStack() {
                                 Spacer()
-                                VideoMenu(feedID: feedID, feedViewModel: feedViewModel)
+                                VideoMenu(feedID: feedID, url: cacheURL, feedViewModel: feedViewModel)
                                 VideoSeekerView()
                             }
                         }
