@@ -9,8 +9,9 @@ struct ShareButton: View {
     var previewImage : UIImage?
     var body: some View {
         if let url = movieURL {
+            let movie = Movie(url: url)
             if let previewImage = previewImage {
-                ShareLink(item: url, preview: SharePreview("Share your video.", image: Image(uiImage: previewImage))) {
+                ShareLink(item: movie, preview: SharePreview("Share your video.", image: Image(uiImage: previewImage))) {
                     Image(systemName: "square.and.arrow.up")
                         .foregroundStyle(Color.white)
                         .font(.title3)

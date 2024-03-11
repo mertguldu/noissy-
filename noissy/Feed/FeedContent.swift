@@ -84,6 +84,7 @@ struct FeedContent: View {
     @ViewBuilder
     func VideoSeekerView() -> some View {
         let width = max(UIScreen.main.bounds.width * 0.8, 0)
+        let progressMax = max(progress, 0)
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerSize: CGSize(width: 50, height: 50))
                 .fill(.black)
@@ -91,7 +92,7 @@ struct FeedContent: View {
             
             RoundedRectangle(cornerSize: CGSize(width: 50, height: 50))
                 .fill(.white)
-                .frame(width: max(width * progress, 0))
+                .frame(width: max(width * progressMax, 0))
         }
         .frame(height: 3)
         .overlay (alignment: .leading) {
