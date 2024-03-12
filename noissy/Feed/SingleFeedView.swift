@@ -10,9 +10,7 @@ struct SingleFeedView: View {
     var feedID: Int?
     @ObservedObject var feedViewModel: FeedViewModel
     @State var mergedData: Data?
-    
-    var player: AVPlayer = AVPlayer()
-    
+        
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
