@@ -12,16 +12,15 @@ struct VideoMenu: View {
     var url: URL?
     var feedViewModel: FeedViewModel
     
+    @State var img: UIImage?
+    
     var body: some View {
         HStack {
             Spacer()
             VStack(spacing:20) {
                 if let id = feedID {
                     if let url = url {
-                        if let pngData = feedViewModel.ContentLibrary[id].previewImageData {
-                            let img = UIImage(data: pngData)
-                            ShareButton(movieURL: url, previewImage: img)
-                        }
+                        ShareButton(movieURL: url, previewImage: img)
                     }
                     DeleteButton(feedID: id, feedViewModel: feedViewModel)
                 } else {
@@ -35,6 +34,13 @@ struct VideoMenu: View {
                 }
             }
             .padding()
+        }
+        .onAppear {
+            if let id = feedID {
+                if let pngData = feedViewModel.ContentLibrary[id].previewImageData {
+                    img = UIImage(data: pngData)
+                }
+            }
         }
     }
 }
