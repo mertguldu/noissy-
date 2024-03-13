@@ -9,7 +9,7 @@ struct HeaderLabel: View {
     @ObservedObject var feedViewModel: FeedViewModel
     
     @State private var textIndex = 0
-    @State private var texts = ["Creating a Music", "Almost there", "Text 3", "Text 4"]
+    @State private var texts = ["Creating the Music", "Almost there", "Getting close", "Last few steps"]
     
     var body: some View {
         if !feedViewModel.currentTask {
