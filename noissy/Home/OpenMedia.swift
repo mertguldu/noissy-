@@ -69,7 +69,7 @@ struct OpenMedia: View {
                     .padding(.top, -200)
                     //.photosPickerAccessoryVisibility(.hidden, edges: .bottom)  //not available before ios17
                 } else {
-                    Logo()
+                    progressLogo()
                         .padding(.top, -200)
                 }
             }
@@ -79,4 +79,5 @@ struct OpenMedia: View {
 
 #Preview {
     OpenMedia(feedViewModel: FeedViewModel())
+ 
 }

@@ -32,7 +32,7 @@ struct HeaderLabel: View {
     
     func startTimer() {
             // Create a timer that repeats every 2 seconds
-            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { timer in
                 // Update the text index
                 textIndex = (textIndex + 1) % texts.count
             }
