@@ -28,6 +28,9 @@ struct SingleFeedView: View {
                                 if let data = data {
                                     mergedData = data
                                     feedViewModel.add(imageData: feedViewModel.imagePreviewData!, contentData: data)
+                                    feedViewModel.selectedMovie = nil
+                                    feedViewModel.imagePreviewData = nil
+                                    feedViewModel.musicDataString = nil
                                 }
                                 if let error = error {
                                     print(error)
