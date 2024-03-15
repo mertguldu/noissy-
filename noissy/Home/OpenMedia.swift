@@ -22,6 +22,7 @@ struct OpenMedia: View {
                         Task {
                             do {
                                 if let movie = try await selectedItem?.loadTransferable(type: Movie.self) {
+                                    selectedItem = nil
                                     let data = NSData(contentsOf: movie.url)!
                                     let cgimage = await generateImageFromVideo(videoUrl: movie.url)
                                     let imageData = UIImage(cgImage: cgimage!).pngData()

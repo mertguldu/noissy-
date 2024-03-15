@@ -24,7 +24,7 @@ struct progressLogo: View {
             Logo()
             Circle()
                 .trim(from: circleStart, to: circleEnd)
-                .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                .stroke(style: StrokeStyle(lineWidth: 15, lineCap: .round))
                 .fill(circleTracGradient)
                 .rotationEffect(rotationDegree)
         }

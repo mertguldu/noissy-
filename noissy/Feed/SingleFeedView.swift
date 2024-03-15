@@ -8,7 +8,7 @@ import AVKit
 struct SingleFeedView: View {
     var contentData: Data?
     var feedID: Int?
-    @ObservedObject var feedViewModel: FeedViewModel
+    var feedViewModel: FeedViewModel
     @State var mergedData: Data?
         
     @Environment(\.presentationMode) var presentationMode
@@ -28,9 +28,6 @@ struct SingleFeedView: View {
                                 if let data = data {
                                     mergedData = data
                                     feedViewModel.add(imageData: feedViewModel.imagePreviewData!, contentData: data)
-                                    feedViewModel.selectedMovie = nil
-                                    feedViewModel.imagePreviewData = nil
-                                    feedViewModel.musicDataString = nil
                                 }
                                 if let error = error {
                                     print(error)
@@ -47,6 +44,10 @@ struct SingleFeedView: View {
             }
             .onDisappear {
                 feedViewModel.hideStatusBar = false
+                feedViewModel.selectedMovie = nil
+                feedViewModel.imagePreviewData = nil
+                feedViewModel.musicDataString = nil
+                
                 if feedViewModel.selectedTab != 2 {
                     withAnimation {
                         feedViewModel.selectedTab = 2

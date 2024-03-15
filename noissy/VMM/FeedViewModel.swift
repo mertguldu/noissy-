@@ -23,12 +23,6 @@ class FeedViewModel: ObservableObject {
     @Published var isErrorOccured = false
     @Published var errorMessage: String = ""
     
-    @Published var imageSelection: PhotosPickerItem? = nil {
-        didSet {
-            isTaskCompleted = true
-        }
-    }
-    
     var ContentLibrary: Array<FeedEntity> { // Stored contents
         return CoreModel.savedContents
     }
