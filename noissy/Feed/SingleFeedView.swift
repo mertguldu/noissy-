@@ -44,9 +44,12 @@ struct SingleFeedView: View {
             }
             .onDisappear {
                 feedViewModel.hideStatusBar = false
+                
                 feedViewModel.selectedMovie = nil
                 feedViewModel.imagePreviewData = nil
                 feedViewModel.musicDataString = nil
+                feedViewModel.mergedVideo = nil
+                mergedData = nil
                 
                 if feedViewModel.selectedTab != 2 {
                     withAnimation {

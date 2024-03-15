@@ -42,6 +42,9 @@ struct VideoMenu: View {
                 }
             }
         }
+        .onDisappear {
+            img = nil
+        }
     }
 }
 

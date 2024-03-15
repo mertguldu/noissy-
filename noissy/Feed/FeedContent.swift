@@ -72,6 +72,7 @@ struct FeedContent: View {
                 if let player = player {
                     player.pause()
                 }
+                player = nil
             }
                 
         } else {
