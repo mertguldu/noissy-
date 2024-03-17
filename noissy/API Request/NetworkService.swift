@@ -81,7 +81,7 @@ struct NetworkService {
         var urlRequest = URLRequest(url: url)
         
         // Set timeout interval (adjust the value as needed)
-        urlRequest.timeoutInterval = 120.0 //seconds
+        urlRequest.timeoutInterval = 150.0 //seconds
         
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.httpMethod = method.rawValue

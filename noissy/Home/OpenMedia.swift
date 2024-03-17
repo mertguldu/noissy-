@@ -30,7 +30,7 @@ struct OpenMedia: View {
                                     
                                     let durationOfVideo = Float(try await asset?.load(.duration).seconds ?? 0)
 
-                                    if durationOfVideo <= 30.0 {
+                                    if durationOfVideo <= 60.0 {
                                         feedViewModel.imagePreviewData = imageData // one time value
                                         feedViewModel.selectedMovie = data!.base64EncodedString() // one time value
                                         feedViewModel.currentTask = true

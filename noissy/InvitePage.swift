@@ -26,7 +26,7 @@ struct InvitePage: View {
             SecureField(text: $textField) {
                 Text("invite password")
                     .multilineTextAlignment(.center)
-                    .foregroundStyle(Color.white.opacity(0.6))
+                    .foregroundStyle(Color.white.opacity(0.8))
                     
             }
             .focused($isTextFieldFocudes)
