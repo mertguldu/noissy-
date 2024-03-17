@@ -35,7 +35,7 @@ struct InvitePage: View {
             .foregroundStyle(.white)
             .frame(width: 300, height: 50)
             .background(
-                RoundedRectangle(cornerSize: CGSizeMake(10, 10))
+                RoundedRectangle(cornerRadius: 20)
                     .fill(Color(red: 0.8, green: 0, blue: 0.8))
             )
             .padding()
