@@ -23,6 +23,13 @@ class FeedViewModel: ObservableObject {
     @Published var isErrorOccured = false
     @Published var errorMessage: String = ""
     
+    @Published var invited: Bool = false
+
+    
+    init() {
+        invited = CoreModel.isInvited
+    }
+    
     var ContentLibrary: Array<FeedEntity> { // Stored contents
         return CoreModel.savedContents
     }
@@ -33,5 +40,10 @@ class FeedViewModel: ObservableObject {
 
     func delete(feed: FeedEntity) {
         return CoreModel.deleteContent(feed: feed)
+    }
+    
+    func invite() {
+        invited = true
+        CoreModel.invite()
     }
 }

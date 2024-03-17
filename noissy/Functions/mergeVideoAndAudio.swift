@@ -66,7 +66,6 @@ func mergeVideoAndAudio(videoData: String,
     let compositionAddAudioOfVideo = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: kCMPersistentTrackID_Invalid)!
 
     let aVideoAssetTrack: AVAssetTrack? = try? await aVideoAsset.loadTracks(withMediaType: AVMediaType.video)[0]
-    let aAudioOfVideoAssetTrack: AVAssetTrack? = try? await aVideoAsset.loadTracks(withMediaType: AVMediaType.audio).first
     let aAudioAssetTrack: AVAssetTrack? = try? await aAudioAsset.loadTracks(withMediaType: AVMediaType.audio)[0]
     
     mutableCompositionVideoTrack.append(compositionAddVideo)
@@ -98,17 +97,6 @@ func mergeVideoAndAudio(videoData: String,
             } else {
                 print("there is no audio in the audio file")
             }
-            /*
-            // adding audio (of the video if exists) asset to the final composition
-            if let aAudioOfVideoAssetTrack = aAudioOfVideoAssetTrack {
-                try await mutableCompositionAudioOfVideoTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
-                                                                                                duration: videoAssetTrack.load(.timeRange).duration),
-                                                                                                of: aAudioOfVideoAssetTrack,
-                                                                                                at: CMTime.zero)
-            } else {
-                print("Video does not have an audio")
-            }
-            */
         } catch {
             print(error.localizedDescription)
         }

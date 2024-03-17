@@ -10,7 +10,8 @@ import CoreData
 
 class CoreDataViewModel: ObservableObject {
     var savedContents: [FeedEntity] = []
-
+    var isInvited: Bool = false
+    
     private static var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "CoreDataModel")
         container.loadPersistentStores { (description, error) in
@@ -28,6 +29,21 @@ class CoreDataViewModel: ObservableObject {
     
     init() {
         fetchContent()
+        fetchInvited()
+    }
+    
+    private func fetchInvited() {
+        let request = NSFetchRequest<InvitedEntity>(entityName: "InvitedEntity")
+        do {
+            let results = try Self.persistentContainer.viewContext.fetch(request)
+                // Check if there are any results
+                if let invitedEntity = results.first {
+                // Assuming your InvitedEntity has a boolean property named "isInvited"
+                isInvited = invitedEntity.isInvited
+            }
+        } catch let error {
+            print("There is an error with fetchInvited: \(error)")
+        }
     }
     
     private func fetchContent() {
@@ -38,6 +54,7 @@ class CoreDataViewModel: ObservableObject {
             print("There is an error with fetchContent: \(error)")
         }
     }
+    
     
     func addContent(imageData: Data, contentData: Data) {
         let newContent = FeedEntity(context: context)
@@ -67,4 +84,16 @@ class CoreDataViewModel: ObservableObject {
             print("There is an error with saveData: \(error)")
         }
     }
+    
+    func invite() {
+        let newContent = InvitedEntity(context: context)
+        newContent.isInvited = true
+        do {
+            try context.save()
+            fetchInvited()
+        } catch let error{
+            print(error.localizedDescription)
+        }
+    }
+    
 }

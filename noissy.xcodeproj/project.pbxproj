@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C70003962BA671DB0058461E /* InvitePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70003952BA671DB0058461E /* InvitePage.swift */; };
 		C7052BB02B936127007131BB /* MoreActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7052BAF2B936127007131BB /* MoreActionButton.swift */; };
 		C7052BB22B93B620007131BB /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7052BB12B93B620007131BB /* DeleteButton.swift */; };
 		C7052BB62B93BDA7007131BB /* VideoMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7052BB52B93BDA7007131BB /* VideoMenu.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C70003952BA671DB0058461E /* InvitePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitePage.swift; sourceTree = "<group>"; };
 		C7052BAF2B936127007131BB /* MoreActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreActionButton.swift; sourceTree = "<group>"; };
 		C7052BB12B93B620007131BB /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
 		C7052BB52B93BDA7007131BB /* VideoMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMenu.swift; sourceTree = "<group>"; };
@@ -133,7 +135,6 @@
 			children = (
 				C75EBA8B2B76DFA000659D07 /* HomeView.swift */,
 				C71F796A2B89652800288621 /* OpenMedia.swift */,
-				C723DFD42BA2809D003FDC48 /* progressLogo.swift */,
 				C7A038B32B8DE812002CD141 /* HeaderLabel.swift */,
 			);
 			path = Home;
@@ -192,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				C7853D282B62F88400130915 /* noissyApp.swift */,
+				C70003952BA671DB0058461E /* InvitePage.swift */,
 				C7853D2A2B62F88400130915 /* noissy.swift */,
 				C71F79762B89798700288621 /* CombinedView.swift */,
 				C71F796C2B89655800288621 /* Home */,
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				C71F79812B8A380900288621 /* logo.swift */,
+				C723DFD42BA2809D003FDC48 /* progressLogo.swift */,
 				C71F79782B897B3600288621 /* Colors.swift */,
 			);
 			path = Assets;
@@ -332,6 +335,7 @@
 				C7A0390C2B9206FD002CD141 /* mergeVideoAndAudio.swift in Sources */,
 				C7052BBF2B93F057007131BB /* NetworkService.swift in Sources */,
 				C7A038B42B8DE812002CD141 /* HeaderLabel.swift in Sources */,
+				C70003962BA671DB0058461E /* InvitePage.swift in Sources */,
 				C723DFD52BA2809D003FDC48 /* progressLogo.swift in Sources */,
 				C7539E0F2B9BDD0500029ED9 /* getVideoFPS.swift in Sources */,
 				C7331EFD2B89043900ECE039 /* ShareButton.swift in Sources */,

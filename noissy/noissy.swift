@@ -5,9 +5,10 @@ import SwiftUI
 
 struct noissy: View {
     @ObservedObject var feedViewModel: FeedViewModel
-
+    
     var body: some View {
-        NavigationStack {
+        if feedViewModel.invited {
+            NavigationStack {
                 ZStack {
                     if !feedViewModel.currentTask && !feedViewModel.ContentLibrary.isEmpty{
                         noissyHeader(feedViewModel: feedViewModel)
@@ -27,9 +28,11 @@ struct noissy: View {
             .statusBarHidden(feedViewModel.hideStatusBar)
             .preferredColorScheme(.dark) //for setting the theme of the app, including the status bar color
             
+        } else {
+            InvitePage(feedViewModel: feedViewModel)
+        }
     }
 }
-
 
 #Preview {
     noissy(feedViewModel: FeedViewModel())
