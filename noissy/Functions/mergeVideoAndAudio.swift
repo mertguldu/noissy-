@@ -98,17 +98,17 @@ func mergeVideoAndAudio(videoData: String,
             } else {
                 print("there is no audio in the audio file")
             }
-            
+            /*
             // adding audio (of the video if exists) asset to the final composition
             if let aAudioOfVideoAssetTrack = aAudioOfVideoAssetTrack {
                 try await mutableCompositionAudioOfVideoTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
                                                                                                 duration: videoAssetTrack.load(.timeRange).duration),
                                                                                                 of: aAudioOfVideoAssetTrack,
                                                                                                 at: CMTime.zero)
-                
             } else {
                 print("Video does not have an audio")
             }
+            */
         } catch {
             print(error.localizedDescription)
         }
