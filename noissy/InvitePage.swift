@@ -11,7 +11,7 @@ struct InvitePage: View {
     @ObservedObject var feedViewModel: FeedViewModel
     
     @State var textField: String = ""
-    @FocusState var isTextFieldFocudes: Bool
+    @FocusState var isTextFieldFocused: Bool
     
     var password = "MakeNoisse"
     var body: some View {
@@ -29,7 +29,7 @@ struct InvitePage: View {
                     .foregroundStyle(Color.white.opacity(0.8))
                     
             }
-            .focused($isTextFieldFocudes)
+            .focused($isTextFieldFocused)
             .multilineTextAlignment(.center)
             .textContentType(.none)
             .foregroundStyle(.white)

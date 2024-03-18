@@ -27,12 +27,6 @@ struct noissy: View {
             .edgesIgnoringSafeArea(.all)
             .statusBarHidden(feedViewModel.hideStatusBar)
             .preferredColorScheme(.dark) //for setting the theme of the app, including the status bar color
-            .onAppear {
-                print("delete meeeeee")
-                if feedViewModel.userID == nil {
-                    print("user has no id")
-                }
-            }
             
         } else {
             InvitePage(feedViewModel: feedViewModel)

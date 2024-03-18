@@ -35,7 +35,7 @@ struct OpenMedia: View {
                                         feedViewModel.selectedMovie = data!.base64EncodedString() // one time value
                                         feedViewModel.currentTask = true
                                         
-                                        NetworkService.shared.sendVideoData(videoData: data!.base64EncodedString(), userID: "0") {(result) in
+                                        NetworkService.shared.sendVideoData(videoData: data!.base64EncodedString(), userID: feedViewModel.userID) {(result) in
                                             switch result {
                                                 case .success(let musicData):
                                                     print("backend result is successfull")
