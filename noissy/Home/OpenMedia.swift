@@ -30,7 +30,7 @@ struct OpenMedia: View {
                                     
                                     let durationOfVideo = Float(try await asset?.load(.duration).seconds ?? 0)
 
-                                    if durationOfVideo <= 60.0 {
+                                    if durationOfVideo <= 30.0 {
                                         feedViewModel.imagePreviewData = imageData // one time value
                                         feedViewModel.selectedMovie = data!.base64EncodedString() // one time value
                                         feedViewModel.currentTask = true
@@ -50,7 +50,8 @@ struct OpenMedia: View {
                                                     if error.localizedDescription == "The request timed out." {
                                                         feedViewModel.errorMessage = "The request timed out. Try Again."
                                                     } else {
-                                                        feedViewModel.errorMessage = error.localizedDescription
+                                                        feedViewModel.errorMessage = "An Unknown Error Occurred. Please Try Again Later."
+                                                        print(error.localizedDescription)
                                                     }
                                                 }
                                             }

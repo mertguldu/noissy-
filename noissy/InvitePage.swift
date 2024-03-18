@@ -11,8 +11,8 @@ struct InvitePage: View {
     @ObservedObject var feedViewModel: FeedViewModel
     
     @State var textField: String = ""
-    @FocusState var isTextFieldFocused: Bool
-    
+    @State var showAlert: Bool = false
+        
     var password = "MakeNoisse"
     var body: some View {
         VStack {
@@ -29,7 +29,6 @@ struct InvitePage: View {
                     .foregroundStyle(Color.white.opacity(0.8))
                     
             }
-            .focused($isTextFieldFocused)
             .multilineTextAlignment(.center)
             .textContentType(.none)
             .foregroundStyle(.white)
@@ -51,6 +50,7 @@ struct InvitePage: View {
                     
                 } else {
                     print("password is incorrect")
+                    showAlert = true
                 }
             } label: {
                 Text("Enter")
@@ -65,6 +65,14 @@ struct InvitePage: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(mainColor)
+        .alert(Text("Wrong Password. Try Again."), isPresented: $showAlert) {
+            Button {
+                showAlert = false
+            } label: {
+                Text("OK")
+            }
+
+        }
     }
 }
 
