@@ -24,7 +24,8 @@ class FeedViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     
     @Published var invited: Bool = false
-    @Published var userID: String = UUID().uuidString
+    
+    let userID: String? = UIDevice.current.identifierForVendor?.uuidString
     
     init() {
         invited = CoreModel.isInvited
@@ -44,6 +45,6 @@ class FeedViewModel: ObservableObject {
     
     func invite() {
         invited = true
-        CoreModel.invite()
+        return CoreModel.invite()
     }
 }
