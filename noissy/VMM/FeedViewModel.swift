@@ -24,7 +24,7 @@ class FeedViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     
     @Published var invited: Bool = false
-
+    var userID: Int?
     
     init() {
         invited = CoreModel.isInvited

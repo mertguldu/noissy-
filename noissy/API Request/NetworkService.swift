@@ -9,8 +9,8 @@ struct NetworkService {
     static let shared = NetworkService()
     private init() {}
 
-    func sendVideoData(videoData: String, completion: @escaping (Result<String, Error>) -> Void) {
-        let params = ["VideoData": videoData]
+    func sendVideoData(videoData: String, userID: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let params = ["VideoData": videoData, "UserID": userID]
         request(route: .temp, method: .post, parameters: params, completion: completion)
     }
     

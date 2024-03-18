@@ -11,7 +11,7 @@ struct Logo: View {
     var body: some View {
         Circle()
             .frame(width: 200)
-            .foregroundStyle(Color(red: 0.5, green: 0, blue: 0.5))
+            .foregroundStyle(logoColor)
             .overlay(Image("logo-crop").resizable().frame(width: 125, height: 125))
     }
 }

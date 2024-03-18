@@ -49,6 +49,12 @@ struct FeedContent: View {
             .onAppear {
                 player = AVPlayer(url: cacheURL)
                 if let player = player {
+                    do {
+                        try AVAudioSession.sharedInstance().setCategory(.playback)
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                    
                     player.play()
                 }
                 
@@ -88,11 +94,11 @@ struct FeedContent: View {
         let progressMax = max(progress, 0)
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerSize: CGSize(width: 50, height: 50))
-                .fill(.black)
+                .fill(.black.opacity(0.6))
                 .frame(width: width)
             
             RoundedRectangle(cornerSize: CGSize(width: 50, height: 50))
-                .fill(.white)
+                .fill(.white.opacity(0.6))
                 .frame(width: max(width * progressMax, 0))
         }
         .frame(height: 3)
