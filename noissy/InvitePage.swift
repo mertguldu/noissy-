@@ -1,9 +1,8 @@
 //
 //  InvitePage.swift
 //  noissy
-//
-//  Created by Mert Guldu on 3/17/24.
-//
+
+// A view that display the entrance page for new users. If the users have the password, they can enter. Otherwise, they are not invited, yet.
 
 import SwiftUI
 
@@ -13,7 +12,8 @@ struct InvitePage: View {
     @State var textField: String = ""
     @State var showAlert: Bool = false
         
-    var password = "MakeNoisse"
+    var password = "MakeNoisse" //Invite Only Password
+    
     var body: some View {
         VStack {
             Image("logo-crop")

@@ -2,6 +2,7 @@
 //  HeaderLabel.swift
 //  noissy
 
+// Text Lables to inform the users.
 
 import SwiftUI
 

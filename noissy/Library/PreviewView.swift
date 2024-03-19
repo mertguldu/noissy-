@@ -2,6 +2,7 @@
 //  PreviewView.swift
 //  noissy
 
+// video previews as images. 
 
 import SwiftUI
 

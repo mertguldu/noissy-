@@ -1,7 +1,7 @@
 //
 //  OpenMedia.swift
 //  noissy
-
+// Opens photo library. When a video is selected, its data is sent to the backend to generate a music using the video. 
 
 import AVKit
 import PhotosUI

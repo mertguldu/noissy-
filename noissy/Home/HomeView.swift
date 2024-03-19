@@ -1,6 +1,8 @@
 //
 //  HomeView.swift
 
+// HeaderLabel is the text that appears on top of the page.
+// OpenMedia accesses the photo library using PhotoPicker. Only videos are accessible.
 
 import SwiftUI
 

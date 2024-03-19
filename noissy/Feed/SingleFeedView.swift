@@ -1,6 +1,7 @@
 //
 //  SingleFeedView.swift
 
+// Feed View. A view that shows the individual generated music with the corresponding video. 
 
 import SwiftUI
 import AVKit

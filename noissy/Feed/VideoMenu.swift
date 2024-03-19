@@ -1,9 +1,8 @@
 //
 //  VideoMenu.swift
 //  noissy
-//
-//  Created by Mert Guldu on 3/2/24.
-//
+
+// Share and Delete buttons are here. This view is placed in the FeedContent view.
 
 import SwiftUI
 

@@ -1,6 +1,10 @@
 //
 //  noissy.swift
 
+// A view of the main App. This view brings everything together.
+// Places the header on top of the Combined View.
+// Color Scheme, status bar activation are determined here
+
 import SwiftUI
 
 struct noissy: View {

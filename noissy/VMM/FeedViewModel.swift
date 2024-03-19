@@ -1,6 +1,7 @@
 //
 //  FeedViewModel.swift
 
+// ViewModel of the app
 
 import SwiftUI
 import PhotosUI

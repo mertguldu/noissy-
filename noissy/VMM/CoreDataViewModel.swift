@@ -1,9 +1,9 @@
 //
 //  CoreDataViewModel.swift
 //  noissy
-//
-//  Created by Mert Guldu on 2/25/24.
-//
+
+
+// A model for saving and fetching required data. Core Data is used.
 
 import Foundation
 import CoreData

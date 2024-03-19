@@ -1,9 +1,11 @@
 //
 //  CombinedView.swift
 //  noissy
-//
-//  Created by Mert Guldu on 2/24/24.
-//
+
+// Unites every view and puts them inside a tabview.
+// LibraryView is where generated musics are stored along with the corresponding videos.
+// HomeView is where photo library can be accessed.
+// Scrolling features are edited here.
 
 import SwiftUI
 

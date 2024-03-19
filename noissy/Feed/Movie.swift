@@ -1,9 +1,8 @@
 //
 //  Movie.swift
 //  noissy
-//
-//  Created by Mert Guldu on 2/29/24.
-//
+
+// Custom transferable movie 
 
 import SwiftUI
 

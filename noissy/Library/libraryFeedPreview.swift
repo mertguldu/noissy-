@@ -2,6 +2,7 @@
 //  libraryFeedPreview.swift
 //  noissy
 
+// Each feed is stored here with a feed ID.
 
 import SwiftUI
 
