@@ -11,30 +11,25 @@ struct noissy: View {
     @ObservedObject var feedViewModel: FeedViewModel
     
     var body: some View {
-        if feedViewModel.invited {
-            NavigationStack {
-                ZStack {
-                    if !feedViewModel.currentTask && !feedViewModel.ContentLibrary.isEmpty{
-                        noissyHeader(feedViewModel: feedViewModel)
-                    }
-                    CombinedView(feedViewModel: feedViewModel)
-                        .padding(.top, 70)
+        NavigationStack {
+            ZStack {
+                if !feedViewModel.currentTask && !feedViewModel.ContentLibrary.isEmpty{
+                    noissyHeader(feedViewModel: feedViewModel)
                 }
-                .edgesIgnoringSafeArea(.bottom)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(mainColor)
-                .navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
-                    SingleFeedView(feedViewModel: feedViewModel)
-                }
+                CombinedView(feedViewModel: feedViewModel)
+                    .padding(.top, 70)
             }
-            .tint(.white)
-            .edgesIgnoringSafeArea(.all)
-            .statusBarHidden(feedViewModel.hideStatusBar)
-            .preferredColorScheme(.dark) //for setting the theme of the app, including the status bar color
-            
-        } else {
-            InvitePage(feedViewModel: feedViewModel)
+            .edgesIgnoringSafeArea(.bottom)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(mainColor)
+            .navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
+                    SingleFeedView(feedViewModel: feedViewModel)
+            }
         }
+        .tint(.white)
+        .edgesIgnoringSafeArea(.all)
+        .statusBarHidden(feedViewModel.hideStatusBar)
+        .preferredColorScheme(.dark) //for setting the theme of the app, including the status bar color
     }
 }
 
