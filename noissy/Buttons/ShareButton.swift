@@ -5,12 +5,10 @@
 import SwiftUI
 
 struct ShareButton: View {
-    var movieURL: URL?
-    var previewImage : UIImage?
+    var movieURL: URL
+    var previewImage : UIImage
     var body: some View {
-        if let url = movieURL {
-            let movie = Movie(url: url)
-            if let previewImage = previewImage {
+            let movie = Movie(url: movieURL)
                 ShareLink(item: movie, preview: SharePreview("Share your video.", image: Image(uiImage: previewImage))) {
                     Image(systemName: "square.and.arrow.up")
                         .foregroundStyle(Color.white)
@@ -20,11 +18,12 @@ struct ShareButton: View {
                         .background(.ultraThinMaterial)
                         .clipShape(Circle())
                 }
-            }
-        }
+            
+        
     }
 }
 
 #Preview {
-    ShareButton()
+    ShareButton(movieURL: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")!, previewImage: UIImage(systemName: "pencil")!)
+        .background(.black)
 }

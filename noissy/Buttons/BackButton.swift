@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct BackButton: View {
-    var action: (() -> Void)? = nil
+    var action: (() -> Void)?
     var body: some View {
         Button(action: {
             if let act = action {

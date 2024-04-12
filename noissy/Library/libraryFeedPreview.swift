@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct libraryFeedPreview: View {
+    var videoURL: URL?
     var imageData: NSData?
     var contentData: Data?
     var feedID: Int?
@@ -15,7 +16,9 @@ struct libraryFeedPreview: View {
 
     var body: some View {
         NavigationLink {
-            SingleFeedView(contentData: contentData, feedID: feedID, feedViewModel: feedViewModel)
+            if let videoURL = videoURL {
+                SingleFeedView(videoURL: videoURL, feedID: feedID, feedViewModel: feedViewModel)
+            }
         } label: {
             PreviewView(imageData: imageData)
         }

@@ -7,8 +7,12 @@
 
 import Foundation
 
-struct APIResponse<T: Decodable>: Decodable {
-    let message: T?
+struct APIResponse: Decodable {
+    let encodedData: String?
+    let channels: Int?
+    let sampleRateHz: Double?
+    let duration: Double?
+    let sampleFrames: Int?
     let error: String?
 }
 

@@ -8,7 +8,7 @@ import SwiftUI
 import AVKit
 
 struct FeedContent: View {
-    var contentData: NSData? = nil
+    var videoURL: URL
     var feedID: Int?
     var feedViewModel: FeedViewModel
     
@@ -21,70 +21,58 @@ struct FeedContent: View {
     @State private var isPlaying: Bool = true
     
     var body: some View {
-        if let data = contentData {
-            let cacheURL = dataToURL(data: data)
-            VStack {
-                if let player = player {
-                    CustomVideoPlayer(player: player)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .overlay(alignment: .bottom) {
-                            VStack() {
-                                Spacer()
-                                VideoMenu(feedID: feedID, url: cacheURL, feedViewModel: feedViewModel)
-                                VideoSeekerView()
-                            }
-                        }
-                }
-            }
-            .onTapGesture {
-                if isPlaying {
-                    player?.pause()
-                    isPlaying = false
-                    print("pause")
-                } else {
-                    player?.play()
-                    isPlaying = true
-                    print("resume")
-                }
-            }
-            .onAppear {
-                player = AVPlayer(url: cacheURL)
-                if let player = player {
-                    do {
-                        try AVAudioSession.sharedInstance().setCategory(.playback)
-                    } catch(let error) {
-                        print(error.localizedDescription)
+        VStack {
+            if let player = player {
+                CustomVideoPlayer(player: player)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .overlay(alignment: .bottom) {
+                        VStack() {
+                            Spacer()
+                            VideoMenu(videoURL: videoURL, feedID: feedID, feedViewModel: feedViewModel)
+                            VideoSeekerView()
                     }
-                    
-                    player.play()
+                }
+            }
+        }
+        .ignoresSafeArea()
+        .onTapGesture {
+            videoPlayerIsTapped(isPlaying: isPlaying, player: player!, audioPlayer: nil, progress: nil) { playing in
+                isPlaying = playing
+            }
+        }
+        .onAppear {
+            player = AVPlayer(url: videoURL)
+            if let player = player {
+                do {
+                    try AVAudioSession.sharedInstance().setCategory(.playback)
+                } catch(let error) {
+                    print(error.localizedDescription)
                 }
                 
-                if let player = player {
-                    player.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 5), queue: .main) { time in
-                        if let currentPlayerTime = player.currentItem {
-                            let totalDuration = currentPlayerTime.duration.seconds
-                            let currentDuration = player.currentTime().seconds
+                player.play()
+            }
+                
+            if let player = player {
+                player.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 20), queue: .main) { time in
+                    if let currentPlayerTime = player.currentItem {
+                        let totalDuration = currentPlayerTime.duration.seconds
+                        let currentDuration = player.currentTime().seconds
                             
-                            let calculatedProgress = currentDuration / totalDuration
+                        let calculatedProgress = currentDuration / totalDuration
                             
-                            if !isSeeking {
-                                progress = calculatedProgress
-                                lastDraggedProgress = progress
-                            }
+                        if !isSeeking {
+                            progress = calculatedProgress
+                            lastDraggedProgress = progress
                         }
                     }
                 }
             }
-            .onDisappear {
-                if let player = player {
-                    player.pause()
-                }
-                player = nil
+        }
+        .onDisappear {
+            if let player = player {
+                player.pause()
             }
-                
-        } else {
-            Color.black
-                .ignoresSafeArea()
+            player = nil
         }
     }
     
@@ -116,21 +104,24 @@ struct FeedContent: View {
                             out = true
                         })
                         .onChanged({ value in
+                            player?.pause()
+                            isPlaying = false
+                            
                             let translationX: CGFloat = value.translation.width
                             let calculatedProgress = (translationX / width) + lastDraggedProgress
 
                             progress = max(min(calculatedProgress, 1), 0)
                             isSeeking = true
-                        })
-                        .onEnded({ value in
-                            lastDraggedProgress = progress
                             
                             if let currentPlayerItem = player?.currentItem {
                                 let totalDuration = currentPlayerItem.duration.seconds
-                                
-                                player?.seek(to: .init(seconds: totalDuration * progress, preferredTimescale: 1))
+                                let seekTime = CMTime(seconds: totalDuration * progress, preferredTimescale: 600)
+                                player?.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
                             }
-                            
+                        })
+                        .onEnded({ value in
+                            lastDraggedProgress = progress
+                        
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                 isSeeking = false
                             }
@@ -145,5 +136,5 @@ struct FeedContent: View {
 }
 
 #Preview {
-    FeedContent(feedViewModel: FeedViewModel())
+    FeedContent(videoURL: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")!, feedID: 1, feedViewModel: FeedViewModel())
 }

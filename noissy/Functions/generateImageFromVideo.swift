@@ -8,24 +8,32 @@
 import Foundation
 import CoreGraphics
 import AVFoundation
+import UIKit
 
-func generateImageFromVideo(videoUrl: URL) async -> CGImage? {
-    let asset = AVAsset(url: videoUrl)
-    let generator = AVAssetImageGenerator(asset: asset)
-    
-    generator.maximumSize = CGSize(width: 300, height: 0)
-    generator.appliesPreferredTrackTransform = true
-    // Configure the generator's time tolerance values.
-    generator.requestedTimeToleranceBefore = .zero
-    generator.requestedTimeToleranceAfter = CMTime(seconds: 2, preferredTimescale: 600)
-    
-    // Generate an image at time zero. Access the image alone.
-    do {
-        let image = try await generator.image(at: .zero).image
-        return image
-    } catch let error {
-        print(error)
+func generateImageFromVideo(videoURL: URL, videoDuration: Double, progress: CGFloat, size: CGSize, completion: @escaping (UIImage) -> ()) {
+    DispatchQueue.global(qos: .background).async {
+        let asset = AVAsset(url: videoURL)
+        let generator = AVAssetImageGenerator(asset: asset)
+        
+        generator.appliesPreferredTrackTransform = true
+        generator.maximumSize = size
+        generator.requestedTimeToleranceBefore = CMTime(seconds: 2, preferredTimescale: 600)
+        generator.requestedTimeToleranceAfter =  CMTime(seconds: 2, preferredTimescale: 600)
+        
+        do{
+            let time = CMTime(seconds: progress * videoDuration, preferredTimescale: 600)
+            let image = try generator.copyCGImage(at: time, actualTime: nil)
+            let cover = UIImage(cgImage: image)
+            
+            DispatchQueue.main.async {
+                completion(cover)
+            }
+        }
+        catch let error{
+            print("Error generating image: \(error)")
+            if let underlyingError = (error as NSError).userInfo[NSUnderlyingErrorKey] as? NSError {
+                print("Underlying Error: \(underlyingError)")
+            }
+        }
     }
-    
-    return nil
 }

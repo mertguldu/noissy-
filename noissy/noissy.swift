@@ -22,9 +22,21 @@ struct noissy: View {
             .edgesIgnoringSafeArea(.bottom)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(mainColor)
-            .navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
-                    SingleFeedView(feedViewModel: feedViewModel)
-            }
+            //.navigationDestination(isPresented: $feedViewModel.isTaskCompleted) {
+                    //SingleFeedView(feedViewModel: feedViewModel)
+                
+                
+              //  if let selectedMovie = feedViewModel.selectedMovie {
+                //    if let generatedMusic = feedViewModel.generatedMusic {
+                  //      let audioData = Data(base64Encoded: generatedMusic.encodedData!)
+                    //    let audioURL = dataToURL2(data: audioData! as NSData, url: "audioGen.wav")
+                      //  EditView(feedViewModel: feedViewModel, videoURL: selectedMovie.url!, audioURL: audioURL, duration: selectedMovie.duration ?? 0.0)
+                        //    .toolbar(.hidden)
+                            
+                    //}
+                //}
+                 
+            //}
         }
         .tint(.white)
         .edgesIgnoringSafeArea(.all)
@@ -37,3 +49,4 @@ struct noissy: View {
     noissy(feedViewModel: FeedViewModel())
        
 }
+

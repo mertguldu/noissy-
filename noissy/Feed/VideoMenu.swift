@@ -7,8 +7,8 @@
 import SwiftUI
 
 struct VideoMenu: View {
+    var videoURL: URL
     var feedID: Int?
-    var url: URL?
     var feedViewModel: FeedViewModel
     
     @State var img: UIImage?
@@ -17,29 +17,19 @@ struct VideoMenu: View {
         HStack {
             Spacer()
             VStack(spacing:20) {
-                if let id = feedID {
-                    if let url = url {
-                        ShareButton(movieURL: url, previewImage: img)
-                    }
-                    DeleteButton(feedID: id, feedViewModel: feedViewModel)
-                } else {
-                    if let url = url {
-                        if let imageData = feedViewModel.imagePreviewData {
-                            if let img = UIImage(data: imageData) {
-                                ShareButton(movieURL: url, previewImage: img)
-                            }
-                        }
+                if let img = img {
+                    ShareButton(movieURL: videoURL, previewImage: img)
+                    if let id = feedID {
+                        DeleteButton(feedID: id, feedViewModel: feedViewModel)
                     }
                 }
             }
             .padding()
         }
         .onAppear {
-            if let id = feedID {
-                if let pngData = feedViewModel.ContentLibrary[id].previewImageData {
-                    img = UIImage(data: pngData)
-                }
-            }
+            generateImageFromVideo(videoURL: videoURL, videoDuration: 0, progress: 0, size: CGSize(width: 300, height: 0), completion: { image in
+                img = image
+            })
         }
         .onDisappear {
             img = nil
@@ -48,5 +38,6 @@ struct VideoMenu: View {
 }
 
 #Preview {
-    VideoMenu(feedViewModel: FeedViewModel())
+    VideoMenu(videoURL: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")!, feedViewModel: FeedViewModel())
+        .background(.black)
 }

@@ -10,8 +10,8 @@ struct noissyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            noissy(feedViewModel: model)
-
+            //noissy(feedViewModel: model)
+            PageSwitching(feedViewModel: model)
         }
     }
 }

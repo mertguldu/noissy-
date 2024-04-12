@@ -10,7 +10,7 @@
 import SwiftUI
 
 struct CombinedView: View {
-    @ObservedObject var feedViewModel: FeedViewModel = FeedViewModel()
+    @ObservedObject var feedViewModel: FeedViewModel
     @State var selectedTab: Int = 0
     var body: some View {
         TabView(selection: $selectedTab){
@@ -52,7 +52,7 @@ struct CombinedView: View {
 }
 
 #Preview {
-    CombinedView()
+    CombinedView(feedViewModel: FeedViewModel())
 }
 
 

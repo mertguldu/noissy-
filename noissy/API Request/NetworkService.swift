@@ -9,12 +9,12 @@ struct NetworkService {
     static let shared = NetworkService()
     private init() {}
 
-    func sendVideoData(videoData: String, userID: String, completion: @escaping (Result<String, Error>) -> Void) {
+    func sendVideoData(videoData: String, userID: String, completion: @escaping (Result<APIResponse, Error>) -> Void) {
         let params = ["VideoData": videoData, "UserID": userID]
         request(route: .temp, method: .post, parameters: params, completion: completion)
     }
     
-    private func request<T: Decodable>(route: Route, method: Method, parameters: [String: Any]? = nil, completion: @escaping (Result<T, Error>) -> Void) {
+    private func request(route: Route, method: Method, parameters: [String: Any]? = nil, completion: @escaping (Result<APIResponse, Error>) -> Void) {
         
         guard let request = createRequest(route: route, method: method, parameters: parameters) else { return }
         
@@ -34,7 +34,7 @@ struct NetworkService {
         }.resume()
     }
     
-    private func handleResponse<T: Decodable>(result: Result<Data, Error>?, completion: (Result<T, Error>) -> Void) {
+    private func handleResponse(result: Result<Data, Error>?, completion: (Result<APIResponse, Error>) -> Void) {
         guard let result = result else {
             completion(.failure(AppError.unkownError))
             return
@@ -44,7 +44,7 @@ struct NetworkService {
             
         case .success(let data):
             let decoder = JSONDecoder()
-            guard let response = try? decoder.decode(APIResponse<T>.self, from: data) else {
+            guard let response = try? decoder.decode(APIResponse.self, from: data) else {
                 completion(.failure(AppError.errorDecoding))
                 return
             }
@@ -54,13 +54,7 @@ struct NetworkService {
                 return
             }
             
-            if let decodedMusicData = response.message {
-                completion(.success(decodedMusicData))
-            } else {
-                //completion(.failure(AppError.unkownError))
-                print("no music data is available")
-            }
-            
+            completion(.success(response))
         case .failure(let error):
             completion(.failure(error))
         }

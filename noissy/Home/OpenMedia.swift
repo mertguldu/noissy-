@@ -24,44 +24,22 @@ struct OpenMedia: View {
                                 if let movie = try await selectedItem?.loadTransferable(type: Movie.self) {
                                     selectedItem = nil
                                     var data: NSData? = NSData(contentsOf: movie.url)
-                                    var cgimage = await generateImageFromVideo(videoUrl: movie.url)
-                                    var imageData = UIImage(cgImage: cgimage!).pngData()
-                                    var asset: AVURLAsset? = AVURLAsset(url: movie.url)
+                                    let durationOfVideo = await videoDuration(videoURL: movie.url)
                                     
-                                    let durationOfVideo = Float(try await asset?.load(.duration).seconds ?? 0)
-
                                     if durationOfVideo <= 30.0 {
-                                        feedViewModel.imagePreviewData = imageData // one time value
-                                        feedViewModel.selectedMovie = data!.base64EncodedString() // one time value
+                                        generateImageFromVideo(videoURL: movie.url, videoDuration: 0, progress: 0, size: CGSize(width: 300, height: 0)) { image in
+                                            feedViewModel.imagePreviewData = image.pngData()
+                                        }
+
+                                        let selectedMovie = SelectedMovie(url: movie.url, encodedData: data!.base64EncodedString(), duration: durationOfVideo)
+                                        feedViewModel.selectedMovie = selectedMovie
                                         feedViewModel.currentTask = true
                                         
                                         if let userID = feedViewModel.userID {
-                                            NetworkService.shared.sendVideoData(videoData: data!.base64EncodedString(), userID: userID) {(result) in
-                                                switch result {
-                                                case .success(let musicData):
-                                                    print("backend result is successfull")
-                                                    feedViewModel.musicDataString = musicData
-                                                    feedViewModel.newMerge = true
-                                                    feedViewModel.isTaskCompleted = true
-                                                case .failure(let error):
-                                                    print("error:", error.localizedDescription)
-                                                    feedViewModel.currentTask = false
-                                                    feedViewModel.isErrorOccured = true
-                                                    if error.localizedDescription == "The request timed out." {
-                                                        feedViewModel.errorMessage = "The request timed out. Try Again."
-                                                    } else {
-                                                        feedViewModel.errorMessage = "An Unknown Error Occurred. Please Try Again Later."
-                                                        print(error.localizedDescription)
-                                                    }
-                                                }
-                                            }
+                                            generateMusic(encodedData: data!.base64EncodedString(), userID: userID, feedViewModel: feedViewModel)
                                         }
                                         data = nil
-                                        cgimage = nil
-                                        imageData = nil
-                                        asset = nil
                                     } else {
-                                        print("video is too large")
                                         feedViewModel.isErrorOccured = true
                                         feedViewModel.errorMessage = "Video can't be longer than 30 secs"
                                     }
@@ -77,6 +55,32 @@ struct OpenMedia: View {
                     progressLogo()
                         .padding(.top, -200)
                 }
+            }
+        }
+    }
+}
+
+func generateMusic(encodedData: String, userID: String, feedViewModel: FeedViewModel) {
+    NetworkService.shared.sendVideoData(videoData: encodedData, userID: userID) {(result) in
+        switch result {
+        case .success(let music):
+            print("backend result is successfull")
+            feedViewModel.generatedMusic = music
+            feedViewModel.newMerge = true
+            
+            withAnimation {
+                feedViewModel.currentView = .SUBVIEW1
+                //feedViewModel.isTaskCompleted = true
+            }
+        case .failure(let error):
+            print("error:", error.localizedDescription)
+            feedViewModel.currentTask = false
+            feedViewModel.isErrorOccured = true
+            if error.localizedDescription == "The request timed out." {
+                feedViewModel.errorMessage = "The request timed out. Try Again."
+            } else {
+                feedViewModel.errorMessage = "An Unknown Error Occurred. Please Try Again Later."
+                print(error.localizedDescription)
             }
         }
     }

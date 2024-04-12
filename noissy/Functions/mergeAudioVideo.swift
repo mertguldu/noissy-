@@ -17,8 +17,8 @@ import AssetsLibrary
 ///   - audioUrl: URL to audio file
 ///   - shouldFlipHorizontally: pass True if video was recorded using frontal camera otherwise pass False
 ///   - completion: completion of saving: error or url with final video
-func mergeVideoAndAudio(videoData: String,
-                        audioData: String,
+func mergeVideoAudio(videoURL: URL,
+                        audioURL: URL,
                         completion: @escaping (_ mergedData:Data?, _ error:Error?) -> Void) async {
 
     let mixComposition = AVMutableComposition()
@@ -27,36 +27,9 @@ func mergeVideoAndAudio(videoData: String,
     var mutableCompositionAudioOfVideoTrack = [AVMutableCompositionTrack]()
 
     //start merge
-    // Decode base64 audio data
-    guard let videoDataDecoded = Data(base64Encoded: videoData) else {
-        completion(nil, NSError(domain: "YourAppDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode base64 video data"]))
-        return
-    }
-    // Save decoded audio data to a temporary file
-    let tempVideoURL = FileManager.default.temporaryDirectory.appendingPathComponent("tempVideo.MOV")
-    do {
-        try videoDataDecoded.write(to: tempVideoURL)
-    } catch {
-        completion(nil, NSError(domain: "YourAppDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to write base64 video data"]))
-        return
-    }
-        
-    // Decode base64 audio data
-    guard let audioDataDecoded = Data(base64Encoded: audioData) else {
-        completion(nil, NSError(domain: "YourAppDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode base64 audio data"]))
-        return
-    }
-    // Save decoded audio data to a temporary file
-    let tempAudioURL = FileManager.default.temporaryDirectory.appendingPathComponent("tempAudio.mp3")
-    do {
-        try audioDataDecoded.write(to: tempAudioURL)
-    } catch {
-        completion(nil, NSError(domain: "YourAppDomain", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to write base64 audio data"]))
-        return
-    }
     
-    let aVideoAsset = AVAsset(url: tempVideoURL)
-    let aAudioAsset = AVAsset(url: tempAudioURL)
+    let aVideoAsset = AVAsset(url: videoURL)
+    let aAudioAsset = AVAsset(url: audioURL)
     
 
     let compositionAddVideo = mixComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)!
@@ -66,7 +39,8 @@ func mergeVideoAndAudio(videoData: String,
     let compositionAddAudioOfVideo = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: kCMPersistentTrackID_Invalid)!
 
     let aVideoAssetTrack: AVAssetTrack? = try? await aVideoAsset.loadTracks(withMediaType: AVMediaType.video)[0]
-    let aAudioAssetTrack: AVAssetTrack? = try? await aAudioAsset.loadTracks(withMediaType: AVMediaType.audio)[0]
+
+    let aaAudioAssetTrack: AVAssetTrack? = try? await aAudioAsset.loadTracks(withMediaType: AVMediaType.audio)[0]
     
     mutableCompositionVideoTrack.append(compositionAddVideo)
     mutableCompositionAudioTrack.append(compositionAddAudio)
@@ -86,7 +60,7 @@ func mergeVideoAndAudio(videoData: String,
                                                                                     of: videoAssetTrack,
                                                                                     at: CMTime.zero)
             
-            if let audioAssetTrack = aAudioAssetTrack {
+            if let audioAssetTrack = aaAudioAssetTrack {
                 //In my case my audio file is longer then video file so i took videoAsset duration
                 //instead of audioAsset duration
                 try await mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
@@ -105,7 +79,7 @@ func mergeVideoAndAudio(videoData: String,
     }
 
     // Exporting
-    let savePathUrl: URL = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/newVideo.mp4")
+    let savePathUrl: URL = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/newMovie.mp4")
     do { // delete old video
         try FileManager.default.removeItem(at: savePathUrl)
     } catch { print(error.localizedDescription) }
