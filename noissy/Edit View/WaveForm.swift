@@ -75,7 +75,23 @@ struct BarView: View {
     }
 }
 
+struct PreviewWaveForm: View {
+    @State private var audioURL: URL?
+    var body: some View {
+        VStack {
+            if let audioURL = audioURL {
+                WaveForm(feedViewModel: FeedViewModel(), audioURL: audioURL, videoDuration: 200, channels: 2, sampleRateHz: 44100.0, sampleFrames:  440288, audioDuration: 100)
+            }
+        }
+        .onAppear {
+            Task {
+                let audioData = try Data(contentsOf: exampleAudioURL)
+                audioURL = dataToURL2(data: audioData as NSData, url: "newAu.wav")
+            }
+        }
+    }
+}
+
 #Preview {
-    WaveForm(feedViewModel: FeedViewModel(), audioURL: Bundle.main.url(forResource: "sample2", withExtension: "m4a"), videoDuration: 5, channels: 2, sampleRateHz: 44100.0, sampleFrames:  140288, audioDuration: 3)
-        
+    PreviewWaveForm()
 }

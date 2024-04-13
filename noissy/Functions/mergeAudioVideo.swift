@@ -18,29 +18,28 @@ import AssetsLibrary
 ///   - shouldFlipHorizontally: pass True if video was recorded using frontal camera otherwise pass False
 ///   - completion: completion of saving: error or url with final video
 func mergeVideoAudio(videoURL: URL,
-                        audioURL: URL,
+                     audioURL: URL,
+                     videoVolume: Float,
+                     audioVolume: Float,
                         completion: @escaping (_ mergedData:Data?, _ error:Error?) -> Void) async {
-
     let mixComposition = AVMutableComposition()
     var mutableCompositionVideoTrack = [AVMutableCompositionTrack]()
     var mutableCompositionAudioTrack = [AVMutableCompositionTrack]()
     var mutableCompositionAudioOfVideoTrack = [AVMutableCompositionTrack]()
 
     //start merge
-    
     let aVideoAsset = AVAsset(url: videoURL)
     let aAudioAsset = AVAsset(url: audioURL)
     
-
+    let audioMix = AVMutableAudioMix()
+    
     let compositionAddVideo = mixComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)!
-
     let compositionAddAudio = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: kCMPersistentTrackID_Invalid)!
-
     let compositionAddAudioOfVideo = mixComposition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: kCMPersistentTrackID_Invalid)!
 
     let aVideoAssetTrack: AVAssetTrack? = try? await aVideoAsset.loadTracks(withMediaType: AVMediaType.video)[0]
-
-    let aaAudioAssetTrack: AVAssetTrack? = try? await aAudioAsset.loadTracks(withMediaType: AVMediaType.audio)[0]
+    let aAudioOfVideoAssetTrack: AVAssetTrack? = try? await aVideoAsset.loadTracks(withMediaType: AVMediaType.audio)[0]
+    let aAudioAssetTrack: AVAssetTrack? = try? await aAudioAsset.loadTracks(withMediaType: AVMediaType.audio)[0]
     
     mutableCompositionVideoTrack.append(compositionAddVideo)
     mutableCompositionAudioTrack.append(compositionAddAudio)
@@ -59,17 +58,33 @@ func mergeVideoAudio(videoURL: URL,
                                                                                     duration: videoAssetTrack.load(.timeRange).duration),
                                                                                     of: videoAssetTrack,
                                                                                     at: CMTime.zero)
-            
-            if let audioAssetTrack = aaAudioAssetTrack {
-                //In my case my audio file is longer then video file so i took videoAsset duration
-                //instead of audioAsset duration
-                try await mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(start: CMTime.zero,
+            if let audioAssetTrack = aAudioAssetTrack {
+                // Apply volume adjustment to audio
+                let audioInputParams = AVMutableAudioMixInputParameters(track: compositionAddAudio)
+                audioInputParams.setVolume(audioVolume, at: .zero)
+                audioMix.inputParameters = [audioInputParams]
+                                
+                // Insert audio with volume adjustment
+                try await mutableCompositionAudioTrack[0].insertTimeRange(CMTimeRangeMake(start: .zero,
                                                                                         duration: videoAssetTrack.load(.timeRange).duration),
                                                                                         of: audioAssetTrack,
-                                                                                        at: CMTime.zero)
-                
+                                                                                        at: .zero)
             } else {
                 print("there is no audio in the audio file")
+            }
+            
+            // adding audio (of the video if exists) asset to the final composition
+            if let aAudioOfVideoAssetTrack = aAudioOfVideoAssetTrack {
+                let audioInputParamsOfVideo = AVMutableAudioMixInputParameters(track: compositionAddAudioOfVideo)
+                audioInputParamsOfVideo.setVolume(videoVolume, at: .zero)
+                audioMix.inputParameters.append(audioInputParamsOfVideo)
+                                
+                try await mutableCompositionAudioOfVideoTrack[0].insertTimeRange(CMTimeRangeMake(start: .zero,
+                                                                                                duration: videoAssetTrack.load(.timeRange).duration),
+                                                                                                of: aAudioOfVideoAssetTrack,
+                                                                                                at: .zero)
+            } else {
+                print("Video does not have an audio")
             }
         } catch {
             print(error.localizedDescription)
@@ -79,7 +94,8 @@ func mergeVideoAudio(videoURL: URL,
     }
 
     // Exporting
-    let savePathUrl: URL = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/newMovie.mp4")
+    let savePathUrl: URL = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/newVideo.mp4")
+    
     do { // delete old video
         try FileManager.default.removeItem(at: savePathUrl)
     } catch { print(error.localizedDescription) }
@@ -88,20 +104,16 @@ func mergeVideoAudio(videoURL: URL,
     assetExport.outputFileType = AVFileType.mp4
     assetExport.outputURL = savePathUrl
     assetExport.shouldOptimizeForNetworkUse = true
-
+    assetExport.audioMix = audioMix
     
-    let outputURL = assetExport.outputURL
     await assetExport.export()
     
-    if let url = outputURL {
-        do {
-            let mergedData = try Data(contentsOf: url)
-            completion(mergedData, nil)
-            print("merging completed")
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
     
+    do {
+        let mergedData = try Data(contentsOf: savePathUrl)
+        completion(mergedData, nil)
+        print("merging completed")
+    } catch {
+        print(error.localizedDescription)
+    }
 }
-

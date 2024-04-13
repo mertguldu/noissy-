@@ -1,5 +1,5 @@
 //
-//  PageSwitching.swift
+//  Noissy.swift
 //  noissy
 //
 //  Created by Mert Guldu on 4/12/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PageSwitching: View {
+struct Noissy: View {
     
     @ObservedObject var feedViewModel: FeedViewModel
     
@@ -15,8 +15,9 @@ struct PageSwitching: View {
         VStack {
             switch feedViewModel.currentView {
             case .PARENT:
-                noissy(feedViewModel: feedViewModel)
-            case .SUBVIEW1:
+                noissyMain(feedViewModel: feedViewModel)
+                
+            case .EDITING:
                 NavigationStack {
                     if let selectedMovie = feedViewModel.selectedMovie {
                         if let generatedMusic = feedViewModel.generatedMusic {
@@ -24,24 +25,24 @@ struct PageSwitching: View {
                             let audioURL = dataToURL2(data: audioData! as NSData, url: "audioGen.wav")
                             EditView(feedViewModel: feedViewModel, videoURL: selectedMovie.url!, audioURL: audioURL, duration: selectedMovie.duration ?? 0.0)
                                 .toolbar(.hidden)
-                            
                         }
                     }
                 }
                 .transition(.backslide)
                 
-            case .SUBVIEW2:
+            case .PREVIEW:
                 NavigationStack {
                     if let selectedMovie = feedViewModel.selectedMovie {
                         if let generatedMusic = feedViewModel.generatedMusic {
                             let audioData = Data(base64Encoded: generatedMusic.encodedData!)
                             let audioURL = dataToURL2(data: audioData! as NSData, url: "audioGen.wav")
-                            SingleFeedView(videoURL: selectedMovie.url!, audioURL: audioURL, feedViewModel: feedViewModel)
+                            SingleFeedView(videoURL: selectedMovie.url!, audioURL: audioURL, videoVolume: feedViewModel.videoVolume, audioVolume: feedViewModel.audioVolume, feedViewModel: feedViewModel)
                                 .toolbar(.hidden)
                         }
                     }
                 }
                 .transition(.bottomslide)
+                
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -50,21 +51,11 @@ struct PageSwitching: View {
 }
 
 #Preview {
-    PageSwitching(feedViewModel: FeedViewModel())
+    Noissy(feedViewModel: FeedViewModel())
 }
 
 enum ShowView {
-    case PARENT, SUBVIEW1, SUBVIEW2
+    case PARENT, EDITING, PREVIEW
 }
 
-extension AnyTransition {
-    static var backslide: AnyTransition {
-        AnyTransition.asymmetric(
-            insertion: .move(edge: .trailing),
-            removal: .move(edge: .leading))}
-    
-    static var bottomslide: AnyTransition {
-        AnyTransition.asymmetric(
-            insertion: .move(edge: .trailing),
-            removal: .move(edge: .bottom))}
-}
+

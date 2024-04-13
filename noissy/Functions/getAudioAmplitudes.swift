@@ -30,9 +30,6 @@ func getAudioAmplitudes(audioURL: URL, channelCount: Int, sampleRate: Double , f
             }
             
             let frameDuration: Double = videoDuration / 20
-            //let sampleRate = audioFile.fileFormat.sampleRate
-            //let sampleDuration = 1.0 / Double(sampleRate)
-            
             let audioToFrameNumber = audioDuration / frameDuration
             
             let frameLength = thumbNailWidth
@@ -43,7 +40,9 @@ func getAudioAmplitudes(audioURL: URL, channelCount: Int, sampleRate: Double , f
             var amplitudes: [Float] = []
             let value = ceil(Double(frameCount) / numberOfBars)
             let decimationFactor = Int(max(value, 1))  // Example decimation factor (adjust as needed)
-            for index in stride(from: 0, to: Int(frameCount), by: decimationFactor) {
+            let adjustedFrameCount = audioDuration > videoDuration ? Double(frameCount) * (videoDuration / audioDuration) : Double(frameCount)
+            
+            for index in stride(from: 0, to: Int(adjustedFrameCount), by: decimationFactor) {
                 var sum: Float = 0
                 let endIndex = min(index + decimationFactor, Int(frameCount))
                 

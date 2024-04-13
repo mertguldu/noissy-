@@ -14,8 +14,8 @@ struct LibraryView: View {
                         let index = feedViewModel.ContentLibrary.count - i - 1
                         let imageData = feedViewModel.ContentLibrary[index].previewImageData
                         let videoData = feedViewModel.ContentLibrary[index].contenData
-                        
-                        libraryFeedPreview(imageData: imageData as NSData?, contentData: videoData, feedID: index, feedViewModel: feedViewModel)
+                        let videoURL = dataToURL2(data: videoData! as NSData, url: "library\(index).mov")
+                        libraryFeedPreview(videoURL: videoURL, imageData: imageData as NSData?, feedID: index, feedViewModel: feedViewModel)
                     }
                 }
                 Spacer()

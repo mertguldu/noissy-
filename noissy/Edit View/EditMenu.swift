@@ -9,7 +9,9 @@ import SwiftUI
 import AVKit
 
 struct EditMenu: View {
-    @Binding var volume: CGFloat
+    @Binding var videoVolume: CGFloat
+    @Binding var audioVolume: CGFloat
+
     @State private var showVolumeMenu: Bool = false
     
     
@@ -18,7 +20,7 @@ struct EditMenu: View {
             let menuHeight = geomerty.safeAreaInsets.bottom
             ZStack {
                 if showVolumeMenu {
-                    VolumeView(volume: $volume, showMenu: $showVolumeMenu)
+                    VolumeView(videoVolume: $videoVolume, audioVolume: $audioVolume, showMenu: $showVolumeMenu)
                         .zIndex(1)
                 }
                 VStack {
@@ -63,9 +65,10 @@ struct EditMenu: View {
 }
 
 struct PreviewEditMenu: View {
-    @State var volume: CGFloat = .zero
+    @State var videoVolume: CGFloat = .zero
+    @State var audioVolume: CGFloat = .zero
     var body: some View {
-        EditMenu(volume: $volume)
+        EditMenu(videoVolume: $videoVolume, audioVolume: $audioVolume)
     }
 }
 

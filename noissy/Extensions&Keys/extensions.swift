@@ -21,18 +21,20 @@ extension UIWindow {
     }
 }
 
-
 extension UIScreen {
     static var current: UIScreen? {
         UIWindow.current?.screen
     }
 }
 
-
-struct ScrollOffsetKey: PreferenceKey {
-    typealias Value = CGFloat
-    static var defaultValue = CGFloat.zero
-    static func reduce(value: inout Value, nextValue: () -> Value) {
-        value += nextValue()
-    }
+extension AnyTransition {
+    static var backslide: AnyTransition {
+        AnyTransition.asymmetric(
+            insertion: .move(edge: .trailing),
+            removal: .move(edge: .leading))}
+    
+    static var bottomslide: AnyTransition {
+        AnyTransition.asymmetric(
+            insertion: .move(edge: .trailing),
+            removal: .move(edge: .bottom))}
 }

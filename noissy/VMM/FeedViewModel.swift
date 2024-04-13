@@ -33,6 +33,9 @@ class FeedViewModel: ObservableObject {
     @Published var imagePreviewData: Data?
     @Published var imageSequence: [UIImage] = []
     
+    @Published var videoVolume: Float?
+    @Published var audioVolume: Float?
+    
     @Published var newMerge: Bool = false
     @Published var isErrorOccured = false
     @Published var errorMessage: String = ""

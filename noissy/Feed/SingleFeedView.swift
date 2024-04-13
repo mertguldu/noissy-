@@ -9,28 +9,24 @@ import AVKit
 struct SingleFeedView: View {
     var videoURL: URL
     var audioURL: URL?
+    var videoVolume: Float?
+    var audioVolume: Float?
     var feedID: Int?
     var feedViewModel: FeedViewModel
     
     @State var mergedURL: URL?
-    
-    
-    
     var body: some View {
         ZStack {
-            //let cacheURL = dataToURL(data: mergedData! as NSData)
             if let mergedURL = mergedURL {
                 FeedContent(videoURL: mergedURL, feedID: feedID, feedViewModel: feedViewModel)
                     .zIndex(0)
-                NextPageButton(feedViewModel: feedViewModel, currentView: .PARENT)
-                
-
+                if (audioURL != nil) {
+                    NextPageButton(feedViewModel: feedViewModel, currentView: .PARENT)
+                }
             } else {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                    
             }
-            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 0.2, green: 0.0, blue: 0.2))
@@ -40,17 +36,23 @@ struct SingleFeedView: View {
                 
                 if let audioURL = audioURL {
                     feedViewModel.currentTask = false
-                    Task {
-                        await mergeVideoAudio(videoURL: videoURL, audioURL: audioURL) { (data, error) in
-                            if let data = data {
-                                mergedURL = dataToURL(data: data as NSData)
-                                //feedViewModel.add(imageData: (feedViewModel.imagePreviewData)!, contentData: data)
-                            }
-                            if let error = error {
-                                print(error)
+                    
+                    DispatchQueue.global(qos: .background).async {
+                        Task {
+                            await mergeVideoAudio(videoURL: videoURL, audioURL: audioURL, videoVolume: videoVolume!, audioVolume: audioVolume!) { (data, error) in
+                                if let data = data {
+                                    mergedURL = dataToURL(data: data as NSData)
+                                    if let imagePreviewData = feedViewModel.imagePreviewData {
+                                        feedViewModel.add(imageData: imagePreviewData, contentData: data)
+                                    }
+                                }
+                                if let error = error {
+                                    print(error)
+                                }
                             }
                         }
                     }
+
                     feedViewModel.newMerge = false
                 } else {
                     mergedURL = videoURL
@@ -76,5 +78,5 @@ struct SingleFeedView: View {
 
 
 #Preview {
-    SingleFeedView(videoURL: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")!, audioURL: Bundle.main.url(forResource: "sample2", withExtension: "m4a")!, feedViewModel: FeedViewModel())
+    SingleFeedView(videoURL: exampleVideoURL, audioURL: exampleAudioURL, videoVolume: 1, audioVolume: 1, feedViewModel: FeedViewModel())
 }

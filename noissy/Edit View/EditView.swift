@@ -9,17 +9,8 @@ import SwiftUI
 import AVKit
 import AVFoundation
 
-let width = (UIScreen.current?.bounds.width ?? 0)
-let height = (UIScreen.current?.bounds.height ?? 0)
-
-let thumbNailWidth = width * 0.06
-let numberOfThumbNail = 20
-
-
-
-
 struct EditView: View {
-    var feedViewModel: FeedViewModel = FeedViewModel()
+    var feedViewModel: FeedViewModel
     var videoURL: URL
     var audioURL: URL
     var duration: Double
@@ -30,7 +21,8 @@ struct EditView: View {
     @State private var imageSequence: [UIImage] = []
     @State private var progress: CGFloat = 0
     @State private var offset: CGPoint = .zero
-    @State private var volume: CGFloat = 1
+    @State private var videoVolume: CGFloat = 1
+    @State private var audioVolume: CGFloat = 1
     
     @State private var isPlaying: Bool = true
     @State private var isNext: Bool = false
@@ -58,28 +50,30 @@ struct EditView: View {
                             Spacer()
                         }
                         .zIndex(0)
+                        
+                        EditMenu(videoVolume: $videoVolume, audioVolume: $audioVolume)
+                            .zIndex(1)
+                        
+                        NextPageButton(feedViewModel: feedViewModel, currentView: .PREVIEW)
+                            .zIndex(1)
+                    } else {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
                     }
-                    
-                    EditMenu(volume: $volume)
-                        .zIndex(1)
-                    
-                    NextPageButton(feedViewModel: feedViewModel, currentView: .SUBVIEW2)
-                        .zIndex(1)                        
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.black)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear{
             player = AVPlayer(url: videoURL)
             player?.volume = 1.0
-            feedViewModel.isTaskCompleted = true
+            feedViewModel.videoVolume = 1.0
+            
             Task{
                 try? prepareAudioPlayer(audioURL: audioURL, completion: { audio in
                     audioPlayer = audio
                 })
-
-                
             }
                     
             if let player = player {
@@ -97,12 +91,17 @@ struct EditView: View {
         }
         .onChange(of: progress) { _ in
             if progress == 0.0 && isPlaying {
+                audioPlayer?.currentTime = .zero
                 audioPlayer?.play()
             }
-            
         }
-        .onChange(of: volume) { value in
+        .onChange(of: videoVolume) { value in
             player?.volume = Float(value)
+            feedViewModel.videoVolume = Float(value)
+        }
+        .onChange(of: audioVolume) { value in
+            audioPlayer?.volume = Float(value)
+            feedViewModel.audioVolume = Float(value)
         }
     }
 }
@@ -110,20 +109,24 @@ struct EditView: View {
 
 
 struct PreviewEditView: View {
-    let videoURL = URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")
-    let audioURL = Bundle.main.url(forResource: "sample2", withExtension: "m4a")
     @State private var duration: Double?
+    @State private var audioURL: URL?
     var body: some View {
         VStack{
             if let duration = duration {
-                EditView(videoURL: videoURL!, audioURL: audioURL!, duration: duration)
-            }
-        }
-            .onAppear {
-                Task {
-                    duration = await videoDuration(videoURL: videoURL!)
+                if let audioURL = audioURL {
+                    EditView(feedViewModel: FeedViewModel(), videoURL: exampleVideoURL, audioURL: audioURL, duration: duration)
                 }
             }
+        }
+        .onAppear {
+            Task {
+                duration = await videoDuration(videoURL: exampleVideoURL)
+                    
+                let audioData = try Data(contentsOf: exampleAudioURL)
+                audioURL = dataToURL2(data: audioData as NSData, url: "neww.wav")
+            }
+        }
     }
 }
 

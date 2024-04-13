@@ -54,7 +54,6 @@ struct CustomSlider: View {
                 .padding(.horizontal, 20)
         }
         .onAppear {
-            //progress = lastDraggedProgress
             lastDraggedProgress = progress
         }
     }

@@ -77,12 +77,10 @@ struct PreviewTimeLine: View {
     @State private var offset: CGPoint = .zero
     @State private var progress: CGFloat = .zero
     @State private var isPlaying: Bool = false
-    let videoURL = URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")
-    let audioURL = Bundle.main.url(forResource: "sample2", withExtension: "m4a")
     
     var body: some View {
         VStack {
-            TimeLineView(offset: $offset, progress: $progress, isPlaying: $isPlaying, videoURL: videoURL!, audioURL: audioURL!, duration: 15, player: AVPlayer(), audioPlayer: AVAudioPlayer(), feedViewModel: FeedViewModel())
+            TimeLineView(offset: $offset, progress: $progress, isPlaying: $isPlaying, videoURL: exampleVideoURL, audioURL: exampleAudioURL, duration: 15, player: AVPlayer(), audioPlayer: AVAudioPlayer(), feedViewModel: FeedViewModel())
         }
         
     }
