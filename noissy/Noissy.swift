@@ -28,7 +28,7 @@ struct Noissy: View {
                         }
                     }
                 }
-                .transition(.backslide)
+                .transition(feedViewModel.regenarating ? .regenarate : .backslide)
                 
             case .PREVIEW:
                 NavigationStack {

@@ -10,7 +10,7 @@ import AVKit
 import AVFoundation
 
 struct EditView: View {
-    var feedViewModel: FeedViewModel
+    @ObservedObject var feedViewModel: FeedViewModel
     var videoURL: URL
     var audioURL: URL
     var duration: Double
@@ -51,7 +51,7 @@ struct EditView: View {
                         }
                         .zIndex(0)
                         
-                        EditMenu(videoVolume: $videoVolume, audioVolume: $audioVolume)
+                        EditMenu(videoVolume: $videoVolume, audioVolume: $audioVolume, feedViewModel: feedViewModel)
                             .zIndex(1)
                         
                         NextPageButton(feedViewModel: feedViewModel, currentView: .PREVIEW)
@@ -68,7 +68,11 @@ struct EditView: View {
         .onAppear{
             player = AVPlayer(url: videoURL)
             player?.volume = 1.0
+            audioPlayer?.volume = 1.0
             feedViewModel.videoVolume = 1.0
+            feedViewModel.audioVolume = 1.0
+            
+            feedViewModel.regenarating = false
             
             Task{
                 try? prepareAudioPlayer(audioURL: audioURL, completion: { audio in

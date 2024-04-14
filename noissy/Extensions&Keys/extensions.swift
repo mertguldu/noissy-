@@ -33,6 +33,11 @@ extension AnyTransition {
             insertion: .move(edge: .trailing),
             removal: .move(edge: .leading))}
     
+    static var regenarate: AnyTransition {
+        AnyTransition.asymmetric(
+            insertion: .move(edge: .trailing),
+            removal: .move(edge: .trailing))}
+    
     static var bottomslide: AnyTransition {
         AnyTransition.asymmetric(
             insertion: .move(edge: .trailing),

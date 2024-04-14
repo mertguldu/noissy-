@@ -13,7 +13,7 @@ struct EditMenu: View {
     @Binding var audioVolume: CGFloat
 
     @State private var showVolumeMenu: Bool = false
-    
+    var feedViewModel: FeedViewModel
     
     var body: some View {
         GeometryReader {geomerty in
@@ -28,8 +28,16 @@ struct EditMenu: View {
                     HStack(spacing: 5) {
                         Spacer()
                         Button(action: {
+                            feedViewModel.regenarating = true
+                            withAnimation {
+                                feedViewModel.currentView = .PARENT
+                            }
                             
-                            print("hkaedad")
+                            if let selectedMovie = feedViewModel.selectedMovie {
+                                if let userID = feedViewModel.userID {
+                                    generateMusic(encodedData: selectedMovie.encodedData!, userID: userID, feedViewModel: feedViewModel)
+                                }
+                            }
                         }, label: {
                             Text("Generate")
                                 .foregroundStyle(.white)
@@ -68,7 +76,7 @@ struct PreviewEditMenu: View {
     @State var videoVolume: CGFloat = .zero
     @State var audioVolume: CGFloat = .zero
     var body: some View {
-        EditMenu(videoVolume: $videoVolume, audioVolume: $audioVolume)
+        EditMenu(videoVolume: $videoVolume, audioVolume: $audioVolume, feedViewModel: FeedViewModel())
     }
 }
 

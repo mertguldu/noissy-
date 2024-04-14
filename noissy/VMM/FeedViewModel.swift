@@ -24,6 +24,7 @@ class FeedViewModel: ObservableObject {
     
     @Published var isTaskCompleted: Bool = false
     @Published var currentTask: Bool = false
+    @Published var regenarating: Bool = false
     
     @Published var generatedMusic: APIResponse?
     //@Published var selectedMovie: String? = nil

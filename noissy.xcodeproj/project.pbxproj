@@ -67,6 +67,7 @@
 		C7A6329F2BC2CBE30021266C /* UIScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A6329E2BC2CBE30021266C /* UIScrollViewController.swift */; };
 		C7A632A12BC2FA760021266C /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A632A02BC2FA760021266C /* VolumeView.swift */; };
 		C7A632A32BC300830021266C /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A632A22BC300830021266C /* CustomSlider.swift */; };
+		C7B911E72BCB6719005EB7E8 /* PrevPageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B911E62BCB6719005EB7E8 /* PrevPageButton.swift */; };
 		C7C03CBB2BBC3D0A00221BC0 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C03CBA2BBC3D0A00221BC0 /* EditView.swift */; };
 		C7DC01AB2B7A254600F96B92 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DC01AA2B7A254600F96B92 /* FeedViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -133,6 +134,7 @@
 		C7A6329E2BC2CBE30021266C /* UIScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewController.swift; sourceTree = "<group>"; };
 		C7A632A02BC2FA760021266C /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
 		C7A632A22BC300830021266C /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
+		C7B911E62BCB6719005EB7E8 /* PrevPageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrevPageButton.swift; sourceTree = "<group>"; };
 		C7C03CBA2BBC3D0A00221BC0 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		C7DC01AA2B7A254600F96B92 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -219,6 +221,7 @@
 				C7052BAF2B936127007131BB /* MoreActionButton.swift */,
 				C7A038DF2B8F867E002CD141 /* VideoPlayButton.swift */,
 				C700355E2BC75A350018515E /* NextPageButton.swift */,
+				C7B911E62BCB6719005EB7E8 /* PrevPageButton.swift */,
 				C7331EFA2B89040700ECE039 /* BackButton.swift */,
 			);
 			path = Buttons;
@@ -424,6 +427,7 @@
 				C71F79772B89798700288621 /* CombinedView.swift in Sources */,
 				C7052BC32B93F0AA007131BB /* APIResponse.swift in Sources */,
 				C70035582BC7397C0018515E /* TimeLineView.swift in Sources */,
+				C7B911E72BCB6719005EB7E8 /* PrevPageButton.swift in Sources */,
 				C792D57D2BC0D954001B7E84 /* videoThumbnail.swift in Sources */,
 				C700355A2BC739B60018515E /* updatePlayerTime.swift in Sources */,
 				C75F97112BC962CF008B46AE /* PreferenceKeys.swift in Sources */,

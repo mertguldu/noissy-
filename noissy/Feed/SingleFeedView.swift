@@ -21,6 +21,7 @@ struct SingleFeedView: View {
                 FeedContent(videoURL: mergedURL, feedID: feedID, feedViewModel: feedViewModel)
                     .zIndex(0)
                 if (audioURL != nil) {
+                    //PrevPageButton(feedViewModel: feedViewModel, currentView: .EDITING)
                     NextPageButton(feedViewModel: feedViewModel, currentView: .PARENT)
                 }
             } else {
@@ -30,7 +31,6 @@ struct SingleFeedView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 0.2, green: 0.0, blue: 0.2))
-            
         .onAppear {
             feedViewModel.hideStatusBar = true
                 
