@@ -33,8 +33,8 @@ struct WaveForm: View {
             }
         }
         .background {
-            RoundedRectangle(cornerRadius: 15)
-                    .fill(.gray)
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color(red: 0.3, green: 0.3, blue: 0.3))
                     .frame(height: height * 0.06)
 
         }
@@ -94,4 +94,5 @@ struct PreviewWaveForm: View {
 
 #Preview {
     PreviewWaveForm()
+        
 }

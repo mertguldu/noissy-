@@ -10,6 +10,8 @@ struct VideoMenu: View {
     var videoURL: URL
     var feedID: Int?
     var feedViewModel: FeedViewModel
+    @Binding var showText: Bool
+    @Binding var liked: Bool
     
     @State var img: UIImage?
     
@@ -19,6 +21,9 @@ struct VideoMenu: View {
             VStack(spacing:20) {
                 if let img = img {
                     ShareButton(movieURL: videoURL, previewImage: img)
+                    
+                    LikeButton(showText: $showText, isLiked: $liked)
+                    
                     if let id = feedID {
                         DeleteButton(feedID: id, feedViewModel: feedViewModel)
                     }
@@ -37,7 +42,14 @@ struct VideoMenu: View {
     }
 }
 
+struct PreviewVideoMenu: View {
+    @State private var showText: Bool = true
+    @State private var liked: Bool = false
+    var body: some View {
+        VideoMenu(videoURL: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")!, feedViewModel: FeedViewModel(), showText: $showText, liked: $liked)
+            .background(.black)
+    }
+}
 #Preview {
-    VideoMenu(videoURL: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")!, feedViewModel: FeedViewModel())
-        .background(.black)
+    PreviewVideoMenu()
 }

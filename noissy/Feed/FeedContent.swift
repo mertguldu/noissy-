@@ -19,27 +19,56 @@ struct FeedContent: View {
     @State private var lastDraggedProgress: CGFloat = 0
     @State private var isSeeking: Bool = false
     @State private var isPlaying: Bool = true
+    @State private var isLiked: Bool = false
+    @State private var isShowingText: Bool = false
     
     var body: some View {
-        VStack {
-            if let player = player {
-                CustomVideoPlayer(player: player)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .overlay(alignment: .bottom) {
-                        VStack() {
-                            Spacer()
-                            VideoMenu(videoURL: videoURL, feedID: feedID, feedViewModel: feedViewModel)
-                            VideoSeekerView()
+        ZStack {
+            VStack {
+                if let player = player {
+                    CustomVideoPlayer(player: player)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .overlay(alignment: .bottom) {
+                            VStack() {
+                                Spacer()
+                                VideoMenu(videoURL: videoURL, feedID: feedID, feedViewModel: feedViewModel, showText: $isShowingText, liked: $isLiked)
+                                VideoSeekerView()
+                            }
+                        }
+                }
+            }
+            .onTapGesture {
+                videoPlayerIsTapped(isPlaying: isPlaying, player: player!, audioPlayer: nil, progress: nil) { playing in
+                    isPlaying = playing
+                }
+            }
+            
+            VStack {
+                Spacer()
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color(red: 0.3, green: 0.3, blue: 0.3))
+                    .frame(width: 150, height: 50)
+                    .overlay {
+                        VStack {
+                            Text("Music is added to favorites")
+                                .foregroundStyle(.white)
+                                .font(.callout)
+                                .fontWeight(.light)
+                                .multilineTextAlignment(.center)
+                        }
+                    }
+            }
+            .padding(.bottom)
+            .opacity(isShowingText ? 1 : 0)
+            .onChange(of: isShowingText) { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    withAnimation {
+                        isShowingText = false
                     }
                 }
             }
         }
         .ignoresSafeArea()
-        .onTapGesture {
-            videoPlayerIsTapped(isPlaying: isPlaying, player: player!, audioPlayer: nil, progress: nil) { playing in
-                isPlaying = playing
-            }
-        }
         .onAppear {
             player = AVPlayer(url: videoURL)
             if let player = player {
