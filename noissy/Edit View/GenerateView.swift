@@ -1,20 +1,19 @@
 //
-//  VolumeView.swift
+//  GenerateView.swift
 //  noissy
 //
-//  Created by Mert Guldu on 4/7/24.
+//  Created by Mert Guldu on 4/16/24.
 //
 
 import SwiftUI
-import AVKit
-import AVFoundation
 
-struct VolumeView: View {
+struct GenerateView: View {
     @State private var offset: CGFloat = 450
     @Binding var videoVolume: CGFloat
     @Binding var audioVolume: CGFloat
     @Binding var showMenu: Bool
     var feedViewModel: FeedViewModel
+    
     let menuHeight: Double = 450
     
     var body: some View {
@@ -32,21 +31,10 @@ struct VolumeView: View {
                         Spacer()
                     }
                     
-                    VolumeBox(volume: $videoVolume)
+                    
                 }
                 
-                VStack(spacing: 5) {
-                    HStack {
-                        Text("Audio Volume")
-                            .foregroundStyle(.white)
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.horizontal)
-                        Spacer()
-                    }
-                    
-                    VolumeBox(volume: $audioVolume)
-                }
+                
             }
             .offset(y:offset - menuHeight / 5 )
         }
@@ -60,35 +48,15 @@ struct VolumeView: View {
     }
 }
 
-struct VolumeBox: View {
-    @Binding var volume: CGFloat
-    
-    var body: some View {
-        ZStack {
-            CustomSlider(progress: $volume)
-                .zIndex(1)
-            
-            RoundedRectangle(cornerRadius: 15)
-                .fill(.gray)
-                .frame(height: 100)
-                .padding(.horizontal, 5)
-                .zIndex(0)
-        }
-        
-    }
-}
-
-struct PreviewVolumeView: View {
+struct PreviewGenerateView: View {
     @State private var showMenu: Bool = true
     @State private var videoVolume: CGFloat = 1
     @State private var audioVolume: CGFloat = 1
     var body: some View {
-        VolumeView(videoVolume: $videoVolume, audioVolume: $audioVolume, showMenu: $showMenu, feedViewModel: FeedViewModel())
+        GenerateView(videoVolume: $videoVolume, audioVolume: $audioVolume, showMenu: $showMenu, feedViewModel: FeedViewModel())
     }
 }
 
 #Preview {
-    PreviewVolumeView()
+    PreviewGenerateView()
 }
-
-

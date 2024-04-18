@@ -14,7 +14,7 @@ struct ShareButton: View {
                         .foregroundStyle(Color.white)
                         .font(.title3)
                         .fontWeight(.semibold)
-                        .frame(width: 55, height: 55)
+                        .frame(width: 50, height: 50)
                         .background(.ultraThinMaterial)
                         .clipShape(Circle())
                 }

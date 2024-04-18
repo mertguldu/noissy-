@@ -21,9 +21,7 @@ struct Noissy: View {
                 NavigationStack {
                     if let selectedMovie = feedViewModel.selectedMovie {
                         if let generatedMusic = feedViewModel.generatedMusic {
-                            let audioData = Data(base64Encoded: generatedMusic.encodedData!)
-                            let audioURL = dataToURL2(data: audioData! as NSData, url: "audioGen.wav")
-                            EditView(feedViewModel: feedViewModel, videoURL: selectedMovie.url!, audioURL: audioURL, duration: selectedMovie.duration ?? 0.0)
+                            EditView(videoURL: selectedMovie.url!, audio: generatedMusic, duration: selectedMovie.duration ?? 0.0, feedViewModel: feedViewModel)
                                 .toolbar(.hidden)
                         }
                     }
@@ -33,9 +31,7 @@ struct Noissy: View {
             case .PREVIEW:
                 NavigationStack {
                     if let selectedMovie = feedViewModel.selectedMovie {
-                        if let generatedMusic = feedViewModel.generatedMusic {
-                            let audioData = Data(base64Encoded: generatedMusic.encodedData!)
-                            let audioURL = dataToURL2(data: audioData! as NSData, url: "audioGen.wav")
+                        if let audioURL = feedViewModel.currentAudioURL {
                             SingleFeedView(videoURL: selectedMovie.url!, audioURL: audioURL, videoVolume: feedViewModel.videoVolume, audioVolume: feedViewModel.audioVolume, feedViewModel: feedViewModel)
                                 .toolbar(.hidden)
                         }

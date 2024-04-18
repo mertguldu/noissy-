@@ -9,10 +9,10 @@ import Foundation
 
 struct APIResponse: Decodable {
     let encodedData: String?
-    let channels: Int?
+    let channels: Int16?
     let sampleRateHz: Double?
     let duration: Double?
-    let sampleFrames: Int?
+    let sampleFrames: Int32?
     let error: String?
 }
 

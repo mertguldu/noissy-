@@ -34,6 +34,8 @@
 		C7331EFD2B89043900ECE039 /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7331EFC2B89043900ECE039 /* ShareButton.swift */; };
 		C7331F002B89049500ECE039 /* FeedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7331EFF2B89049500ECE039 /* FeedContent.swift */; };
 		C73B176F2BCDFDFF00D83A84 /* LikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73B176E2BCDFDFF00D83A84 /* LikeButton.swift */; };
+		C73B17712BCE0B4C00D83A84 /* GenerateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73B17702BCE0B4C00D83A84 /* GenerateView.swift */; };
+		C73B17732BD0173100D83A84 /* LikedSongsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73B17722BD0173100D83A84 /* LikedSongsView.swift */; };
 		C73F70562B8BCE120063978E /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C73F70542B8BCE120063978E /* CoreDataModel.xcdatamodeld */; };
 		C73F70582B8BCE390063978E /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73F70572B8BCE390063978E /* CoreDataViewModel.swift */; };
 		C75EBA8C2B76DFA000659D07 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75EBA8B2B76DFA000659D07 /* HomeView.swift */; };
@@ -101,6 +103,8 @@
 		C7331EFC2B89043900ECE039 /* ShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
 		C7331EFF2B89049500ECE039 /* FeedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContent.swift; sourceTree = "<group>"; };
 		C73B176E2BCDFDFF00D83A84 /* LikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
+		C73B17702BCE0B4C00D83A84 /* GenerateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateView.swift; sourceTree = "<group>"; };
+		C73B17722BD0173100D83A84 /* LikedSongsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedSongsView.swift; sourceTree = "<group>"; };
 		C73F70552B8BCE120063978E /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		C73F70572B8BCE390063978E /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
 		C75EBA8B2B76DFA000659D07 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -237,6 +241,7 @@
 				C792D57E2BC0DCF2001B7E84 /* EditMenu.swift */,
 				C70035572BC7397C0018515E /* TimeLineView.swift */,
 				C7A632A02BC2FA760021266C /* VolumeView.swift */,
+				C73B17702BCE0B4C00D83A84 /* GenerateView.swift */,
 				C766A2B82BC3692800A769AE /* menuView.swift */,
 				C792D57C2BC0D954001B7E84 /* videoThumbnail.swift */,
 				C7964EAA2BBF4D4400D8587D /* WaveForm.swift */,
@@ -286,6 +291,7 @@
 				C70035672BC8C3B10018515E /* Noissy.swift */,
 				C7853D2A2B62F88400130915 /* noissyMain.swift */,
 				C71F79762B89798700288621 /* CombinedView.swift */,
+				C73B17722BD0173100D83A84 /* LikedSongsView.swift */,
 				C75F97122BC96AC3008B46AE /* Edit View */,
 				C71F796C2B89655800288621 /* Home */,
 				C71F796D2B89667D00288621 /* Library */,
@@ -454,6 +460,7 @@
 				C7A0390E2B921104002CD141 /* generateImageFromVideo.swift in Sources */,
 				C71F796B2B89652800288621 /* OpenMedia.swift in Sources */,
 				C71F79732B89781800288621 /* PageIndicator.swift in Sources */,
+				C73B17712BCE0B4C00D83A84 /* GenerateView.swift in Sources */,
 				C7052BB22B93B620007131BB /* DeleteButton.swift in Sources */,
 				C7052BB02B936127007131BB /* MoreActionButton.swift in Sources */,
 				C75EBA8C2B76DFA000659D07 /* HomeView.swift in Sources */,
@@ -481,6 +488,7 @@
 				C75EBA9B2B77F4FD00659D07 /* SingleFeedView.swift in Sources */,
 				C7052BC52B93F0BC007131BB /* Route.swift in Sources */,
 				C75EBA8E2B76E61900659D07 /* LibraryView.swift in Sources */,
+				C73B17732BD0173100D83A84 /* LikedSongsView.swift in Sources */,
 				C766A2B92BC3692800A769AE /* menuView.swift in Sources */,
 				C792D57F2BC0DCF2001B7E84 /* EditMenu.swift in Sources */,
 			);

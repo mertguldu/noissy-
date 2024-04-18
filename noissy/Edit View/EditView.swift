@@ -10,10 +10,11 @@ import AVKit
 import AVFoundation
 
 struct EditView: View {
-    @ObservedObject var feedViewModel: FeedViewModel
     var videoURL: URL
-    var audioURL: URL
+    @State var audio: APIResponse
+    //@State var audioURL: URL
     var duration: Double
+    @ObservedObject var feedViewModel: FeedViewModel
     
     @State private var player: AVPlayer?
     @State private var audioPlayer: AVAudioPlayer?
@@ -44,14 +45,18 @@ struct EditView: View {
                             
                             Spacer()
                             
-                            TimeLineView(offset: $offset, progress: $progress, isPlaying: $isPlaying, videoURL: videoURL, audioURL: audioURL, duration: duration, player: player, audioPlayer: audioPlayer, feedViewModel: feedViewModel)
-                                .frame(height: height * 0.12 + 30)
+                                TimeLineView(offset: $offset, progress: $progress, isPlaying: $isPlaying, audio: audio, videoURL: videoURL, videoDuration: duration, player: player, audioPlayer: audioPlayer, feedViewModel: feedViewModel)
+                                    .frame(height: height * 0.12 + 30)
+                            
                             
                             Spacer()
                         }
                         .zIndex(0)
                         
                         EditMenu(videoVolume: $videoVolume, audioVolume: $audioVolume, feedViewModel: feedViewModel)
+                            .zIndex(2)
+                        
+                        PrevPageButton(feedViewModel: feedViewModel, currentView: .PARENT)
                             .zIndex(1)
                         
                         NextPageButton(feedViewModel: feedViewModel, currentView: .PREVIEW)
@@ -73,13 +78,19 @@ struct EditView: View {
             feedViewModel.audioVolume = 1.0
             
             feedViewModel.regenarating = false
+            feedViewModel.selectedFavoritePlayer = nil
+           
+            let audioData = Data(base64Encoded: (audio.encodedData)!)
+            let audioURL = dataToURL2(data: audioData! as NSData, url: "edit.wav")
+            
+            feedViewModel.currentAudioURL = audioURL
             
             Task{
                 try? prepareAudioPlayer(audioURL: audioURL, completion: { audio in
                     audioPlayer = audio
                 })
             }
-                    
+            
             if let player = player {
                 player.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 50), queue: .main) { time in
                     let currentDuration = player.currentTime().seconds
@@ -107,6 +118,30 @@ struct EditView: View {
             audioPlayer?.volume = Float(value)
             feedViewModel.audioVolume = Float(value)
         }
+        .onChange(of:feedViewModel.selectedFavoritePlayer) { id in
+            if let id = id {
+                let feed = feedViewModel.ContentLibrary[id]
+                let audioData = feed.musicData
+                
+                let audioURL = dataToURL2(data: audioData! as NSData, url: "edit.wav")
+                feedViewModel.currentAudioURL = audioURL
+                Task{
+                    try? prepareAudioPlayer(audioURL: audioURL, completion: { audio in
+                        audioPlayer = audio
+                        audioPlayer?.currentTime = progress * duration
+                    })
+                }
+
+            }
+        }
+        .onChange(of: feedViewModel.showMenu) { value in
+            print("menu is showed")
+            if value {
+                player?.pause()
+                audioPlayer?.pause()
+                isPlaying = false
+            }
+        }
     }
 }
 
@@ -114,21 +149,24 @@ struct EditView: View {
 
 struct PreviewEditView: View {
     @State private var duration: Double?
-    @State private var audioURL: URL?
+    @State private var audio: APIResponse?
     var body: some View {
         VStack{
             if let duration = duration {
-                if let audioURL = audioURL {
-                    EditView(feedViewModel: FeedViewModel(), videoURL: exampleVideoURL, audioURL: audioURL, duration: duration)
+                if let audio = audio {
+                    EditView(videoURL: exampleVideoURL, audio: audio, duration: duration, feedViewModel: FeedViewModel())
                 }
             }
         }
         .onAppear {
             Task {
                 duration = await videoDuration(videoURL: exampleVideoURL)
-                    
+                
                 let audioData = try Data(contentsOf: exampleAudioURL)
-                audioURL = dataToURL2(data: audioData as NSData, url: "neww.wav")
+                
+                audio = APIResponse(encodedData: audioData.base64EncodedString(), channels: 2, sampleRateHz: 44100.0, duration: 71, sampleFrames: 440288, error: "dsf")
+                    
+                
             }
         }
     }

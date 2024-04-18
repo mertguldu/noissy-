@@ -22,7 +22,7 @@ struct VideoMenu: View {
                 if let img = img {
                     ShareButton(movieURL: videoURL, previewImage: img)
                     
-                    LikeButton(showText: $showText, isLiked: $liked)
+                    LikeButton(showText: $showText, isLiked: $liked, feedID: feedID, feedViewModel: feedViewModel)
                     
                     if let id = feedID {
                         DeleteButton(feedID: id, feedViewModel: feedViewModel)

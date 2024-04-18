@@ -28,7 +28,7 @@ struct CombinedView: View {
         .tabViewStyle(.page(indexDisplayMode: .never))
         .disabled(feedViewModel.currentTask)
         .onAppear(perform: {
-                UIScrollView.appearance().bounces = false
+            UIScrollView.appearance().bounces = false
             selectedTab = feedViewModel.selectedTab
             })
         .onChange(of: feedViewModel.selectedTab) { _ in

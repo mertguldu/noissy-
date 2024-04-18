@@ -32,6 +32,7 @@ struct FeedContent: View {
                             VStack() {
                                 Spacer()
                                 VideoMenu(videoURL: videoURL, feedID: feedID, feedViewModel: feedViewModel, showText: $isShowingText, liked: $isLiked)
+                                
                                 VideoSeekerView()
                             }
                         }
@@ -165,5 +166,5 @@ struct FeedContent: View {
 }
 
 #Preview {
-    FeedContent(videoURL: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")!, feedID: 1, feedViewModel: FeedViewModel())
+    FeedContent(videoURL: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")!, feedViewModel: FeedViewModel())
 }

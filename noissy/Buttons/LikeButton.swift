@@ -10,10 +10,21 @@ import SwiftUI
 struct LikeButton: View {
     @Binding var showText: Bool
     @Binding var isLiked: Bool
+    var feedID: Int?
+    var feedViewModel: FeedViewModel = FeedViewModel()
+    
     var body: some View {
         Button(action: {
             withAnimation {
                 isLiked.toggle()
+                
+                if let id = feedID {
+                    let feed = feedViewModel.ContentLibrary[id]
+                    feedViewModel.likeToggle(feed: feed)
+                } else {
+                    feedViewModel.isLiked.toggle()
+                }
+                
                 if isLiked {
                     showText = true
                     print("music is added to the favorites")
@@ -27,10 +38,19 @@ struct LikeButton: View {
                 .foregroundStyle(isLiked ? Color.red : Color.white)
                 .font(.title3)
                 .fontWeight(.semibold)
-                .frame(width: 55, height: 55)
+                .frame(width: 50, height: 50)
                 .background(.ultraThinMaterial)
                 .clipShape(Circle())
         })
+        .onAppear {
+            if let id = feedID {
+                let feed = feedViewModel.ContentLibrary[id]
+                isLiked = feed.isLiked
+                print("onAppear isLiked:", isLiked)
+            } else {
+                feedViewModel.isLiked = false
+            }
+        }
     }
 }
 

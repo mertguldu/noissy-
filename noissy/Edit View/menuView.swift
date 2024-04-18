@@ -10,7 +10,7 @@ import SwiftUI
 struct menuView: View {
     @Binding var offset: CGFloat
     @Binding var showMenu: Bool
-    
+    var feedViewModel: FeedViewModel
     var menuHeight: Double
     
     var body: some View {
@@ -23,6 +23,7 @@ struct menuView: View {
                     withAnimation {
                         offset = menuHeight
                         showMenu = false
+                        feedViewModel.showMenu = false
                     }
                 }
                 .overlay {
@@ -41,19 +42,24 @@ struct menuView: View {
                                     .onEnded({ value in
                                         let translationY = value.translation.height
                                         
-                                        if translationY > 40 {
+                                        if translationY > menuHeight * 0.2 {
                                             withAnimation {
-                                                offset = 200
+                                                offset = menuHeight
                                                 showMenu = false
+                                                feedViewModel.showMenu = false
                                             }
                                         } else {
                                             withAnimation {
                                                 offset = 0
+                                                feedViewModel.showMenu = true
                                             }
                                         }
                                     })
                             )
                     }
+                }
+                .onAppear {
+                    feedViewModel.showMenu = true
                 }
                 .ignoresSafeArea()
         
@@ -85,7 +91,7 @@ struct PreviewMenuView: View {
     @State private var offset_ex: CGFloat = .zero
     @State private var showMenu: Bool = true
     var body: some View {
-        menuView(offset: $offset_ex, showMenu: $showMenu, menuHeight: 200)
+        menuView(offset: $offset_ex, showMenu: $showMenu, feedViewModel: FeedViewModel(), menuHeight: 200)
     }
 }
 

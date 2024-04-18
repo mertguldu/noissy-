@@ -25,14 +25,15 @@ class FeedViewModel: ObservableObject {
     @Published var isTaskCompleted: Bool = false
     @Published var currentTask: Bool = false
     @Published var regenarating: Bool = false
+    @Published var isLiked: Bool = false
+    @Published var showMenu: Bool = false
     
     @Published var generatedMusic: APIResponse?
-    //@Published var selectedMovie: String? = nil
     @Published var selectedMovie: SelectedMovie?
-    @Published var musicDataString: String?
     @Published var mergedVideo: Data?
     @Published var imagePreviewData: Data?
     @Published var imageSequence: [UIImage] = []
+    @Published var currentAudioURL: URL?
     
     @Published var videoVolume: Float?
     @Published var audioVolume: Float?
@@ -40,6 +41,10 @@ class FeedViewModel: ObservableObject {
     @Published var newMerge: Bool = false
     @Published var isErrorOccured = false
     @Published var errorMessage: String = ""
+    
+    @Published var ActiveFavoritePlayer: Int?
+    @Published var selectedFavoritePlayer: Int?
+    @Published var selectedFavouriteAudioURL: URL?
     
     @Published var invited: Bool = false
     
@@ -53,8 +58,12 @@ class FeedViewModel: ObservableObject {
         return CoreModel.savedContents
     }
     
-    func add(imageData:Data, contentData: Data) { // add feed
-        return CoreModel.addContent(imageData: imageData, contentData: contentData)
+    func add(imageData:Data, contentData: Data, musicData: Data, channels: Int16, sampleRate: Double, duration: Double, sampleFrames: Int32, isLiked: Bool) { // add feed
+        return CoreModel.addContent(imageData: imageData, contentData: contentData, musicData: musicData, channels: channels, sampleRate: sampleRate, duration: duration, sampleFrames: sampleFrames, isLiked: isLiked)
+    }
+    
+    func likeToggle(feed: FeedEntity) {
+        return CoreModel.likeToggle(feed: feed)
     }
 
     func delete(feed: FeedEntity) {

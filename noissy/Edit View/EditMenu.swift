@@ -13,6 +13,7 @@ struct EditMenu: View {
     @Binding var audioVolume: CGFloat
 
     @State private var showVolumeMenu: Bool = false
+    @State private var showLikedMenu: Bool = false
     var feedViewModel: FeedViewModel
     
     var body: some View {
@@ -20,7 +21,11 @@ struct EditMenu: View {
             let menuHeight = geomerty.safeAreaInsets.bottom
             ZStack {
                 if showVolumeMenu {
-                    VolumeView(videoVolume: $videoVolume, audioVolume: $audioVolume, showMenu: $showVolumeMenu)
+                    VolumeView(videoVolume: $videoVolume, audioVolume: $audioVolume, showMenu: $showVolumeMenu, feedViewModel: feedViewModel)
+                        .zIndex(1)
+                }
+                else if showLikedMenu {
+                    LikedSongsView(showMenu: $showLikedMenu, feedViewModel: feedViewModel)
                         .zIndex(1)
                 }
                 VStack {
@@ -49,6 +54,7 @@ struct EditMenu: View {
                         .background(.black)
                         
                         Spacer()
+                        
                         Button(action: {
                             showVolumeMenu = true
                         }, label: {
@@ -57,8 +63,21 @@ struct EditMenu: View {
                                 .padding()
                                 .frame(height: menuHeight)
                         })
-                        
                         .background(.black)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            showLikedMenu = true
+                            print("clicked")
+                        }, label: {
+                            Text("Liked")
+                                .foregroundStyle(.white)
+                                .padding()
+                                .frame(height: menuHeight)
+                        })
+                        .background(.black)
+                        
                         Spacer()
                     }
                     .frame(height: menuHeight)

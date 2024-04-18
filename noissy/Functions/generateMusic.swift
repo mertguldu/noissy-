@@ -19,6 +19,7 @@ func generateMusic(encodedData: String, userID: String, feedViewModel: FeedViewM
             withAnimation {
                 feedViewModel.currentView = .EDITING
                 feedViewModel.isTaskCompleted = true
+                feedViewModel.currentTask = false
             }
         case .failure(let error):
             print("error:", error.localizedDescription)

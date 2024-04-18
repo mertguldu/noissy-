@@ -9,16 +9,11 @@ import SwiftUI
 import AVFoundation
 
 struct WaveForm: View {
-    var feedViewModel: FeedViewModel
-    var audioURL: URL?
-    var videoDuration: Double?
-    @State var channels: Int?
-    @State var sampleRateHz: Double?
-    @State var sampleFrames: Int?
-    @State var audioDuration: Double?
+    var audio: APIResponse
+    var videoDuration: Double
+    @ObservedObject var feedViewModel: FeedViewModel
     
     @State private var amplitudeValues: [Float] = []
-    @State private var timelineValues: [TimeInterval] = []  // Stores time values for each sample
     @State private var height_factor: Float = 1.0
     
     let barWidth: CGFloat = 2
@@ -40,21 +35,50 @@ struct WaveForm: View {
         }
         .frame(height: height * 0.06)
         .onAppear {
-            if let audio = feedViewModel.generatedMusic {
-                channels = audio.channels
-                sampleRateHz = audio.sampleRateHz
-                sampleFrames = audio.sampleFrames
-                audioDuration = audio.duration
-            }
+            print("waveform audioURL is changed FFFF")
             
-            if let audioURL = audioURL {
-                if let videoDuration = videoDuration {
-                    getAudioAmplitudes(audioURL: audioURL, channelCount: channels ?? 1, sampleRate: sampleRateHz ?? 1 , frameCount: sampleFrames ?? 1, audioDuration: audioDuration ?? 0, videoDuration: videoDuration) { amplitudes in
+            let channels = audio.channels
+            let sampleRateHz = audio.sampleRateHz
+            let sampleFrames = audio.sampleFrames
+            let audioDuration = audio.duration
+            
+            
+            let encodedData = audio.encodedData
+            let data = Data(base64Encoded: encodedData!)
+            let url = dataToURL2(data: data! as NSData, url: "waveForm.wav")
+                
+            getAudioAmplitudes(audioURL: url, channelCount: Int(channels ?? 1), sampleRate: sampleRateHz ?? 1, frameCount: Int(sampleFrames ?? 1), audioDuration: audioDuration ?? 0, videoDuration: videoDuration) { amplitudes in
+                        
+                amplitudeValues = amplitudes
+                            
+                let max_amplitude = amplitudeValues.max()
+                height_factor = Float((UIScreen.current?.bounds.height ?? 0) * 0.04) / (max_amplitude ?? 1)
+            }
+        }
+        .onChange(of: feedViewModel.selectedFavoritePlayer) { id in
+            print("favourite is selected")
+            if let id = id {
+                amplitudeValues = []
+                let feed = feedViewModel.ContentLibrary[id]
+                
+                print(feed.duration)
+                let channels = feed.channels
+                let sampleRateHz = feed.sampleRate
+                let sampleFrames = feed.sampleFrames
+                let audioDuration = feed.duration
+                
+                
+                let data = Data(base64Encoded: (feed.musicData?.base64EncodedString())!)
+                if let data = data {
+                    print("data yess")
+                    let url = dataToURL2(data: data as NSData, url: "selectedWaveForm.wav")
+                    
+                    getAudioAmplitudes(audioURL: url, channelCount: Int(channels), sampleRate: sampleRateHz, frameCount: Int(sampleFrames), audioDuration: audioDuration, videoDuration: videoDuration) { amplitudes in
                         
                         amplitudeValues = amplitudes
-                            
+                        
                         let max_amplitude = amplitudeValues.max()
-                        height_factor = Float((UIScreen.current?.bounds.height ?? 0) * 0.03) / (max_amplitude ?? 1)
+                        height_factor = Float((UIScreen.current?.bounds.height ?? 0) * 0.04) / (max_amplitude ?? 1)
                     }
                 }
             }
@@ -62,6 +86,10 @@ struct WaveForm: View {
     }
 }
 
+
+func generateAmplitudes() {
+    
+}
 struct BarView: View {
     let amplitude: Float
     let barWidth: CGFloat
@@ -76,17 +104,21 @@ struct BarView: View {
 }
 
 struct PreviewWaveForm: View {
-    @State private var audioURL: URL?
+    @State var audio: APIResponse?
+    
     var body: some View {
         VStack {
-            if let audioURL = audioURL {
-                WaveForm(feedViewModel: FeedViewModel(), audioURL: audioURL, videoDuration: 200, channels: 2, sampleRateHz: 44100.0, sampleFrames:  440288, audioDuration: 100)
+            if let audio = audio {
+               
+                WaveForm(audio: audio, videoDuration: 40, feedViewModel: FeedViewModel())
+                
             }
         }
         .onAppear {
             Task {
                 let audioData = try Data(contentsOf: exampleAudioURL)
-                audioURL = dataToURL2(data: audioData as NSData, url: "newAu.wav")
+                
+                audio = APIResponse(encodedData: audioData.base64EncodedString(), channels: 2, sampleRateHz: 44100.0, duration: 71.0, sampleFrames: 440288, error: "dsf")
             }
         }
     }

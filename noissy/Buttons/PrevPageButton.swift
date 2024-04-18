@@ -15,6 +15,7 @@ struct PrevPageButton: View {
         HStack {
             VStack {
                 Button(action: {
+                    feedViewModel.regenarating = true
                     withAnimation {
                         feedViewModel.currentView = currentView
                     }

@@ -15,6 +15,8 @@ struct SingleFeedView: View {
     var feedViewModel: FeedViewModel
     
     @State var mergedURL: URL?
+    @State private var mergedData: Data?
+    
     var body: some View {
         ZStack {
             if let mergedURL = mergedURL {
@@ -33,19 +35,17 @@ struct SingleFeedView: View {
         .background(Color(red: 0.2, green: 0.0, blue: 0.2))
         .onAppear {
             feedViewModel.hideStatusBar = true
-                
+            
                 if let audioURL = audioURL {
-                    feedViewModel.currentTask = false
-                    
                     DispatchQueue.global(qos: .background).async {
                         Task {
                             await mergeVideoAudio(videoURL: videoURL, audioURL: audioURL, videoVolume: videoVolume!, audioVolume: audioVolume!) { (data, error) in
+                                
                                 if let data = data {
+                                    mergedData = data
                                     mergedURL = dataToURL(data: data as NSData)
-                                    if let imagePreviewData = feedViewModel.imagePreviewData {
-                                        feedViewModel.add(imageData: imagePreviewData, contentData: data)
-                                    }
                                 }
+                                
                                 if let error = error {
                                     print(error)
                                 }
@@ -59,11 +59,28 @@ struct SingleFeedView: View {
                 }
         }
         .onDisappear {
+            if audioURL != nil {
+                if let mergedData = mergedData {
+                    if let imagePreviewData = feedViewModel.imagePreviewData {
+                        print("feed is liked:", feedViewModel.isLiked)
+                        if let encodedString = feedViewModel.generatedMusic?.encodedData {
+                            let generatedData = Data(base64Encoded: encodedString)
+                            let channels = feedViewModel.generatedMusic?.channels
+                            let sampleRate = feedViewModel.generatedMusic?.sampleRateHz
+                            let duration = feedViewModel.generatedMusic?.duration
+                            let sampleFrames = feedViewModel.generatedMusic?.sampleFrames
+                            
+                            feedViewModel.add(imageData: imagePreviewData, contentData: mergedData, musicData: generatedData!, channels: channels!, sampleRate: sampleRate ?? 0, duration: duration!, sampleFrames: sampleFrames!, isLiked: feedViewModel.isLiked)
+                        }
+                    }
+                }
+            }
+            
             feedViewModel.hideStatusBar = false
             
             feedViewModel.selectedMovie = nil
             feedViewModel.imagePreviewData = nil
-            feedViewModel.musicDataString = nil
+            feedViewModel.generatedMusic = nil
             feedViewModel.mergedVideo = nil
             mergedURL = nil
                 

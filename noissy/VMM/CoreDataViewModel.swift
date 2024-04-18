@@ -56,16 +56,28 @@ class CoreDataViewModel: ObservableObject {
     }
     
     
-    func addContent(imageData: Data, contentData: Data) {
+    func addContent(imageData: Data, contentData: Data, musicData: Data, channels: Int16, sampleRate: Double, duration: Double, sampleFrames: Int32, isLiked: Bool) {
         let newContent = FeedEntity(context: context)
         newContent.contenData = contentData
         newContent.previewImageData = imageData
-        
+        newContent.musicData = musicData
+        newContent.channels = channels
+        newContent.sampleRate = sampleRate
+        newContent.duration = duration
+        newContent.sampleFrames = sampleFrames
+        newContent.isLiked = isLiked
+
         saveData()
     }
     
     func deleteContent(feed: FeedEntity) {
         context.delete(feed)
+        saveData()
+    }
+    
+    func likeToggle(feed:FeedEntity) {
+        feed.isLiked.toggle()
+        print(feed.isLiked)
         saveData()
     }
     
