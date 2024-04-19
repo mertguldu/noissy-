@@ -26,7 +26,7 @@ class FeedViewModel: ObservableObject {
     @Published var currentTask: Bool = false
     @Published var regenarating: Bool = false
     @Published var isLiked: Bool = false
-    @Published var showMenu: Bool = false
+    @Published var showFavouriteMenu: Bool = false
     
     @Published var generatedMusic: APIResponse?
     @Published var selectedMovie: SelectedMovie?
@@ -42,8 +42,8 @@ class FeedViewModel: ObservableObject {
     @Published var isErrorOccured = false
     @Published var errorMessage: String = ""
     
-    @Published var ActiveFavoritePlayer: Int?
-    @Published var selectedFavoritePlayer: Int?
+    @Published var ActiveFavoritePlayer: Int = -1
+    @Published var selectedFavoritePlayer: Int = -1
     @Published var selectedFavouriteAudioURL: URL?
     
     @Published var invited: Bool = false

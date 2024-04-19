@@ -18,6 +18,7 @@ struct EditView: View {
     
     @State private var player: AVPlayer?
     @State private var audioPlayer: AVAudioPlayer?
+    @State private var audioData: Data?
     
     @State private var imageSequence: [UIImage] = []
     @State private var progress: CGFloat = 0
@@ -48,7 +49,6 @@ struct EditView: View {
                                 TimeLineView(offset: $offset, progress: $progress, isPlaying: $isPlaying, audio: audio, videoURL: videoURL, videoDuration: duration, player: player, audioPlayer: audioPlayer, feedViewModel: feedViewModel)
                                     .frame(height: height * 0.12 + 30)
                             
-                            
                             Spacer()
                         }
                         .zIndex(0)
@@ -78,9 +78,9 @@ struct EditView: View {
             feedViewModel.audioVolume = 1.0
             
             feedViewModel.regenarating = false
-            feedViewModel.selectedFavoritePlayer = nil
+            feedViewModel.selectedFavoritePlayer = -1
            
-            let audioData = Data(base64Encoded: (audio.encodedData)!)
+            audioData = Data(base64Encoded: (audio.encodedData)!)
             let audioURL = dataToURL2(data: audioData! as NSData, url: "edit.wav")
             
             feedViewModel.currentAudioURL = audioURL
@@ -119,22 +119,27 @@ struct EditView: View {
             feedViewModel.audioVolume = Float(value)
         }
         .onChange(of:feedViewModel.selectedFavoritePlayer) { id in
-            if let id = id {
+            if id == -1 {
+                if let generatedMusic = feedViewModel.generatedMusic {
+                    audioData = Data(base64Encoded: generatedMusic.encodedData!)
+                }
+            } else {
                 let feed = feedViewModel.ContentLibrary[id]
-                let audioData = feed.musicData
-                
-                let audioURL = dataToURL2(data: audioData! as NSData, url: "edit.wav")
+                audioData = feed.musicData
+            }
+            if let audioData = audioData {
+                let audioURL = dataToURL2(data: audioData as NSData, url: "edit.wav")
                 feedViewModel.currentAudioURL = audioURL
+                print(id)
                 Task{
                     try? prepareAudioPlayer(audioURL: audioURL, completion: { audio in
                         audioPlayer = audio
                         audioPlayer?.currentTime = progress * duration
                     })
                 }
-
             }
         }
-        .onChange(of: feedViewModel.showMenu) { value in
+        .onChange(of: feedViewModel.showFavouriteMenu) { value in
             print("menu is showed")
             if value {
                 player?.pause()

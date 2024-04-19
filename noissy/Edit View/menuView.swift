@@ -23,7 +23,6 @@ struct menuView: View {
                     withAnimation {
                         offset = menuHeight
                         showMenu = false
-                        feedViewModel.showMenu = false
                     }
                 }
                 .overlay {
@@ -46,20 +45,16 @@ struct menuView: View {
                                             withAnimation {
                                                 offset = menuHeight
                                                 showMenu = false
-                                                feedViewModel.showMenu = false
                                             }
                                         } else {
                                             withAnimation {
                                                 offset = 0
-                                                feedViewModel.showMenu = true
+                                                showMenu = true
                                             }
                                         }
                                     })
                             )
                     }
-                }
-                .onAppear {
-                    feedViewModel.showMenu = true
                 }
                 .ignoresSafeArea()
         

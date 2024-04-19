@@ -15,6 +15,7 @@ struct WaveForm: View {
     
     @State private var amplitudeValues: [Float] = []
     @State private var height_factor: Float = 1.0
+    @State private var feed: APIResponse?
     
     let barWidth: CGFloat = 2
     let barSpacing: CGFloat = 2
@@ -48,7 +49,6 @@ struct WaveForm: View {
             let url = dataToURL2(data: data! as NSData, url: "waveForm.wav")
                 
             getAudioAmplitudes(audioURL: url, channelCount: Int(channels ?? 1), sampleRate: sampleRateHz ?? 1, frameCount: Int(sampleFrames ?? 1), audioDuration: audioDuration ?? 0, videoDuration: videoDuration) { amplitudes in
-                        
                 amplitudeValues = amplitudes
                             
                 let max_amplitude = amplitudeValues.max()
@@ -56,29 +56,29 @@ struct WaveForm: View {
             }
         }
         .onChange(of: feedViewModel.selectedFavoritePlayer) { id in
-            print("favourite is selected")
-            if let id = id {
-                amplitudeValues = []
-                let feed = feedViewModel.ContentLibrary[id]
-                
-                print(feed.duration)
+            amplitudeValues = []
+            if id == -1 {
+                feed = feedViewModel.generatedMusic
+            } else {
+                let content = feedViewModel.ContentLibrary[id]
+                feed = APIResponse(encodedData: content.musicData?.base64EncodedString(), channels: content.channels, sampleRateHz: content.sampleRate, duration: content.duration, sampleFrames: content.sampleFrames, error: nil)
+            }
+            
+            if let feed = feed {
                 let channels = feed.channels
-                let sampleRateHz = feed.sampleRate
+                let sampleRateHz = feed.sampleRateHz
                 let sampleFrames = feed.sampleFrames
                 let audioDuration = feed.duration
-                
-                
-                let data = Data(base64Encoded: (feed.musicData?.base64EncodedString())!)
-                if let data = data {
-                    print("data yess")
-                    let url = dataToURL2(data: data as NSData, url: "selectedWaveForm.wav")
+                                
+                let data = Data(base64Encoded: feed.encodedData!)
+                    if let data = data {
+                        let url = dataToURL2(data: data as NSData, url: "selectedWaveForm.wav")
                     
-                    getAudioAmplitudes(audioURL: url, channelCount: Int(channels), sampleRate: sampleRateHz, frameCount: Int(sampleFrames), audioDuration: audioDuration, videoDuration: videoDuration) { amplitudes in
+                        getAudioAmplitudes(audioURL: url, channelCount: Int(channels ?? 1), sampleRate: sampleRateHz ?? 1, frameCount: Int(sampleFrames ?? 1), audioDuration: audioDuration ?? 1, videoDuration: videoDuration) { amplitudes in
+                            amplitudeValues = amplitudes
                         
-                        amplitudeValues = amplitudes
-                        
-                        let max_amplitude = amplitudeValues.max()
-                        height_factor = Float((UIScreen.current?.bounds.height ?? 0) * 0.04) / (max_amplitude ?? 1)
+                            let max_amplitude = amplitudeValues.max()
+                            height_factor = Float((UIScreen.current?.bounds.height ?? 0) * 0.04) / (max_amplitude ?? 1)
                     }
                 }
             }
